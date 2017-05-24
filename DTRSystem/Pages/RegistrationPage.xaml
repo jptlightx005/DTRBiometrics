@@ -3,41 +3,43 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
-      d:DesignHeight="300"
-      Title="RegistrationPage" Width="604">
+      mc:Ignorable="d"
+      Title="RegistrationPage">
     <Grid Margin="0,0,0,0">
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,41,0,171" Width="280">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,41,0,0" Width="280" VerticalAlignment="Top" Height="87">
             <Grid>
                 <Label Content="Username:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Password:" HorizontalAlignment="Left" Margin="31,41,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <TextBox x:Name="txtFName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,13,0,0"/>
-                <TextBox x:Name="txtMName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,44,0,0"/>
+                <TextBox x:Name="txtUsrn" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,13,0,0"/>
+                <PasswordBox x:Name="txtPssw" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="168" Margin="100,44,0,0"/>
             </Grid>
         </Border>
         <Label Content="Register Employee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="295,41,-30,10" Width="280">
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="295,41,10,10" Width="280" VerticalAlignment="Top">
             <Grid>
-                <Label Content="First Name:" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Last Name:" HorizontalAlignment="Left" Margin="25,72,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Department:" HorizontalAlignment="Left" Margin="19,103,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Corporation:" HorizontalAlignment="Left" Margin="19,165,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Designation:" HorizontalAlignment="Left" Margin="19,134,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <TextBox x:Name="txtFName1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,13,0,0"/>
-                <TextBox x:Name="txtMName1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,44,0,0"/>
-                <TextBox x:Name="txtLName1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,75,0,0"/>
-                <TextBox x:Name="txtDepartment1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,106,0,0"/>
-                <TextBox x:Name="txtDesignation1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,137,0,0"/>
-                <TextBox x:Name="txtCorporation1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,168,0,0"/>
+                <Label Content="First Name:" HorizontalAlignment="Left" Margin="26,99,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="11,130,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Last Name:" HorizontalAlignment="Left" Margin="26,161,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Department:" HorizontalAlignment="Left" Margin="20,192,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Corporation:" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Designation:" HorizontalAlignment="Left" Margin="20,223,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txtFName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,102,0,0"/>
+                <TextBox x:Name="txtMName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,133,0,0"/>
+                <TextBox x:Name="txtLName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,164,0,0"/>
+                <TextBox x:Name="txtDepartment" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,195,0,0"/>
+                <TextBox x:Name="txtDesignation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,226,0,0"/>
+                <TextBox x:Name="txtCorporation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,257,0,10"/>
+                <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png"/>
+                <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
+                <Button x:Name="btnTakePhoto" Content="Take a Photo" HorizontalAlignment="Left" Margin="100,37,0,0" VerticalAlignment="Top" Width="94"/>
             </Grid>
         </Border>
-        <Button Content="Register" HorizontalAlignment="Right" Margin="0,0,314,10" VerticalAlignment="Bottom" Width="75"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,134,0,78" Width="280">
+        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="215,311,0,0" VerticalAlignment="Top" Width="75"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,133,0,0" Width="280" VerticalAlignment="Top" Height="71">
             <Grid>
                 <Label Content="Biometric:" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Button x:Name="btnEnroll" Content="Enroll" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81"/>
