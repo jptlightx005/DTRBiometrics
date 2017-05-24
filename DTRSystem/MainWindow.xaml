@@ -17,6 +17,7 @@
                     <MenuItem x:Name="mnu_daily" Header="_Daily Time Records"/>
                 </MenuItem>
                 <MenuItem Header="_Employee Details">
+                    <MenuItem x:Name="mnu_register" Header="_Register Employee"/>
                     <MenuItem x:Name="mnu_employee" Header="_Employee Information"/>
                 </MenuItem>
                 <MenuItem Header="_Administration">
@@ -72,6 +73,8 @@
                 </Button>
             </ToolBar>
         </DockPanel>
-        <Grid Margin="0,85,0,0"/>
+        <Grid Margin="0,85,0,0">
+            <Frame x:Name="frmPanel" Margin="0,0,0,0" NavigationUIVisibility="Hidden"/>
+        </Grid>
     </Grid>
 </Window>
