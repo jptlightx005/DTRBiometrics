@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\DTRBiometricWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,6 +88,9 @@
     </Compile>
     <Compile Include="Modules\DBFunctions.vb" />
     <Compile Include="Modules\DTRBiometricSystemModule.vb" />
+    <Compile Include="Pages\RegistrationPage.xaml.vb">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DTRBiometricWindow.xaml.vb">
       <DependentUpon>DTRBiometricWindow.xaml</DependentUpon>
     </Compile>

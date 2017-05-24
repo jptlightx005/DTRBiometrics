@@ -1,0 +1,3 @@
+﻿Class RegistrationPage
+
+End Class
