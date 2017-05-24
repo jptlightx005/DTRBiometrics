@@ -40,7 +40,8 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,134,0,78" Width="280">
             <Grid>
                 <Label Content="Biometric:" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Button Content="Add" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81"/>
+                <Button x:Name="btnEnroll" Content="Enroll" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81"/>
+                <Label x:Name="lblStatus" Content="No Fingerprint Enrolled" HorizontalAlignment="Left" Margin="100,39,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
     </Grid>
