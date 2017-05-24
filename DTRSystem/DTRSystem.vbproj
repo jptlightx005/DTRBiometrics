@@ -13,7 +13,7 @@
     <MyType>Custom</MyType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -190,7 +190,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="ZKFPEngXControl">
-      <Guid>{D065AEC9-3868-476E-AC6D-3F9F6603EDCB}</Guid>
+      <Guid>{D95CB779-00CB-4B49-97B9-9F0B61CAB3C1}</Guid>
       <VersionMajor>4</VersionMajor>
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>

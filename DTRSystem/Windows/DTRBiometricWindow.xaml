@@ -1,7 +1,7 @@
 ﻿<Window x:Class="DTRBiometricWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="DTRBiometricWindow" Height="300" Width="518" WindowStyle="None" WindowState="Maximized">
+    Title="DTRBiometricWindow" Height="300" Width="518" WindowStyle="None" WindowState="Maximized" Loaded="Window_Loaded">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
