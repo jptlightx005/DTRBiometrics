@@ -17,7 +17,7 @@
         <Border BorderBrush="Black" BorderThickness="1" Margin="0,75,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Grid>
                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75">
-                    <Image Margin="0"/>
+                    <Image Margin="0" Source="pack://siteoforigin:,,,/Resources/placeholder.png"/>
                 </Border>
                 <Label Content="Employee Name:" HorizontalAlignment="Left" Height="27" Margin="90,10,0,0" VerticalAlignment="Top" Width="105" HorizontalContentAlignment="Right"/>
                 <Label Content="Department:" HorizontalAlignment="Left" Height="27" Margin="90,42,0,0" VerticalAlignment="Top" Width="105" HorizontalContentAlignment="Right"/>
@@ -28,7 +28,13 @@
                 <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Margin="200,74,15,0"/>
                 <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Margin="200,106,15,30"/>
                 <Button x:Name="btnHistory" Content="History" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,106,0,0" IsEnabled="False"/>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,12" Height="22">
+                    <Image Source="pack://siteoforigin:,,,/Resources/not connected.png" HorizontalAlignment="Left" Width="12" Height="12" VerticalAlignment="Center" Margin="0"/>
+                    <Image x:Name="imgConnected" Source="pack://siteoforigin:,,,/Resources/connected.png" HorizontalAlignment="Left" Width="12" Height="12" VerticalAlignment="Center" Margin="0" Visibility="Hidden" />
+                    <Label x:Name="lblConnected" Content="Device Not Connected" VerticalAlignment="Center" Margin="15,0,0,0" Height="24"/>
+                </Grid>
             </Grid>
         </Border>
+        
     </Grid>
 </Window>
