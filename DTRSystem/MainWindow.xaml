@@ -36,7 +36,7 @@
         </DockPanel>
         <DockPanel LastChildFill="False" Margin="0,22,0,0" VerticalAlignment="Top">
             <ToolBar DockPanel.Dock="Top">
-                <Button>
+                <Button x:Name="btnDTR">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/no-proxy-attendance-N1.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="DTR" HorizontalAlignment="Center"/>
@@ -64,7 +64,7 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button>
+                <Button x:Name="btnClose">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/close-button-icon-30064.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Close" HorizontalAlignment="Center"/>

@@ -82,6 +82,7 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Modules\DBFunctions.vb" />
     <Compile Include="Modules\DTRBiometricSystemModule.vb" />
     <Compile Include="Windows\DTRBiometricWindow.xaml.vb">
       <DependentUpon>DTRBiometricWindow.xaml</DependentUpon>
@@ -163,8 +164,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
