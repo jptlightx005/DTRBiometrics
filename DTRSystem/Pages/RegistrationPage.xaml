@@ -11,8 +11,8 @@
         </Grid.Background>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,41,0,0" Width="280" VerticalAlignment="Top" Height="87">
             <Grid>
-                <Label Content="Username:" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Password:" HorizontalAlignment="Left" Margin="31,41,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Username*" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Password*" HorizontalAlignment="Left" Margin="31,41,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <TextBox x:Name="txtUsrn" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="100,13,0,0"/>
                 <PasswordBox x:Name="txtPssw" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="168" Margin="100,44,0,0"/>
             </Grid>
@@ -21,9 +21,9 @@
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="295,41,10,10" Width="280" VerticalAlignment="Top">
             <Grid>
-                <Label Content="First Name:" HorizontalAlignment="Left" Margin="26,99,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Middle Name:" HorizontalAlignment="Left" Margin="11,130,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Last Name:" HorizontalAlignment="Left" Margin="26,161,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="First Name*" HorizontalAlignment="Left" Margin="20,99,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="11,130,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="26,161,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Department:" HorizontalAlignment="Left" Margin="20,192,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Corporation:" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Designation:" HorizontalAlignment="Left" Margin="20,223,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>

@@ -8,6 +8,8 @@ Public Class RegFPWindow
     Dim FRegTemplate As String
     Dim FRegTemp As Object
     Dim fpcHandle As Long
+
+    Public regPage As RegistrationPage
     Public Sub New()
 
         ' This call is required by the designer.
@@ -64,9 +66,9 @@ Public Class RegFPWindow
 
             '  ZKFPEngX1.AddRegTemplateStrToFPCacheDB fpcHandle, FingerCount, FRegTemplate
             'fp.AddRegTemplateToFPCacheDB(fpcHandle, FingerCount, FRegTemp)
-
-            Me.Close()
         End If
+        regPage.FingerprintEnrolled(ActionResult)
+        Me.Close()
     End Sub
 
     Private Sub fp_OnImageReceived(ByRef AImageValid As Boolean) Handles fp.OnImageReceived
