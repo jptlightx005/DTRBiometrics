@@ -3,7 +3,6 @@ Imports System.Drawing
 Imports System.Windows.Interop
 Public Class RegFPWindow
     Dim WithEvents fp As ZKFPEngX
-    Public otemplate As Object
     Dim FTempLen As Integer
     Dim FRegTemplate As String
     Dim FRegTemp As Object
@@ -50,8 +49,6 @@ Public Class RegFPWindow
     End Sub
 
     Private Sub fp_OnEnroll(ByVal ActionResult As Boolean, ByVal aTemplate As Object) Handles fp.OnEnroll
-        Dim i As Long
-
         If Not ActionResult Then
             MsgBox("Registration failed!", vbExclamation)
         Else
@@ -59,13 +56,7 @@ Public Class RegFPWindow
 
             FRegTemplate = fp.GetTemplateAsString()
             FRegTemp = fp.GetTemplate()
-            fp.SaveTemplateStr(applicationPath & "\fptemp.txt", FRegTemplate)
             fp.SaveTemplate(applicationPath & "\fptemp.tpl", FRegTemp)
-
-            'To Save to Database
-
-            '  ZKFPEngX1.AddRegTemplateStrToFPCacheDB fpcHandle, FingerCount, FRegTemplate
-            'fp.AddRegTemplateToFPCacheDB(fpcHandle, FingerCount, FRegTemp)
         End If
         regPage.FingerprintEnrolled(ActionResult)
         Me.Close()
@@ -75,7 +66,15 @@ Public Class RegFPWindow
         Dim myHandle As IntPtr = New WindowInteropHelper(Me).Handle
         Dim myGraphics As Graphics = Graphics.FromHwnd(myHandle)
         Dim x = (Me.Width / 2) - (fp.ImageWidth / 2)
-        fp.PrintImageAt(myGraphics.GetHdc, x, 10, fp.ImageWidth, fp.ImageHeight)
+        Dim i As IntPtr = myGraphics.GetHdc
+        fp.PrintImageAt(i, x, 10, fp.ImageWidth, fp.ImageHeight)
+        myGraphics.Dispose()
+    End Sub
 
+    Private Sub Window_Closed(sender As Object, e As EventArgs)
+        If fp.IsRegister Then
+            fp.CancelEnroll()
+        End If
+        fp.EndEngine()
     End Sub
 End Class

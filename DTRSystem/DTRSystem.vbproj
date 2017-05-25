@@ -66,9 +66,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTRBiometricDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RegFPWindow.xaml.vb">
       <DependentUpon>RegFPWindow.xaml</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,7 +117,6 @@
     <Import Include="System.Xml.Linq" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
-    <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Windows" />
@@ -147,6 +152,17 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <None Include="DTRBiometricDataSet.xsc">
+      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DTRBiometricDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DTRBiometricDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DTRBiometricDataSet.xss">
+      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
@@ -212,6 +228,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dtr-biometric.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

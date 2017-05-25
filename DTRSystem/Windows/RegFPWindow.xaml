@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RegFPWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="RegFP" Height="550" Width="477" Loaded="Window_Loaded" ResizeMode="NoResize">
+    Title="RegFP" Height="550" Width="477" Loaded="Window_Loaded" ResizeMode="NoResize" Closed="Window_Closed">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
     </Window.Background>
@@ -14,7 +14,7 @@
         <Label x:Name="lblStatus" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50">
             <TextBlock TextWrapping="Wrap" Text="Status: ">
                 <InlineUIContainer>
-        			<TextBlock TextWrapping="Wrap"><Run Text="Status: "/>
+        			<TextBlock TextWrapping="Wrap">
                         <InlineUIContainer>
 			                <TextBlock x:Name="txbStatus" TextWrapping="Wrap" Text="Waiting"/>
 		                </InlineUIContainer>
