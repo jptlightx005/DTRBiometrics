@@ -65,9 +65,32 @@ Public Class DTRBiometricWindow
                 End If
             Next
             If Not emp Is Nothing Then
-                txtEmpName.Text = emp.first_name
-            End If
+                Dim firstName = emp.first_name
+                Dim middleInitial = IIf(emp.middle_name.Length > 0, emp.middle_name(0) & ". ", "")
+                Dim lastName = emp.last_name
+                Dim fullName = String.Format("{0} {1}{2}", firstName, middleInitial, lastName)
+                txtEmpName.Text = fullName
+                If emp.picture.Count > 1 Then
+                    Try
+                        Dim image = New BitmapImage()
+                        Using mem = New MemoryStream(emp.picture)
+                            mem.Position = 0
+                            image.BeginInit()
+                            image.CreateOptions = BitmapCreateOptions.PreservePixelFormat
+                            image.CacheOption = BitmapCacheOption.OnLoad
+                            image.UriSource = Nothing
+                            image.StreamSource = mem
+                            image.EndInit()
+                        End Using
 
+                        image.Freeze()
+                        imgEmployee.Source = image
+                    Catch ex As Exception
+                        Debug.Print("Not a photo")
+                    End Try
+                End If
+
+            End If
         End If
     End Sub
 End Class

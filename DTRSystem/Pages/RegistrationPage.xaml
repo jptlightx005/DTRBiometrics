@@ -33,9 +33,8 @@
                 <TextBox x:Name="txtDepartment" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,195,0,0"/>
                 <TextBox x:Name="txtDesignation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,226,0,0"/>
                 <TextBox x:Name="txtCorporation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,257,0,10"/>
-                <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png"/>
+                <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
                 <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
-                <Button x:Name="btnTakePhoto" Content="Take a Photo" HorizontalAlignment="Left" Margin="100,37,0,0" VerticalAlignment="Top" Width="94"/>
             </Grid>
         </Border>
         <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="215,311,0,0" VerticalAlignment="Top" Width="75"/>

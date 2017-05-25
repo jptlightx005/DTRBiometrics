@@ -1,7 +1,9 @@
-﻿Imports System.IO
+﻿Imports Microsoft.Win32
+Imports System.Windows.Media.Imaging
+Imports System.IO
 Class RegistrationPage
     Dim hasFingerPrint = False
-    Dim hasImage = False
+    Dim imageFileName As String
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
         regFP.regPage = Me
@@ -11,9 +13,17 @@ Class RegistrationPage
 
     Private Sub btnRegister_Click(sender As Object, e As RoutedEventArgs) Handles btnRegister.Click
         If ValidateFields() Then
-            Dim a As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
+            Dim tblEmployee As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
             Try
-                a.Insert("", txtUsrn.Text, txtPssw.Password, File.ReadAllBytes(applicationPath & "\fptemp.tpl"), txtFName.Text, txtMName.Text, txtLName.Text, 0, txtDesignation.Text, txtCorporation.Text, "8:00 A.M.", "5:00 P.M.", File.ReadAllBytes(applicationPath & "\fptemp.tpl"), 25)
+                Dim image As Byte()
+                If imageFileName <> "" Then
+                    image = File.ReadAllBytes(imageFileName)
+                Else
+                    Dim b As New System.Text.ASCIIEncoding
+                    image = b.GetBytes(0)
+                End If
+
+                tblEmployee.Insert("", txtUsrn.Text, txtPssw.Password, File.ReadAllBytes(applicationPath & "\fptemp.tpl"), txtFName.Text, txtMName.Text, txtLName.Text, 0, txtDesignation.Text, txtCorporation.Text, "8:00 A.M.", "5:00 P.M.", image, 25)
                 MsgBox("Successfully registered!", vbInformation)
             Catch ex As Exception
                 MsgBox("Registration failed!", vbInformation)
@@ -43,4 +53,14 @@ Class RegistrationPage
         isValid = isValid And hasFingerPrint
         Return isValid
     End Function
+
+    Private Sub btnBrowse_Click(sender As Object, e As RoutedEventArgs) Handles btnBrowse.Click
+        Dim fileDialog As New OpenFileDialog
+        fileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        fileDialog.Filter = "Image files (*.png;*.jpg)|*.png;*.jpg|All files (*.*)|*.*"
+        If fileDialog.ShowDialog Then
+            imgEmpPicture.Source = New BitmapImage(New Uri(fileDialog.FileName))
+            imageFileName = fileDialog.FileName
+        End If
+    End Sub
 End Class
