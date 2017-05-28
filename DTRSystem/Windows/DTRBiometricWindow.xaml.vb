@@ -56,7 +56,9 @@ Public Class DTRBiometricWindow
         Dim score = 8
         Dim fi = fp.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
         If fi = -1 Then
+
             txbStatus.Text = "Not registered"
+            imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim emp As DTRBiometricDataSet.tbl_employeeRow
             For Each row In a.GetData()
@@ -86,10 +88,10 @@ Public Class DTRBiometricWindow
                         image.Freeze()
                         imgEmployee.Source = image
                     Catch ex As Exception
+                        imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
                         Debug.Print("Not a photo")
                     End Try
                 End If
-
             End If
         End If
     End Sub
