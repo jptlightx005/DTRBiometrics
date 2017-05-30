@@ -56,7 +56,9 @@ Public Class DTRBiometricWindow
         Dim score = 8
         Dim fi = fp.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
         If fi = -1 Then
+            txtEmpName.Text = ""
             txbStatus.Text = "Not registered"
+            imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim emp As DTRBiometricDataSet.tbl_employeeRow
             For Each row In a.GetData()
@@ -65,6 +67,7 @@ Public Class DTRBiometricWindow
                 End If
             Next
             If Not emp Is Nothing Then
+                txbStatus.Text = "Record Found"
                 Dim firstName = emp.first_name
                 Dim middleInitial = IIf(emp.middle_name.Length > 0, emp.middle_name(0) & ". ", "")
                 Dim lastName = emp.last_name
@@ -86,10 +89,10 @@ Public Class DTRBiometricWindow
                         image.Freeze()
                         imgEmployee.Source = image
                     Catch ex As Exception
+                        imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
                         Debug.Print("Not a photo")
                     End Try
                 End If
-
             End If
         End If
     End Sub
