@@ -73,26 +73,26 @@ Public Class DTRBiometricWindow
                 Dim lastName = emp.last_name
                 Dim fullName = String.Format("{0} {1}{2}", firstName, middleInitial, lastName)
                 txtEmpName.Text = fullName
-                If emp.picture.Count > 1 Then
-                    Try
-                        Dim image = New BitmapImage()
-                        Using mem = New MemoryStream(emp.picture)
-                            mem.Position = 0
-                            image.BeginInit()
-                            image.CreateOptions = BitmapCreateOptions.PreservePixelFormat
-                            image.CacheOption = BitmapCacheOption.OnLoad
-                            image.UriSource = Nothing
-                            image.StreamSource = mem
-                            image.EndInit()
-                        End Using
 
-                        image.Freeze()
-                        imgEmployee.Source = image
-                    Catch ex As Exception
-                        imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
-                        Debug.Print("Not a photo")
-                    End Try
-                End If
+                Try
+                    Dim image = New BitmapImage()
+                    Using mem = New MemoryStream(emp.picture)
+                        mem.Position = 0
+                        image.BeginInit()
+                        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat
+                        image.CacheOption = BitmapCacheOption.OnLoad
+                        image.UriSource = Nothing
+                        image.StreamSource = mem
+                        image.EndInit()
+                    End Using
+
+                    image.Freeze()
+                    imgEmployee.Source = image
+                Catch ex As Exception
+                    imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
+                    Debug.Print("Not a photo")
+                End Try
+
             End If
         End If
     End Sub
