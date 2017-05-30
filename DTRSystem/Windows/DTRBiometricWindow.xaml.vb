@@ -1,12 +1,14 @@
 ﻿Imports ZKFPEngXControl
 Imports System.IO
+Imports System.Media
+Imports System.Threading
 Public Class DTRBiometricWindow
     Dim WithEvents fp As ZKFPEngX
     Dim fpHandle As Integer
     Dim idList As List(Of Integer)
     Public otemplate As Object
-    Dim a As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
-
+    Dim tblAdapter As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
+    Dim employeeFound As DTRBiometricDataSet.tbl_employeeRow
     Public Sub New()
 
         ' This call is required by the designer.
@@ -33,7 +35,7 @@ Public Class DTRBiometricWindow
         fpHandle = fp.CreateFPCacheDB
 
         Dim i = 0
-        For Each row In a.GetData
+        For Each row In tblAdapter.GetData
             idList.Add(row.ID)
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
@@ -60,23 +62,28 @@ Public Class DTRBiometricWindow
             txbStatus.Text = "Not registered"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
-            Dim emp As DTRBiometricDataSet.tbl_employeeRow
-            For Each row In a.GetData()
+
+            For Each row In tblAdapter.GetData()
                 If row.ID = idList(fi) Then
-                    emp = row
+                    employeeFound = row
                 End If
             Next
-            If Not emp Is Nothing Then
+            If Not employeeFound Is Nothing Then
+                Dim a As New Thread(Sub()
+                                        Console.Beep(1000, 500)
+                                    End Sub)
+                a.Start()
+
                 txbStatus.Text = "Record Found"
-                Dim firstName = emp.first_name
-                Dim middleInitial = IIf(emp.middle_name.Length > 0, emp.middle_name(0) & ". ", "")
-                Dim lastName = emp.last_name
+                Dim firstName = employeeFound.first_name
+                Dim middleInitial = IIf(employeeFound.middle_name.Length > 0, employeeFound.middle_name(0) & ". ", "")
+                Dim lastName = employeeFound.last_name
                 Dim fullName = String.Format("{0} {1}{2}", firstName, middleInitial, lastName)
                 txtEmpName.Text = fullName
 
                 Try
                     Dim image = New BitmapImage()
-                    Using mem = New MemoryStream(emp.picture)
+                    Using mem = New MemoryStream(employeeFound.picture)
                         mem.Position = 0
                         image.BeginInit()
                         image.CreateOptions = BitmapCreateOptions.PreservePixelFormat

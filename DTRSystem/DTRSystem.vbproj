@@ -71,6 +71,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DTRBiometricDataSet.vb">
+      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Windows\RegFPWindow.xaml.vb">
       <DependentUpon>RegFPWindow.xaml</DependentUpon>
     </Compile>
