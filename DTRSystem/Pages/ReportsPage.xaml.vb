@@ -1,0 +1,3 @@
+﻿Class ReportsPage
+
+End Class
