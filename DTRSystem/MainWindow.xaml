@@ -74,7 +74,9 @@
             </ToolBar>
         </DockPanel>
         <Grid Margin="0,85,0,0">
-            <Frame x:Name="frmPanel" Margin="0,0,0,0" NavigationUIVisibility="Hidden"/>
+            <TabControl x:Name="tab_panels"  Margin="0,0,0,0" Background="{x:Null}" >
+   
+            </TabControl>
         </Grid>
     </Grid>
 </Window>
