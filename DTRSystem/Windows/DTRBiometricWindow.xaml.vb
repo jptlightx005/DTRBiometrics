@@ -9,6 +9,8 @@ Public Class DTRBiometricWindow
     Public otemplate As Object
     Dim tblAdapter As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
     Dim employeeFound As DTRBiometricDataSet.tbl_employeeRow
+    Dim logAdapter As New DTRBiometricDataSetTableAdapters.tbl_timelogTableAdapter
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -73,6 +75,8 @@ Public Class DTRBiometricWindow
                                         Console.Beep(1000, 500)
                                     End Sub)
                 a.Start()
+
+                logAdapter.Insert(employeeFound.ID, Now, "PM", "OUT")
 
                 txbStatus.Text = "Record Found"
                 Dim firstName = employeeFound.first_name
