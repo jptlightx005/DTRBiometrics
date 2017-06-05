@@ -23,7 +23,21 @@ Class RegistrationPage
                     image = b.GetBytes(0)
                 End If
 
-                tblEmployee.Insert("", txtUsrn.Text, txtPssw.Password, File.ReadAllBytes(applicationPath & "\fptemp.tpl"), txtFName.Text, txtMName.Text, txtLName.Text, 0, txtDesignation.Text, txtCorporation.Text, "8:00 A.M.", "5:00 P.M.", image, 25)
+                tblEmployee.Insert("",
+                                   txtUsrn.Text,
+                                   txtPssw.Password,
+                                   File.ReadAllBytes(applicationPath & "\fptemp.tpl"),
+                                   txtFName.Text,
+                                   txtMName.Text,
+                                   txtLName.Text,
+                                   0,
+                                   txtDesignation.Text,
+                                   txtCorporation.Text,
+                                   "8:00 A.M.",
+                                   "5:00 P.M.",
+                                   image, 25)
+
+                File.Delete(applicationPath & "\fptemp.tpl")
                 MsgBox("Successfully registered!", vbInformation)
             Catch ex As Exception
                 MsgBox("Registration failed!", vbInformation)

@@ -41,7 +41,9 @@ Public Class DTRBiometricWindow
             idList.Add(row.ID)
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
+
             fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName)
+            File.Delete(fileName)
             i += 1
         Next
     End Sub
@@ -75,11 +77,11 @@ Public Class DTRBiometricWindow
                                     End Sub)
                 a.Start()
 
-                Dim logRows = logAdapter.GetTimeLogID(employeeFound.ID, Now.Date).Rows
+                Dim logRows = logAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRBiometricDataSet.TimeLogTableRow
                 If logRows.Count <= 0 Then
                     logAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
-                    timeLogFound = logAdapter.GetTimeLogID(employeeFound.ID, Now.Date).Rows(0)
+                    timeLogFound = logAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows(0)
                 Else
                     timeLogFound = logRows(0)
                 End If
