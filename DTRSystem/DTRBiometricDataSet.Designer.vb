@@ -2765,8 +2765,7 @@ Namespace DTRBiometricDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ID", Global.System.Data.DataRowVersion.Original, False, Nothing))
             Me._commandCollection(3) = New Global.System.Data.OleDb.OleDbCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "UPDATE `tbl_timelog` SET `TimeInPM` = ? WHERE ID = ? AND (TimeInPM = '' OR TimeIn" & _
-                "PM = null)"
+            Me._commandCollection(3).CommandText = "UPDATE `tbl_timelog` SET `TimeInPM` = ? WHERE ID = ?"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("TimeInPM", Global.System.Data.OleDb.OleDbType.[Date], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "TimeInPM", Global.System.Data.DataRowVersion.Current, False, Nothing))
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.OleDb.OleDbParameter("Original_ID", Global.System.Data.OleDb.OleDbType.[Integer], 0, Global.System.Data.ParameterDirection.Input, CType(0, Byte), CType(0, Byte), "ID", Global.System.Data.DataRowVersion.Original, False, Nothing))
@@ -2812,7 +2811,7 @@ Namespace DTRBiometricDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetTimeLogID(ByVal EmpID As Global.System.Nullable(Of Integer), ByVal DateOfTheDay As Global.System.Nullable(Of Date)) As DTRBiometricDataSet.TimeLogTableDataTable
+        Public Overridable Overloads Function GetTimeLog(ByVal EmpID As Global.System.Nullable(Of Integer), ByVal DateOfTheDay As Global.System.Nullable(Of Date)) As DTRBiometricDataSet.TimeLogTableDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(1)
             If (EmpID.HasValue = True) Then
                 Me.Adapter.SelectCommand.Parameters(0).Value = CType(EmpID.Value, Integer)
