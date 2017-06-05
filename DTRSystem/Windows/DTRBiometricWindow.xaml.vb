@@ -89,17 +89,26 @@ Public Class DTRBiometricWindow
                 'AM IN 7AM-12PM
                 If Not timeLogFound Is Nothing Then
                     If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
-                        logAdapter.UpdateInAM(Now, timeLogFound.ID)
+                        If IsDBNull(timeLogFound("TimeInAM")) Then
+                            logAdapter.UpdateInAM(Now, timeLogFound.ID)
+                        End If
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
-                        logAdapter.UpdateOutAM(Now, timeLogFound.ID)
+                        If IsDBNull(timeLogFound("TimeOutAM")) Then
+                            logAdapter.UpdateOutAM(Now, timeLogFound.ID)
+                        End If
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
-                        logAdapter.UpdateInPM(Now, timeLogFound.ID)
+                        If IsDBNull(timeLogFound("TimeInPM")) Then
+                            logAdapter.UpdateInPM(Now, timeLogFound.ID)
+                        End If
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
-                        logAdapter.UpdateOutPM(Now, timeLogFound.ID)
+                        If IsDBNull(timeLogFound("TimeOutPM")) Then
+                            logAdapter.UpdateOutPM(Now, timeLogFound.ID)
+                        End If
                     End If
+
                 End If
 
                 txbStatus.Text = "Record Found"
