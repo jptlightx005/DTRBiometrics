@@ -1,4 +1,8 @@
-﻿
+﻿Partial Class DTRBiometricDataSet
+    Partial Class tbl_timelogDataTable
 
-Partial Public Class DTRBiometricDataSet
+    End Class
+
 End Class
+
+

@@ -7,6 +7,9 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ReportsPage">
     <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
         
     </Grid>
 </Page>

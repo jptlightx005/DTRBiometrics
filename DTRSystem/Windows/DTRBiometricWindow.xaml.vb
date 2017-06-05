@@ -64,19 +64,41 @@ Public Class DTRBiometricWindow
             txbStatus.Text = "Not registered"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
+            Dim rows = tblAdapter.GetDataBy(idList(fi)).Rows
+            If rows.Count > 0 Then
+                employeeFound = rows(0)
+            End If
 
-            For Each row In tblAdapter.GetData()
-                If row.ID = idList(fi) Then
-                    employeeFound = row
-                End If
-            Next
             If Not employeeFound Is Nothing Then
                 Dim a As New Thread(Sub()
-                                        Console.Beep(1000, 500)
+                                        Console.Beep(750, 500)
                                     End Sub)
                 a.Start()
 
-                logAdapter.Insert(employeeFound.ID, Now, "PM", "OUT")
+                Dim logRows = logAdapter.GetTimeLogID(employeeFound.ID, Now.Date).Rows
+                Dim timeLogFound As DTRBiometricDataSet.tbl_timelogRow
+                If logRows.Count <= 0 Then
+                    logAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
+                    timeLogFound = logAdapter.GetTimeLogID(employeeFound.ID, Now.Date).Rows(0)
+                Else
+                    timeLogFound = logRows(0)
+                End If
+
+                'AM IN 7AM-12PM
+                If Not timeLogFound Is Nothing Then
+                    If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
+                        logAdapter.UpdateInAM(Now, timeLogFound.ID)
+                        'AM Out 12PM-1PM
+                    ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
+                        logAdapter.UpdateOutAM(Now, timeLogFound.ID)
+                        'PM IN 1PM-5PM
+                    ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
+                        logAdapter.UpdateInPM(Now, timeLogFound.ID)
+                        'PM OUT 5PM-8PM
+                    ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
+                        logAdapter.UpdateOutPM(Now, timeLogFound.ID)
+                    End If
+                End If
 
                 txbStatus.Text = "Record Found"
                 Dim firstName = employeeFound.first_name
