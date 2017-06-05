@@ -13,7 +13,7 @@ Class RegistrationPage
 
     Private Sub btnRegister_Click(sender As Object, e As RoutedEventArgs) Handles btnRegister.Click
         If ValidateFields() Then
-            Dim tblEmployee As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
+            Dim tblEmployee As New DTRBiometricDataSetTableAdapters.EmployeeTableAdapter
             Try
                 Dim image As Byte()
                 If imageFileName <> "" Then

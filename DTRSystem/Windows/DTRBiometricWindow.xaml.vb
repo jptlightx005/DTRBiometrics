@@ -7,9 +7,9 @@ Public Class DTRBiometricWindow
     Dim fpHandle As Integer
     Dim idList As List(Of Integer)
     Public otemplate As Object
-    Dim tblAdapter As New DTRBiometricDataSetTableAdapters.tbl_employeeTableAdapter
-    Dim employeeFound As DTRBiometricDataSet.tbl_employeeRow
-    Dim logAdapter As New DTRBiometricDataSetTableAdapters.tbl_timelogTableAdapter
+    Dim tblAdapter As New DTRBiometricDataSetTableAdapters.EmployeeTableAdapter
+    Dim employeeFound As DTRBiometricDataSet.EmployeeTableRow
+    Dim logAdapter As New DTRBiometricDataSetTableAdapters.TimeLogTableAdapter
 
     Public Sub New()
 
@@ -76,7 +76,7 @@ Public Class DTRBiometricWindow
                 a.Start()
 
                 Dim logRows = logAdapter.GetTimeLogID(employeeFound.ID, Now.Date).Rows
-                Dim timeLogFound As DTRBiometricDataSet.tbl_timelogRow
+                Dim timeLogFound As DTRBiometricDataSet.TimeLogTableRow
                 If logRows.Count <= 0 Then
                     logAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
                     timeLogFound = logAdapter.GetTimeLogID(employeeFound.ID, Now.Date).Rows(0)

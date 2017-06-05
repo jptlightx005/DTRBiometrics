@@ -1,5 +1,5 @@
 ﻿Partial Class DTRBiometricDataSet
-    Partial Class tbl_timelogDataTable
+    Partial Class TimeLogTableDataTable
 
     End Class
 
