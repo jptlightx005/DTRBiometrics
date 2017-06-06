@@ -1,5 +1,6 @@
 ﻿Class MainWindow 
     Dim registrationTab As TabItem
+    Dim employeeTab As TabItem
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         Dim dtrWindow As New DTRBiometricWindow
         dtrWindow.Show()
@@ -30,4 +31,11 @@
 
         Return tab
     End Function
+
+    Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
+        If employeeTab Is Nothing Then
+            employeeTab = NewTab(New EmployeeInformationPage, "Employee")
+        End If
+        tab_panels.SelectedItem = employeeTab
+    End Sub
 End Class

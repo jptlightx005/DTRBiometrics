@@ -74,6 +74,9 @@
     <Compile Include="DTRBiometricDataSet.vb">
       <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EmployeeInformationPage.xaml.vb">
+      <DependentUpon>EmployeeInformationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ReportsPage.xaml.vb">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\EmployeeInformationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
