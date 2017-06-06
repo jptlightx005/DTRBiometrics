@@ -4,9 +4,29 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
       Title="EmployeeInformationPage">
     <Grid>
-        
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
+        <ComboBox x:Name="cmbEmployees" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="20,40,20,20" Width="280">
+            <Grid>
+                <Label Content="First Name*" HorizontalAlignment="Left" Margin="20,99,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="11,130,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="26,161,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Department:" HorizontalAlignment="Left" Margin="20,192,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Corporation:" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Designation:" HorizontalAlignment="Left" Margin="20,223,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txtFName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,102,0,0"/>
+                <TextBox x:Name="txtMName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,133,0,0"/>
+                <TextBox x:Name="txtLName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,164,0,0"/>
+                <TextBox x:Name="txtDepartment" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,195,0,0"/>
+                <TextBox x:Name="txtDesignation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,226,0,0"/>
+                <TextBox x:Name="txtCorporation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,257,0,10"/>
+                <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
+                <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
