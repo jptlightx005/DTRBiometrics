@@ -64,6 +64,12 @@ Public Class DTRBiometricWindow
 
         Dim beep As New Thread(Sub()
                                    Console.Beep(750, 500)
+                                   If fi = -1 Then
+                                       My.Computer.Audio.Play("Resources\pls_try_again.wav", AudioPlayMode.Background)
+                                   Else
+                                       My.Computer.Audio.Play("Resources\thank_you.wav", AudioPlayMode.Background)
+                                   End If
+
                                End Sub)
         beep.Start()
 
@@ -120,26 +126,30 @@ Public Class DTRBiometricWindow
                 Dim fullName = String.Format("{0} {1}{2}", firstName, middleInitial, lastName)
                 txtEmpName.Text = fullName
 
-                Try
-                    Dim image = New BitmapImage()
-                    Using mem = New MemoryStream(employeeFound.picture)
-                        mem.Position = 0
-                        image.BeginInit()
-                        image.CreateOptions = BitmapCreateOptions.PreservePixelFormat
-                        image.CacheOption = BitmapCacheOption.OnLoad
-                        image.UriSource = Nothing
-                        image.StreamSource = mem
-                        image.EndInit()
-                    End Using
+                imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
-                    image.Freeze()
-                    imgEmployee.Source = image
-                Catch ex As Exception
-                    imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
-                    Debug.Print("Not a photo")
-                End Try
 
             End If
         End If
     End Sub
+
+    Function DataToBitmap(data As Byte()) As BitmapImage
+        Try
+            Dim image = New BitmapImage()
+            Using mem = New MemoryStream(data)
+                mem.Position = 0
+                image.BeginInit()
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat
+                image.CacheOption = BitmapCacheOption.OnLoad
+                image.UriSource = Nothing
+                image.StreamSource = mem
+                image.EndInit()
+            End Using
+
+            image.Freeze()
+            Return image
+        Catch ex As Exception
+            Return New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
+        End Try
+    End Function
 End Class

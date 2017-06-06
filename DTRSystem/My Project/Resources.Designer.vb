@@ -139,5 +139,23 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property pls_try_again1() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("pls_try_again1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property thank_you1() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("thank_you1", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace
