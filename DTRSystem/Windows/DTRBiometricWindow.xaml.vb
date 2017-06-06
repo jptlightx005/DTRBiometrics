@@ -7,9 +7,9 @@ Public Class DTRBiometricWindow
     Dim fpHandle As Integer
     Dim idList As List(Of Integer)
     Public otemplate As Object
-    Dim tblAdapter As New DTRBiometricDataSetTableAdapters.EmployeeTableAdapter
+
     Dim employeeFound As DTRBiometricDataSet.EmployeeTableRow
-    Dim logAdapter As New DTRBiometricDataSetTableAdapters.TimeLogTableAdapter
+
 
     Public Sub New()
 
@@ -37,7 +37,7 @@ Public Class DTRBiometricWindow
         fpHandle = fp.CreateFPCacheDB
 
         Dim i = 0
-        For Each row In tblAdapter.GetData
+        For Each row In tblEmployeeAdapter.GetData
             idList.Add(row.ID)
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
@@ -61,27 +61,30 @@ Public Class DTRBiometricWindow
 
         Dim score = 8
         Dim fi = fp.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
+
+        Dim beep As New Thread(Sub()
+                                   Console.Beep(750, 500)
+                               End Sub)
+        beep.Start()
+
         If fi = -1 Then
             txtEmpName.Text = ""
             txbStatus.Text = "Not registered"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
-            Dim rows = tblAdapter.GetDataBy(idList(fi)).Rows
+            Dim rows = tblEmployeeAdapter.GetDataBy(idList(fi)).Rows
             If rows.Count > 0 Then
                 employeeFound = rows(0)
             End If
 
             If Not employeeFound Is Nothing Then
-                Dim a As New Thread(Sub()
-                                        Console.Beep(750, 500)
-                                    End Sub)
-                a.Start()
+                
 
-                Dim logRows = logAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
+                Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRBiometricDataSet.TimeLogTableRow
                 If logRows.Count <= 0 Then
-                    logAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
-                    timeLogFound = logAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows(0)
+                    tblLogAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
+                    timeLogFound = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows(0)
                 Else
                     timeLogFound = logRows(0)
                 End If
@@ -90,22 +93,22 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
                     If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
-                            logAdapter.UpdateInAM(Now, timeLogFound.ID)
+                            tblLogAdapter.UpdateInAM(Now, timeLogFound.ID)
                         End If
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutAM")) Then
-                            logAdapter.UpdateOutAM(Now, timeLogFound.ID)
+                            tblLogAdapter.UpdateOutAM(Now, timeLogFound.ID)
                         End If
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
-                            logAdapter.UpdateInPM(Now, timeLogFound.ID)
+                            tblLogAdapter.UpdateInPM(Now, timeLogFound.ID)
                         End If
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutPM")) Then
-                            logAdapter.UpdateOutPM(Now, timeLogFound.ID)
+                            tblLogAdapter.UpdateOutPM(Now, timeLogFound.ID)
                         End If
                     End If
 

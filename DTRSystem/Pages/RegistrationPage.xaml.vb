@@ -1,9 +1,29 @@
 ﻿Imports Microsoft.Win32
 Imports System.Windows.Media.Imaging
 Imports System.IO
+Imports DTRSystem.DTRBiometricDataSetTableAdapters
+Imports DTRSystem.DTRBiometricDataSet
 Class RegistrationPage
     Dim hasFingerPrint = False
     Dim imageFileName As String
+
+    Dim dataTable As New EmployeeTableDataTable
+    Dim employeeRow As EmployeeTableRow
+    Private Sub regPage_Initialized(sender As Object, e As EventArgs) Handles regPage.Initialized
+        employeeRow = dataTable.NewRow
+        employeeRow.usrn = ""
+        employeeRow.pssw = ""
+        employeeRow.first_name = ""
+        employeeRow.middle_name = ""
+        employeeRow.last_name = ""
+        employeeRow.department = 0
+        employeeRow.designation = ""
+        employeeRow.corporation = ""
+        employeeRow.work_timeb = 0
+        employeeRow.work_timee = 0
+        employeeRow.leave_credits = 0
+        grdEmployee.DataContext = employeeRow
+    End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
         regFP.regPage = Me
@@ -13,7 +33,6 @@ Class RegistrationPage
 
     Private Sub btnRegister_Click(sender As Object, e As RoutedEventArgs) Handles btnRegister.Click
         If ValidateFields() Then
-            Dim tblEmployee As New DTRBiometricDataSetTableAdapters.EmployeeTableAdapter
             Try
                 Dim image As Byte()
                 If imageFileName <> "" Then
@@ -23,22 +42,19 @@ Class RegistrationPage
                     image = b.GetBytes(0)
                 End If
 
-                tblEmployee.Insert("",
-                                   txtUsrn.Text,
-                                   txtPssw.Password,
-                                   File.ReadAllBytes(applicationPath & "\fptemp.tpl"),
-                                   txtFName.Text,
-                                   txtMName.Text,
-                                   txtLName.Text,
-                                   0,
-                                   txtDesignation.Text,
-                                   txtCorporation.Text,
-                                   "8:00 A.M.",
-                                   "5:00 P.M.",
-                                   image, 25)
-
+                employeeRow.biometric = File.ReadAllBytes(applicationPath & "\fptemp.tpl")
                 File.Delete(applicationPath & "\fptemp.tpl")
-                MsgBox("Successfully registered!", vbInformation)
+                employeeRow.work_timeb = 8
+                employeeRow.work_timee = 17
+                employeeRow.picture = image
+
+                dataTable.Rows.Add(employeeRow)
+
+                If tblEmployeeAdapter.Update(dataTable) = 1 Then
+                    MsgBox("Successfully registered!", vbInformation)
+                Else
+                    MsgBox("Registration failed!", vbInformation)
+                End If
             Catch ex As Exception
                 MsgBox("Registration failed!", vbInformation)
             End Try
