@@ -430,6 +430,44 @@ WHERE        (EmpID = ?) AND (DateOfTheDay = ?)</CommandText>
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeROTableAdapter" GeneratorDataComponentClassName="EmployeeROTableAdapter" Name="EmployeeROTable" UserDataComponentName="EmployeeROTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DTRBiometricConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        tbl_employee.ID, tbl_employee.EmployeeID, tbl_employee.usrn, tbl_employee.pssw, tbl_employee.biometric, tbl_employee.first_name, tbl_employee.middle_name, 
+                         tbl_employee.last_name, tbl_employee.department, tbl_employee.designation, tbl_employee.corporation, tbl_employee.work_timeb, tbl_employee.work_timee, 
+                         tbl_employee.picture, tbl_employee.leave_credits, tbl_department.department AS department_name, tbl_department.abbr, 
+                         tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') + tbl_employee.last_name AS full_name
+FROM            (tbl_employee LEFT OUTER JOIN
+                         tbl_department ON tbl_employee.department = tbl_department.ID)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="EmployeeID" DataSetColumn="EmployeeID" />
+              <Mapping SourceColumn="usrn" DataSetColumn="usrn" />
+              <Mapping SourceColumn="pssw" DataSetColumn="pssw" />
+              <Mapping SourceColumn="biometric" DataSetColumn="biometric" />
+              <Mapping SourceColumn="first_name" DataSetColumn="first_name" />
+              <Mapping SourceColumn="middle_name" DataSetColumn="middle_name" />
+              <Mapping SourceColumn="last_name" DataSetColumn="last_name" />
+              <Mapping SourceColumn="department" DataSetColumn="department" />
+              <Mapping SourceColumn="designation" DataSetColumn="designation" />
+              <Mapping SourceColumn="corporation" DataSetColumn="corporation" />
+              <Mapping SourceColumn="work_timeb" DataSetColumn="work_timeb" />
+              <Mapping SourceColumn="work_timee" DataSetColumn="work_timee" />
+              <Mapping SourceColumn="picture" DataSetColumn="picture" />
+              <Mapping SourceColumn="leave_credits" DataSetColumn="leave_credits" />
+              <Mapping SourceColumn="department_name" DataSetColumn="department_name" />
+              <Mapping SourceColumn="abbr" DataSetColumn="abbr" />
+              <Mapping SourceColumn="full_name" DataSetColumn="full_name" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -438,7 +476,7 @@ WHERE        (EmpID = ?) AND (DateOfTheDay = ?)</CommandText>
   <xs:element name="DTRBiometricDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DTRBiometricDataSet" msprop:Generator_UserDSName="DTRBiometricDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TimeLogTable" msprop:Generator_TableClassName="TimeLogTableDataTable" msprop:Generator_TableVarName="tableTimeLogTable" msprop:Generator_TablePropName="TimeLogTable" msprop:Generator_RowDeletingName="TimeLogTableRowDeleting" msprop:Generator_RowChangingName="TimeLogTableRowChanging" msprop:Generator_RowEvHandlerName="TimeLogTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TimeLogTableRowDeleted" msprop:Generator_UserTableName="TimeLogTable" msprop:Generator_RowChangedName="TimeLogTableRowChanged" msprop:Generator_RowEvArgName="TimeLogTableRowChangeEvent" msprop:Generator_RowClassName="TimeLogTableRow">
+        <xs:element name="TimeLogTable" msprop:Generator_TableClassName="TimeLogTableDataTable" msprop:Generator_TableVarName="tableTimeLogTable" msprop:Generator_RowChangedName="TimeLogTableRowChanged" msprop:Generator_TablePropName="TimeLogTable" msprop:Generator_RowDeletingName="TimeLogTableRowDeleting" msprop:Generator_RowChangingName="TimeLogTableRowChanging" msprop:Generator_RowEvHandlerName="TimeLogTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TimeLogTableRowDeleted" msprop:Generator_RowClassName="TimeLogTableRow" msprop:Generator_UserTableName="TimeLogTable" msprop:Generator_RowEvArgName="TimeLogTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -451,7 +489,7 @@ WHERE        (EmpID = ?) AND (DateOfTheDay = ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LeaveCreditsTable" msprop:Generator_TableClassName="LeaveCreditsTableDataTable" msprop:Generator_TableVarName="tableLeaveCreditsTable" msprop:Generator_TablePropName="LeaveCreditsTable" msprop:Generator_RowDeletingName="LeaveCreditsTableRowDeleting" msprop:Generator_RowChangingName="LeaveCreditsTableRowChanging" msprop:Generator_RowEvHandlerName="LeaveCreditsTableRowChangeEventHandler" msprop:Generator_RowDeletedName="LeaveCreditsTableRowDeleted" msprop:Generator_UserTableName="LeaveCreditsTable" msprop:Generator_RowChangedName="LeaveCreditsTableRowChanged" msprop:Generator_RowEvArgName="LeaveCreditsTableRowChangeEvent" msprop:Generator_RowClassName="LeaveCreditsTableRow">
+        <xs:element name="LeaveCreditsTable" msprop:Generator_TableClassName="LeaveCreditsTableDataTable" msprop:Generator_TableVarName="tableLeaveCreditsTable" msprop:Generator_RowChangedName="LeaveCreditsTableRowChanged" msprop:Generator_TablePropName="LeaveCreditsTable" msprop:Generator_RowDeletingName="LeaveCreditsTableRowDeleting" msprop:Generator_RowChangingName="LeaveCreditsTableRowChanging" msprop:Generator_RowEvHandlerName="LeaveCreditsTableRowChangeEventHandler" msprop:Generator_RowDeletedName="LeaveCreditsTableRowDeleted" msprop:Generator_RowClassName="LeaveCreditsTableRow" msprop:Generator_UserTableName="LeaveCreditsTable" msprop:Generator_RowEvArgName="LeaveCreditsTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -479,7 +517,7 @@ WHERE        (EmpID = ?) AND (DateOfTheDay = ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DepartmentTable" msprop:Generator_TableClassName="DepartmentTableDataTable" msprop:Generator_TableVarName="tableDepartmentTable" msprop:Generator_TablePropName="DepartmentTable" msprop:Generator_RowDeletingName="DepartmentTableRowDeleting" msprop:Generator_RowChangingName="DepartmentTableRowChanging" msprop:Generator_RowEvHandlerName="DepartmentTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DepartmentTableRowDeleted" msprop:Generator_UserTableName="DepartmentTable" msprop:Generator_RowChangedName="DepartmentTableRowChanged" msprop:Generator_RowEvArgName="DepartmentTableRowChangeEvent" msprop:Generator_RowClassName="DepartmentTableRow">
+        <xs:element name="DepartmentTable" msprop:Generator_TableClassName="DepartmentTableDataTable" msprop:Generator_TableVarName="tableDepartmentTable" msprop:Generator_RowChangedName="DepartmentTableRowChanged" msprop:Generator_TablePropName="DepartmentTable" msprop:Generator_RowDeletingName="DepartmentTableRowDeleting" msprop:Generator_RowChangingName="DepartmentTableRowChanging" msprop:Generator_RowEvHandlerName="DepartmentTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DepartmentTableRowDeleted" msprop:Generator_RowClassName="DepartmentTableRow" msprop:Generator_UserTableName="DepartmentTable" msprop:Generator_RowEvArgName="DepartmentTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -500,7 +538,7 @@ WHERE        (EmpID = ?) AND (DateOfTheDay = ?)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="EmployeeTable" msprop:Generator_TableClassName="EmployeeTableDataTable" msprop:Generator_TableVarName="tableEmployeeTable" msprop:Generator_TablePropName="EmployeeTable" msprop:Generator_RowDeletingName="EmployeeTableRowDeleting" msprop:Generator_RowChangingName="EmployeeTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeTableRowDeleted" msprop:Generator_UserTableName="EmployeeTable" msprop:Generator_RowChangedName="EmployeeTableRowChanged" msprop:Generator_RowEvArgName="EmployeeTableRowChangeEvent" msprop:Generator_RowClassName="EmployeeTableRow">
+        <xs:element name="EmployeeTable" msprop:Generator_TableClassName="EmployeeTableDataTable" msprop:Generator_TableVarName="tableEmployeeTable" msprop:Generator_RowChangedName="EmployeeTableRowChanged" msprop:Generator_TablePropName="EmployeeTable" msprop:Generator_RowDeletingName="EmployeeTableRowDeleting" msprop:Generator_RowChangingName="EmployeeTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeTableRowDeleted" msprop:Generator_RowClassName="EmployeeTableRow" msprop:Generator_UserTableName="EmployeeTable" msprop:Generator_RowEvArgName="EmployeeTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -566,6 +604,96 @@ WHERE        (EmpID = ?) AND (DateOfTheDay = ?)</CommandText>
               <xs:element name="work_timee" msprop:Generator_ColumnVarNameInTable="columnwork_timee" msprop:Generator_ColumnPropNameInRow="work_timee" msprop:Generator_ColumnPropNameInTable="work_timeeColumn" msprop:Generator_UserColumnName="work_timee" type="xs:int" minOccurs="0" />
               <xs:element name="picture" msprop:Generator_ColumnVarNameInTable="columnpicture" msprop:Generator_ColumnPropNameInRow="picture" msprop:Generator_ColumnPropNameInTable="pictureColumn" msprop:Generator_UserColumnName="picture" type="xs:base64Binary" minOccurs="0" />
               <xs:element name="leave_credits" msprop:Generator_ColumnVarNameInTable="columnleave_credits" msprop:Generator_ColumnPropNameInRow="leave_credits" msprop:Generator_ColumnPropNameInTable="leave_creditsColumn" msprop:Generator_UserColumnName="leave_credits" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EmployeeROTable" msprop:Generator_TableClassName="EmployeeROTableDataTable" msprop:Generator_TableVarName="tableEmployeeROTable" msprop:Generator_TablePropName="EmployeeROTable" msprop:Generator_RowDeletingName="EmployeeROTableRowDeleting" msprop:Generator_RowChangingName="EmployeeROTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeROTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeROTableRowDeleted" msprop:Generator_UserTableName="EmployeeROTable" msprop:Generator_RowChangedName="EmployeeROTableRowChanged" msprop:Generator_RowEvArgName="EmployeeROTableRowChangeEvent" msprop:Generator_RowClassName="EmployeeROTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="EmployeeID" msprop:Generator_ColumnVarNameInTable="columnEmployeeID" msprop:Generator_ColumnPropNameInRow="EmployeeID" msprop:Generator_ColumnPropNameInTable="EmployeeIDColumn" msprop:Generator_UserColumnName="EmployeeID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="usrn" msprop:Generator_ColumnVarNameInTable="columnusrn" msprop:Generator_ColumnPropNameInRow="usrn" msprop:Generator_ColumnPropNameInTable="usrnColumn" msprop:Generator_UserColumnName="usrn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pssw" msprop:Generator_ColumnVarNameInTable="columnpssw" msprop:Generator_ColumnPropNameInRow="pssw" msprop:Generator_ColumnPropNameInTable="psswColumn" msprop:Generator_UserColumnName="pssw" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="biometric" msprop:Generator_ColumnVarNameInTable="columnbiometric" msprop:Generator_ColumnPropNameInRow="biometric" msprop:Generator_ColumnPropNameInTable="biometricColumn" msprop:Generator_UserColumnName="biometric" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="first_name" msprop:Generator_ColumnVarNameInTable="columnfirst_name" msprop:Generator_ColumnPropNameInRow="first_name" msprop:Generator_ColumnPropNameInTable="first_nameColumn" msprop:Generator_UserColumnName="first_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="middle_name" msprop:Generator_ColumnVarNameInTable="columnmiddle_name" msprop:Generator_ColumnPropNameInRow="middle_name" msprop:Generator_ColumnPropNameInTable="middle_nameColumn" msprop:Generator_UserColumnName="middle_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="last_name" msprop:Generator_ColumnVarNameInTable="columnlast_name" msprop:Generator_ColumnPropNameInRow="last_name" msprop:Generator_ColumnPropNameInTable="last_nameColumn" msprop:Generator_UserColumnName="last_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="department" msprop:Generator_ColumnVarNameInTable="columndepartment" msprop:Generator_ColumnPropNameInRow="department" msprop:Generator_ColumnPropNameInTable="departmentColumn" msprop:Generator_UserColumnName="department" type="xs:int" minOccurs="0" />
+              <xs:element name="designation" msprop:Generator_ColumnVarNameInTable="columndesignation" msprop:Generator_ColumnPropNameInRow="designation" msprop:Generator_ColumnPropNameInTable="designationColumn" msprop:Generator_UserColumnName="designation" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="corporation" msprop:Generator_ColumnVarNameInTable="columncorporation" msprop:Generator_ColumnPropNameInRow="corporation" msprop:Generator_ColumnPropNameInTable="corporationColumn" msprop:Generator_UserColumnName="corporation" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="work_timeb" msprop:Generator_ColumnVarNameInTable="columnwork_timeb" msprop:Generator_ColumnPropNameInRow="work_timeb" msprop:Generator_ColumnPropNameInTable="work_timebColumn" msprop:Generator_UserColumnName="work_timeb" type="xs:int" minOccurs="0" />
+              <xs:element name="work_timee" msprop:Generator_ColumnVarNameInTable="columnwork_timee" msprop:Generator_ColumnPropNameInRow="work_timee" msprop:Generator_ColumnPropNameInTable="work_timeeColumn" msprop:Generator_UserColumnName="work_timee" type="xs:int" minOccurs="0" />
+              <xs:element name="picture" msprop:Generator_ColumnVarNameInTable="columnpicture" msprop:Generator_ColumnPropNameInRow="picture" msprop:Generator_ColumnPropNameInTable="pictureColumn" msprop:Generator_UserColumnName="picture" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="leave_credits" msprop:Generator_ColumnVarNameInTable="columnleave_credits" msprop:Generator_ColumnPropNameInRow="leave_credits" msprop:Generator_ColumnPropNameInTable="leave_creditsColumn" msprop:Generator_UserColumnName="leave_credits" type="xs:int" minOccurs="0" />
+              <xs:element name="department_name" msprop:Generator_ColumnVarNameInTable="columndepartment_name" msprop:Generator_ColumnPropNameInRow="department_name" msprop:Generator_ColumnPropNameInTable="department_nameColumn" msprop:Generator_UserColumnName="department_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="abbr" msprop:Generator_ColumnVarNameInTable="columnabbr" msprop:Generator_ColumnPropNameInRow="abbr" msprop:Generator_ColumnPropNameInTable="abbrColumn" msprop:Generator_UserColumnName="abbr" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="full_name" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfull_name" msprop:Generator_ColumnPropNameInRow="full_name" msprop:Generator_ColumnPropNameInTable="full_nameColumn" msprop:Generator_UserColumnName="full_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

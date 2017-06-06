@@ -8,7 +8,7 @@ Public Class DTRBiometricWindow
     Dim idList As List(Of Integer)
     Public otemplate As Object
 
-    Dim employeeFound As DTRBiometricDataSet.EmployeeTableRow
+    Dim employeeFound As DTRBiometricDataSet.EmployeeROTableRow
 
 
     Public Sub New()
@@ -79,12 +79,14 @@ Public Class DTRBiometricWindow
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim filter = String.Format("ID = {0}", idList(fi))
-            Dim rows = tblEmployeeAdapter.GetData().Select(filter)
+            Dim rows = tblEmployeeROAdapter.GetData().Select(filter)
+            
             If rows.Count > 0 Then
                 employeeFound = rows(0)
             End If
 
             If Not employeeFound Is Nothing Then
+
                 Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRBiometricDataSet.TimeLogTableRow
                 If logRows.Count <= 0 Then
@@ -120,19 +122,29 @@ Public Class DTRBiometricWindow
                 End If
 
                 txbStatus.Text = "Record Found"
-                Dim firstName = employeeFound.first_name
-                Dim middleInitial = IIf(employeeFound.middle_name.Length > 0, employeeFound.middle_name(0) & ". ", "")
-                Dim lastName = employeeFound.last_name
-                Dim fullName = String.Format("{0} {1}{2}", firstName, middleInitial, lastName)
-                txtEmpName.Text = fullName
-
+                txtEmpName.Text = Coalesce(employeeFound("full_name"))
+                txtDep.Text = Coalesce(employeeFound("department_name"))
+                txtDesignation.Text = Coalesce(employeeFound("designation"))
+                txtCorp.Text = Coalesce(employeeFound("corporation"))
                 imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
 
             End If
         End If
     End Sub
-
+    Function Coalesce(obj As Object)
+        If IsDBNull(obj) Then
+            If obj.GetType() = GetType(String) Then
+                Return ""
+            ElseIf obj.GetType() = GetType(Integer) Then
+                Return 0
+            Else
+                Return Nothing
+            End If
+        Else
+            Return obj
+        End If
+    End Function
     Function DataToBitmap(data As Byte()) As BitmapImage
         Try
             Dim image = New BitmapImage()
