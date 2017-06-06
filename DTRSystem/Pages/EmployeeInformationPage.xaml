@@ -18,12 +18,12 @@
                 <Label Content="Department:" HorizontalAlignment="Left" Margin="20,192,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Corporation:" HorizontalAlignment="Left" Margin="20,254,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Designation:" HorizontalAlignment="Left" Margin="20,223,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <TextBox x:Name="txtFName" DataContext="{Binding}" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,102,10,0"/>
-                <TextBox x:Name="txtMName" DataContext="{Binding}" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,133,0,0"/>
-                <TextBox x:Name="txtLName" DataContext="{Binding}" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,164,0,0"/>
-                <ComboBox x:Name="cmbDepartment" HorizontalAlignment="Left" Height="23" Margin="101,195,0,0" VerticalAlignment="Top" Width="168"/>
-                <TextBox x:Name="txtDesignation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,226,0,0"/>
-                <TextBox x:Name="txtCorporation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,257,0,10"/>
+                <TextBox x:Name="txtFName" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,102,10,0"/>
+                <TextBox x:Name="txtMName" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,133,0,0"/>
+                <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,164,0,0"/>
+                <ComboBox x:Name="cmbDepartment" DisplayMemberPath="department" SelectedValuePath="ID" SelectedValue="{Binding Path=department}"  HorizontalAlignment="Left" Height="23" Margin="101,195,0,0" VerticalAlignment="Top" Width="168"/>
+                <TextBox x:Name="txtDesignation" Text="{Binding Path=designation}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,226,0,0"/>
+                <TextBox x:Name="txtCorporation" Text="{Binding Path=corporation}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,257,0,10"/>
                 <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
                 <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
             </Grid>

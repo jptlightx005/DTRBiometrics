@@ -5,7 +5,8 @@ Module DTRBiometricSystemModule
     Public dtrMainWindow As MainWindow
 
     Public tblEmployeeAdapter As New EmployeeTableAdapter
-    Public tblLogAdapter As New DTRBiometricDataSetTableAdapters.TimeLogTableAdapter
+    Public tblLogAdapter As New TimeLogTableAdapter
+    Public tblDepartmentAdapter As New DepartmentTableAdapter
 
     Sub Main()
         applicationPath = AppDomain.CurrentDomain.BaseDirectory

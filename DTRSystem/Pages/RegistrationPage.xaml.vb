@@ -23,6 +23,8 @@ Class RegistrationPage
         employeeRow.work_timee = 0
         employeeRow.leave_credits = 0
         grdEmployee.DataContext = employeeRow
+
+        cmbDepartment.ItemsSource = tblDepartmentAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow

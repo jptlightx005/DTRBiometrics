@@ -72,14 +72,13 @@ Public Class DTRBiometricWindow
             txbStatus.Text = "Not registered"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
-            Dim rows = tblEmployeeAdapter.GetDataBy(idList(fi)).Rows
+            Dim filter = String.Format("ID = {0}", idList(fi))
+            Dim rows = tblEmployeeAdapter.GetData().Select(filter)
             If rows.Count > 0 Then
                 employeeFound = rows(0)
             End If
 
             If Not employeeFound Is Nothing Then
-                
-
                 Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRBiometricDataSet.TimeLogTableRow
                 If logRows.Count <= 0 Then
