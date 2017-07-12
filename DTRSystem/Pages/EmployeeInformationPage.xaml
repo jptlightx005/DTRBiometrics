@@ -10,7 +10,7 @@
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <ComboBox x:Name="cmbEmployees" DisplayMemberPath="first_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="200"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="20,40">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="20,40,180,40">
             <Grid x:Name="grdEmpForm">
                 <Label Content="First Name*" HorizontalAlignment="Left" Margin="20,99,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="11,130,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
@@ -28,6 +28,18 @@
                 <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
             </Grid>
         </Border>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,300,20,10"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="340,40,20,40">
+            <Grid>
+                <Grid.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                </Grid.Background>
+                <Label Content="Add Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0"/>
+                <TextBox x:Name="txtCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,66,0,0" Text="0"/>
+                <Label Content="And Sick Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,94,0,0"/>
+                <TextBox x:Name="txtSLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="10,120,0,0" Text="0"/>
+                <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,148,0,0"/>
+            </Grid>
+        </Border>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,180,10"/>
     </Grid>
 </Page>

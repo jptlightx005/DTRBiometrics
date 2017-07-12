@@ -1,3 +1,0 @@
-﻿Class AdminPage
-
-End Class

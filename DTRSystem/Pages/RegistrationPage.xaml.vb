@@ -24,7 +24,7 @@ Class RegistrationPage
         employeeRow.leave_credits = 0
         grdEmployee.DataContext = employeeRow
 
-        cmbDepartment.ItemsSource = tblDepartmentAdapter.GetData
+        'cmbDepartment.ItemsSource = tblDepartmentAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
@@ -77,12 +77,10 @@ Class RegistrationPage
         Dim isValid As Boolean = True
         Dim i As Integer = 0
 
-        isValid = isValid And txtUsrn.Text.Length > 0
-        isValid = isValid And txtPssw.Password.Length > 6
         isValid = isValid And txtFName.Text.Length > 0
         isValid = isValid And txtMName.Text.Length > 0
         isValid = isValid And txtLName.Text.Length > 0
-        isValid = isValid And hasFingerPrint
+        'isValid = isValid And hasFingerPrint
         Return isValid
     End Function
 

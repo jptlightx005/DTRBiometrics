@@ -7,6 +7,7 @@ Module DTRBiometricSystemModule
     Public tblEmployeeAdapter As New EmployeeTableAdapter
     Public tblEmployeeROAdapter As New EmployeeROTableAdapter
     Public tblLogAdapter As New TimeLogTableAdapter
+    Public tblLeaveCreditsAdapter As New LeaveCreditsTableAdapter
     Public tblDepartmentAdapter As New DepartmentTableAdapter
 
     Sub Main()

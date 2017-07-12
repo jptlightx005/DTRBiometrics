@@ -74,6 +74,9 @@
     <Compile Include="DTRBiometricDataSet.vb">
       <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LeaveManagementPage.xaml.vb">
+      <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EmployeeInformationPage.xaml.vb">
       <DependentUpon>EmployeeInformationPage.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\LeaveManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EmployeeInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
