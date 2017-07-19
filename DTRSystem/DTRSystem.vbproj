@@ -66,13 +66,22 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTRBiometricDataSet.Designer.vb">
+    <Compile Include="DTRDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DTRBiometricDataSet.vb">
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    <Compile Include="DTRDataSet.vb">
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LeaveManagementPage.xaml.vb">
+      <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmployeeInformationPage.xaml.vb">
+      <DependentUpon>EmployeeInformationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ReportsPage.xaml.vb">
+      <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\RegFPWindow.xaml.vb">
       <DependentUpon>RegFPWindow.xaml</DependentUpon>
@@ -82,7 +91,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\LeaveManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EmployeeInformationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReportsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,16 +176,16 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <None Include="DTRBiometricDataSet.xsc">
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    <None Include="DTRDataSet.xsc">
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </None>
-    <None Include="DTRBiometricDataSet.xsd">
+    <None Include="DTRDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DTRBiometricDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>DTRDataSet.Designer.vb</LastGenOutput>
     </None>
-    <None Include="DTRBiometricDataSet.xss">
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    <None Include="DTRDataSet.xss">
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -231,6 +252,21 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pls_try_again.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thank_you.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dtr-biometric.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

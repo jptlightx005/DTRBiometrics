@@ -58,20 +58,9 @@ Partial Friend NotInheritable Class MySettings
      Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
      Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\dtr-biometric.accdb"& _ 
         "")>  _
-    Public ReadOnly Property DTRBiometricCnStr() As String
+    Public ReadOnly Property DTRCnStr() As String
         Get
-            Return CType(Me("DTRBiometricCnStr"),String)
-        End Get
-    End Property
-    
-    <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Pat-kun\Documents\dtr-biometric."& _ 
-        "accdb")>  _
-    Public ReadOnly Property DTRBiometricConnectionString() As String
-        Get
-            Return CType(Me("DTRBiometricConnectionString"),String)
+            Return CType(Me("DTRCnStr"),String)
         End Get
     End Property
 End Class
