@@ -44,7 +44,7 @@ Public Class DTRBiometricWindow
             File.WriteAllBytes(fileName, row.biometric)
             Debug.Print("Loading {0}'s biometric...", row.first_name)
             fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName)
-            'File.Delete(fileName)
+            File.Delete(fileName)
             i += 1
         Next
     End Sub
@@ -145,4 +145,9 @@ Public Class DTRBiometricWindow
             Return obj
         End If
     End Function
+
+    Private Sub Window_Closed(sender As Object, e As EventArgs)
+        fp.CancelCapture()
+        fp.EndEngine()
+    End Sub
 End Class

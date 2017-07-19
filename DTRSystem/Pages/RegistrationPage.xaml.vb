@@ -60,7 +60,7 @@ Class RegistrationPage
 
                 If tblEmployeeAdapter.Update(dataTable) = 1 Then
                     MsgBox("Successfully registered!", vbInformation)
-
+                    EmptyBoxes()
                 Else
                     MsgBox("Registration failed!", vbInformation)
                 End If
