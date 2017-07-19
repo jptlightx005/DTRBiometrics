@@ -66,13 +66,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTRBiometricDataSet.Designer.vb">
+    <Compile Include="DTRDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DTRBiometricDataSet.vb">
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    <Compile Include="DTRDataSet.vb">
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Pages\LeaveManagementPage.xaml.vb">
       <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
@@ -176,16 +176,16 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <None Include="DTRBiometricDataSet.xsc">
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    <None Include="DTRDataSet.xsc">
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </None>
-    <None Include="DTRBiometricDataSet.xsd">
+    <None Include="DTRDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DTRBiometricDataSet.Designer.vb</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>DTRDataSet.Designer.vb</LastGenOutput>
     </None>
-    <None Include="DTRBiometricDataSet.xss">
-      <DependentUpon>DTRBiometricDataSet.xsd</DependentUpon>
+    <None Include="DTRDataSet.xss">
+      <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -262,6 +262,11 @@
     <None Include="Resources\thank_you.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dtr-biometric.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

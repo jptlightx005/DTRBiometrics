@@ -2,13 +2,14 @@
 Imports System.IO
 Imports System.Media
 Imports System.Threading
+Imports DTRSystem.DTRDataSet
 Public Class DTRBiometricWindow
     Dim WithEvents fp As ZKFPEngX
     Dim fpHandle As Integer
     Dim idList As List(Of Integer)
     Public otemplate As Object
 
-    Dim employeeFound As DTRBiometricDataSet.EmployeeROTableRow
+    Dim employeeFound As EmployeeTableRow
 
 
     Public Sub New()
@@ -41,9 +42,9 @@ Public Class DTRBiometricWindow
             idList.Add(row.ID)
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
-
+            Debug.Print("Loading {0}'s biometric...", row.first_name)
             fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName)
-            File.Delete(fileName)
+            'File.Delete(fileName)
             i += 1
         Next
     End Sub
@@ -79,16 +80,18 @@ Public Class DTRBiometricWindow
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim filter = String.Format("ID = {0}", idList(fi))
-            Dim rows = tblEmployeeROAdapter.GetData().Select(filter)
-            
+            Dim rows = tblEmployeeAdapter.GetData().Select(filter)
+
             If rows.Count > 0 Then
                 employeeFound = rows(0)
             End If
 
+            Debug.Print("Found {0}'s record!", employeeFound.first_name)
+
             If Not employeeFound Is Nothing Then
 
                 Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
-                Dim timeLogFound As DTRBiometricDataSet.TimeLogTableRow
+                Dim timeLogFound As DTRDataSet.TimelogTableRow
                 If logRows.Count <= 0 Then
                     tblLogAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
                     timeLogFound = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows(0)
@@ -100,35 +103,32 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
                     If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
-                            tblLogAdapter.UpdateInAM(Now, timeLogFound.ID)
+                            timeLogFound.TimeInAM = Now.Date
                         End If
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutAM")) Then
-                            tblLogAdapter.UpdateOutAM(Now, timeLogFound.ID)
+                            timeLogFound.TimeOutAM = Now.Date
                         End If
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
-                            tblLogAdapter.UpdateInPM(Now, timeLogFound.ID)
+                            timeLogFound.TimeInPM = Now.Date
                         End If
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutPM")) Then
-                            tblLogAdapter.UpdateOutPM(Now, timeLogFound.ID)
+                            timeLogFound.TimeOutPM = Now.Date
                         End If
                     End If
-
+                    tblLogAdapter.Update(timeLogFound)
                 End If
 
                 txbStatus.Text = "Record Found"
                 txtEmpName.Text = Coalesce(employeeFound("full_name"))
-                txtDep.Text = Coalesce(employeeFound("department_name"))
-                txtDesignation.Text = Coalesce(employeeFound("designation"))
-                txtCorp.Text = Coalesce(employeeFound("corporation"))
                 imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
-
+                File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
             End If
         End If
     End Sub
@@ -144,24 +144,5 @@ Public Class DTRBiometricWindow
         Else
             Return obj
         End If
-    End Function
-    Function DataToBitmap(data As Byte()) As BitmapImage
-        Try
-            Dim image = New BitmapImage()
-            Using mem = New MemoryStream(data)
-                mem.Position = 0
-                image.BeginInit()
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat
-                image.CacheOption = BitmapCacheOption.OnLoad
-                image.UriSource = Nothing
-                image.StreamSource = mem
-                image.EndInit()
-            End Using
-
-            image.Freeze()
-            Return image
-        Catch ex As Exception
-            Return New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
-        End Try
     End Function
 End Class

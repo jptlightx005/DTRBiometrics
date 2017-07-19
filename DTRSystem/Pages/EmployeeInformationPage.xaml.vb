@@ -1,4 +1,5 @@
-﻿Imports DTRSystem.DTRBiometricDataSet
+﻿Imports DTRSystem.DTRDataSet
+
 Class EmployeeInformationPage
     Dim selectedEmployee As EmployeeTableRow
     Private Sub employeePage_Initialized(sender As Object, e As EventArgs) Handles employeePage.Initialized
@@ -13,6 +14,7 @@ Class EmployeeInformationPage
             selectedEmployee = result(0)
 
             grdEmpForm.DataContext = selectedEmployee
+            imgEmpPicture.Source = DataToBitmap(selectedEmployee("picture"))
         End If
     End Sub
 
@@ -22,9 +24,5 @@ Class EmployeeInformationPage
         Else
             MsgBox("Failed to Update!", vbExclamation)
         End If
-    End Sub
-
-    Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
-
     End Sub
 End Class

@@ -10,7 +10,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_Application">
                     <MenuItem x:Name="mnu_settings" Header="_Settings" IsEnabled="False"/>
-                    <MenuItem x:Name="mnu_logout" Header="_Logout"/>
+                    <MenuItem x:Name="mnu_logout" Header="_Logout" IsEnabled="False"/>
                     <MenuItem x:Name="mnu_close" Header="_Close" />
                 </MenuItem>
                 <MenuItem Header="_Attendance">
@@ -20,14 +20,14 @@
                     <MenuItem x:Name="mnu_register" Header="_Register Employee"/>
                     <MenuItem x:Name="mnu_employee" Header="_Employee Information"/>
                 </MenuItem>
-                <MenuItem Header="_Administration">
+                <MenuItem Header="_Administration" IsEnabled="False">
                     <MenuItem x:Name="mnu_departments" Header="_Departments"/>
                     <MenuItem x:Name="mnu_corporation" Header="_Corporation"/>
                     <MenuItem x:Name="mnu_designation" Header="_Designation"/>
                     <Separator/>
                     <MenuItem x:Name="mnu_controls" Header="_Controls"/>
                 </MenuItem>
-                <MenuItem Header="_Reports">
+                <MenuItem Header="_Reports" IsEnabled="False">
                     <MenuItem x:Name="mnu_report" Header="_Daily Time Record"/>
                     <MenuItem x:Name="mnu_leave" Header="_Leave Management"/>
                     <MenuItem x:Name="mnu_payroll" Header="_Payroll"/>
@@ -51,14 +51,14 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button>
+                <Button IsEnabled="False">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/admin_icon.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Admin" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button>
+                <Button IsEnabled="False">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/All_reports.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Reports" HorizontalAlignment="Center"/>

@@ -1,6 +1,15 @@
 ﻿Class MainWindow 
     Dim registrationTab As TabItem
     Dim employeeTab As TabItem
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         Dim dtrWindow As New DTRBiometricWindow
         dtrWindow.Show()
@@ -34,7 +43,10 @@
 
     Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
         If employeeTab Is Nothing Then
-            employeeTab = NewTab(New EmployeeInformationPage, "Employee")
+            Dim empPage As New EmployeeInformationPage
+            AddHandler empPage.btnAdd.Click, AddressOf mnu_register_Click
+
+            employeeTab = NewTab(empPage, "Employee")
         End If
         tab_panels.SelectedItem = employeeTab
     End Sub

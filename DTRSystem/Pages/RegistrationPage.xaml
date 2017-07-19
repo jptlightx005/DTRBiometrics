@@ -13,18 +13,18 @@
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,42,10,0" Width="280" VerticalAlignment="Top">
             <Grid>
-                <Label Content="First Name*"  HorizontalAlignment="Left" Margin="20,99,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="11,130,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="26,161,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <TextBox x:Name="txtFName" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,102,0,0"/>
-                <TextBox x:Name="txtMName" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,133,0,0"/>
-                <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="168" Margin="101,164,0,16"/>
-                <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
-                <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
+                <Label Content="First Name*"  HorizontalAlignment="Left" Margin="24,124,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="26,180,0,-19" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txtFName" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,124,0,0"/>
+                <TextBox x:Name="txtMName" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="102,152,0,0"/>
+                <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="102,180,0,10"/>
+                <Image x:Name="imgEmpPicture" HorizontalAlignment="Center" Height="75" Margin="0,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
+                <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Center" Margin="92,93,92,0" VerticalAlignment="Top" Width="94"/>
             </Grid>
         </Border>
-        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="215,328,0,10" VerticalAlignment="Top" Width="75"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,252,0,0" Width="280" VerticalAlignment="Top" Height="71">
+        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="215,338,0,10" VerticalAlignment="Top" Width="75"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,262,0,0" Width="280" VerticalAlignment="Top" Height="71">
             <Grid>
                 <Label Content="Biometric:" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Button x:Name="btnEnroll" Content="Enroll" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81"/>

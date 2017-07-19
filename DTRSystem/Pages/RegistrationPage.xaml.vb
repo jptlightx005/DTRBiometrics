@@ -1,27 +1,33 @@
 ﻿Imports Microsoft.Win32
 Imports System.Windows.Media.Imaging
 Imports System.IO
-Imports DTRSystem.DTRBiometricDataSetTableAdapters
-Imports DTRSystem.DTRBiometricDataSet
+Imports DTRSystem.DTRDataSetTableAdapters
+Imports DTRSystem.DTRDataSet
 Class RegistrationPage
     Dim hasFingerPrint = False
     Dim imageFileName As String
 
     Dim dataTable As New EmployeeTableDataTable
     Dim employeeRow As EmployeeTableRow
+
+    'Custom Functions
+    Sub EmptyBoxes()
+        hasFingerPrint = False
+        imgEmpPicture.Source = Nothing
+        txtFName.Text = ""
+        txtMName.Text = ""
+        txtLName.Text = ""
+        lblStatus.Content = "No Fingerprint Enrolled"
+    End Sub
+
+    'Page Events
     Private Sub regPage_Initialized(sender As Object, e As EventArgs) Handles regPage.Initialized
         employeeRow = dataTable.NewRow
-        employeeRow.usrn = ""
-        employeeRow.pssw = ""
         employeeRow.first_name = ""
         employeeRow.middle_name = ""
         employeeRow.last_name = ""
-        employeeRow.department = 0
-        employeeRow.designation = ""
-        employeeRow.corporation = ""
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
-        employeeRow.leave_credits = 0
         grdEmployee.DataContext = employeeRow
 
         'cmbDepartment.ItemsSource = tblDepartmentAdapter.GetData
@@ -54,6 +60,7 @@ Class RegistrationPage
 
                 If tblEmployeeAdapter.Update(dataTable) = 1 Then
                     MsgBox("Successfully registered!", vbInformation)
+
                 Else
                     MsgBox("Registration failed!", vbInformation)
                 End If
@@ -80,7 +87,7 @@ Class RegistrationPage
         isValid = isValid And txtFName.Text.Length > 0
         isValid = isValid And txtMName.Text.Length > 0
         isValid = isValid And txtLName.Text.Length > 0
-        'isValid = isValid And hasFingerPrint
+
         Return isValid
     End Function
 
