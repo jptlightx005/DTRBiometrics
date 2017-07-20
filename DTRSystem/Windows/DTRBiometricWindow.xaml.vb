@@ -39,13 +39,16 @@ Public Class DTRBiometricWindow
 
         Dim i = 0
         For Each row In tblEmployeeAdapter.GetData
-            idList.Add(row.ID)
+
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
-            Debug.Print("Loading {0}'s biometric...", row.first_name)
-            fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName)
-            'File.Delete(fileName)
-            i += 1
+
+            If fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName) = 1 Then
+                Debug.Print("Succesfully loaded {0}'s biometric...", row.first_name)
+                idList.Add(row.ID)
+                i += 1
+            End If
+            File.Delete(fileName)
         Next
     End Sub
 
@@ -103,22 +106,22 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
                     If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
-                            timeLogFound.TimeInAM = Now.Date
+                            timeLogFound.TimeInAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutAM")) Then
-                            timeLogFound.TimeOutAM = Now.Date
+                            timeLogFound.TimeOutAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
-                            timeLogFound.TimeInPM = Now.Date
+                            timeLogFound.TimeInPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutPM")) Then
-                            timeLogFound.TimeOutPM = Now.Date
+                            timeLogFound.TimeOutPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
                     End If
                     tblLogAdapter.Update(timeLogFound)
@@ -145,4 +148,9 @@ Public Class DTRBiometricWindow
             Return obj
         End If
     End Function
+
+    Private Sub Window_Closed(sender As Object, e As EventArgs)
+        fp.CancelCapture()
+        fp.EndEngine()
+    End Sub
 End Class

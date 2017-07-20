@@ -13,7 +13,7 @@ Class RegistrationPage
     'Custom Functions
     Sub EmptyBoxes()
         hasFingerPrint = False
-        imgEmpPicture.Source = Nothing
+        imgEmpPicture.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         txtFName.Text = ""
         txtMName.Text = ""
         txtLName.Text = ""
@@ -29,8 +29,6 @@ Class RegistrationPage
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
         grdEmployee.DataContext = employeeRow
-
-        'cmbDepartment.ItemsSource = tblDepartmentAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
@@ -60,7 +58,7 @@ Class RegistrationPage
 
                 If tblEmployeeAdapter.Update(dataTable) = 1 Then
                     MsgBox("Successfully registered!", vbInformation)
-
+                    EmptyBoxes()
                 Else
                     MsgBox("Registration failed!", vbInformation)
                 End If
