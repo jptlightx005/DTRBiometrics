@@ -4,12 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
       Title="ReportsPage">
-    <Grid>
+    <Grid Margin="0">
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
-        
+        <Label Content="Reports" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,10" Background="White"/>
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="first_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="79,36,0,0" VerticalAlignment="Top" Width="254"/>
+        <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="79,63,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Employee:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
+        <DatePicker x:Name="toPicker" Margin="231,62,10,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>
+        <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,61,0,0"/>
+        <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Page>

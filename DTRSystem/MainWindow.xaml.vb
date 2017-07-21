@@ -1,6 +1,7 @@
 ﻿Class MainWindow 
     Dim registrationTab As TabItem
     Dim employeeTab As TabItem
+    Dim reportsTab As TabItem
 
     Public Sub New()
 
@@ -27,6 +28,23 @@
         tab_panels.SelectedItem = registrationTab
     End Sub
 
+    Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
+        If employeeTab Is Nothing Then
+            Dim empPage As New EmployeeInformationPage
+            AddHandler empPage.btnAdd.Click, AddressOf mnu_register_Click
+
+            employeeTab = NewTab(empPage, "Employee")
+        End If
+        tab_panels.SelectedItem = employeeTab
+    End Sub
+
+    Private Sub tlbrReports_Click(sender As Object, e As RoutedEventArgs)
+        If reportsTab Is Nothing Then
+            employeeTab = NewTab(New ReportsPage, "Reports")
+        End If
+        tab_panels.SelectedItem = employeeTab
+    End Sub
+
     Private Function NewTab(ByRef pg As Page, header As String) As TabItem
         Dim tab As New TabItem
         tab.Header = header
@@ -40,14 +58,4 @@
 
         Return tab
     End Function
-
-    Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
-        If employeeTab Is Nothing Then
-            Dim empPage As New EmployeeInformationPage
-            AddHandler empPage.btnAdd.Click, AddressOf mnu_register_Click
-
-            employeeTab = NewTab(empPage, "Employee")
-        End If
-        tab_panels.SelectedItem = employeeTab
-    End Sub
 End Class
