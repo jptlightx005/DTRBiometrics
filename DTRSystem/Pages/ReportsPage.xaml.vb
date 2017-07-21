@@ -18,6 +18,5 @@
             Dim filterExpression As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromPicker.SelectedDate, toPicker.SelectedDate)
             timeLogDataGrid.ItemsSource = tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
         End If
-
     End Sub
 End Class

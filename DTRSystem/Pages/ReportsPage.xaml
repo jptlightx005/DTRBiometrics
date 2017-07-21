@@ -17,7 +17,7 @@
         <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,61,0,0"/>
         <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
         <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,10" Background="White" AutoGenerateColumns="False">
+        <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,10" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding EmpID}" Header="Employee ID" />
                 <DataGridTextColumn Binding="{Binding DateOfTheDay, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
@@ -25,6 +25,7 @@
                 <DataGridTextColumn Binding="{Binding TimeOutAM, StringFormat=\{0:hh:mm tt\}}" Header="Time out AM" />
                 <DataGridTextColumn Binding="{Binding TimeInPM, StringFormat=\{0:hh:mm tt\}}" Header="Time in PM" />
                 <DataGridTextColumn Binding="{Binding TimeOutPM, StringFormat=\{0:hh:mm tt\}}" Header="Time out PM" />
+                <DataGridTextColumn Binding="{Binding TotalHours}" Header="Total Hours" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

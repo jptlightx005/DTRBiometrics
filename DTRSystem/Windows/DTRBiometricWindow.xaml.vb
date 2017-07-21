@@ -96,7 +96,7 @@ Public Class DTRBiometricWindow
                 Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRDataSet.TimelogTableRow
                 If logRows.Count <= 0 Then
-                    tblLogAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing)
+                    tblLogAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing, 0)
                     timeLogFound = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows(0)
                 Else
                     timeLogFound = logRows(0)
@@ -108,20 +108,35 @@ Public Class DTRBiometricWindow
                         If IsDBNull(timeLogFound("TimeInAM")) Then
                             timeLogFound.TimeInAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
+
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutAM")) Then
                             timeLogFound.TimeOutAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
+
+                        'TimeCalculation
+                        If Not IsDBNull(timeLogFound("TimeInAM")) Then
+                            Dim total As TimeSpan = timeLogFound.TimeOutAM - timeLogFound.TimeInAM
+                            timeLogFound.TotalTime += total.TotalHours
+                        End If
+
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
                             timeLogFound.TimeInPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
                         End If
+
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutPM")) Then
                             timeLogFound.TimeOutPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                        End If
+
+                        'TimeCalculation
+                        If Not IsDBNull(timeLogFound("TimeInPM")) Then
+                            Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
+                            timeLogFound.TotalTime += total.TotalHours
                         End If
                     End If
                     tblLogAdapter.Update(timeLogFound)
