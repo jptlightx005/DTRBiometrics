@@ -106,13 +106,13 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
                     If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
-                            timeLogFound.TimeInAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeInAM = DateTime.Now
                         End If
 
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutAM")) Then
-                            timeLogFound.TimeOutAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeOutAM = DateTime.Now
                         End If
 
                         'TimeCalculation
@@ -124,13 +124,13 @@ Public Class DTRBiometricWindow
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
-                            timeLogFound.TimeInPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeInPM = DateTime.Now
                         End If
 
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutPM")) Then
-                            timeLogFound.TimeOutPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeOutPM = DateTime.Now
                         End If
 
                         'TimeCalculation

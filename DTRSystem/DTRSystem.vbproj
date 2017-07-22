@@ -264,7 +264,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dtr-biometric.accdb" />
+    <Content Include="dtr-biometric.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
