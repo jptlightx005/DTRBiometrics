@@ -25,7 +25,7 @@
                 <DataGridTextColumn Binding="{Binding TimeOutAM, StringFormat=\{0:hh:mm tt\}}" Header="Time out AM" />
                 <DataGridTextColumn Binding="{Binding TimeInPM, StringFormat=\{0:hh:mm tt\}}" Header="Time in PM" />
                 <DataGridTextColumn Binding="{Binding TimeOutPM, StringFormat=\{0:hh:mm tt\}}" Header="Time out PM" />
-                <DataGridTextColumn Binding="{Binding TotalHours}" Header="Total Hours" />
+                <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Hours" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

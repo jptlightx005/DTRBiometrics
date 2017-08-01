@@ -18,6 +18,8 @@ Class RegistrationPage
         txtMName.Text = ""
         txtLName.Text = ""
         lblStatus.Content = "No Fingerprint Enrolled"
+
+        regPage_Initialized(Me, New EventArgs)
     End Sub
 
     'Page Events
