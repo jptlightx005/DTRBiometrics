@@ -2,6 +2,8 @@
 Imports System.IO
 Imports System.Media
 Imports System.Threading
+Imports System.Windows.Threading
+
 Imports DTRSystem.DTRDataSet
 Public Class DTRBiometricWindow
     Dim WithEvents fp As ZKFPEngX
@@ -11,6 +13,7 @@ Public Class DTRBiometricWindow
 
     Dim employeeFound As EmployeeTableRow
 
+    Dim dateTimer As DispatcherTimer
 
     Public Sub New()
 
@@ -20,6 +23,14 @@ Public Class DTRBiometricWindow
         ' Add any initialization after the InitializeComponent() call.
         fp = New ZKFPEngX
         idList = New List(Of Integer)
+        dateTimer = New DispatcherTimer
+        AddHandler dateTimer.Tick, AddressOf dateTimer_Tick
+        dateTimer.Interval = New TimeSpan(0, 0, 1)
+        dateTimer.Start()
+
+        lblEmpName.Content = ""
+        lblDepartment.Content = ""
+        lblDesignation.Content = ""
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
@@ -78,7 +89,7 @@ Public Class DTRBiometricWindow
         beep.Start()
 
         If fi = -1 Then
-            txtEmpName.Text = ""
+            lblEmpName.Content = ""
             txbStatus.Text = "Not registered"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
@@ -144,12 +155,15 @@ Public Class DTRBiometricWindow
                 End If
 
                 txbStatus.Text = "Record Found"
-                txtEmpName.Text = Coalesce(employeeFound("full_name"))
+                lblEmpName.Content = Coalesce(employeeFound("full_name"))
                 imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
                 File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
             End If
         End If
+    End Sub
+    Private Sub dateTimer_Tick(sender As Object, e As EventArgs)
+        lblTime.Content = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss")
     End Sub
     Function Coalesce(obj As Object)
         If IsDBNull(obj) Then
