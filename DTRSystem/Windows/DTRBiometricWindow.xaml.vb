@@ -31,6 +31,7 @@ Public Class DTRBiometricWindow
         lblEmpName.Content = ""
         lblDepartment.Content = ""
         lblDesignation.Content = ""
+        lblMessage.Content = ""
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
@@ -91,6 +92,7 @@ Public Class DTRBiometricWindow
         If fi = -1 Then
             lblEmpName.Content = ""
             txbStatus.Text = "Not registered"
+            lblMessage.Content = "You are not registered!"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim filter = String.Format("ID = {0}", idList(fi))
@@ -103,6 +105,7 @@ Public Class DTRBiometricWindow
             Debug.Print("Found {0}'s record!", employeeFound.first_name)
 
             If Not employeeFound Is Nothing Then
+                lblMessage.Content = String.Format("You have logged in at {0}", DateTime.Now.ToString("hh:mm:ss tt"))
 
                 Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRDataSet.TimelogTableRow
@@ -163,7 +166,7 @@ Public Class DTRBiometricWindow
         End If
     End Sub
     Private Sub dateTimer_Tick(sender As Object, e As EventArgs)
-        lblTime.Content = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss")
+        lblTime.Content = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")
     End Sub
     Function Coalesce(obj As Object)
         If IsDBNull(obj) Then

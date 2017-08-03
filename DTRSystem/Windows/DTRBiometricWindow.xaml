@@ -46,6 +46,7 @@
         		        </InlineUIContainer>
                     </TextBlock>
                 </Label>
+                <Label x:Name="lblMessage" Content="Your message will go here" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,681,0,0" FontSize="24"/>
             </Grid>
         </Border>
 
