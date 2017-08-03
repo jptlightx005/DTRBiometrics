@@ -218,6 +218,24 @@ FROM            tbl_employee</CommandText>
               </DbSource>
             </Sources>
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DepartmentTableAdapter" GeneratorDataComponentClassName="DepartmentTableAdapter" Name="DepartmentTable" UserDataComponentName="DepartmentTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DTRCnStr (MySettings)" DbObjectName="tbl_department" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ID, dept_name
+FROM            tbl_department</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="dept_name" DataSetColumn="dept_name" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -226,7 +244,7 @@ FROM            tbl_employee</CommandText>
   <xs:element name="DTRDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DTRDataSet" msprop:Generator_UserDSName="DTRDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="EmployeeTable" msprop:Generator_TableClassName="EmployeeTableDataTable" msprop:Generator_TableVarName="tableEmployeeTable" msprop:Generator_RowChangedName="EmployeeTableRowChanged" msprop:Generator_TablePropName="EmployeeTable" msprop:Generator_RowDeletingName="EmployeeTableRowDeleting" msprop:Generator_RowChangingName="EmployeeTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeTableRowDeleted" msprop:Generator_RowClassName="EmployeeTableRow" msprop:Generator_UserTableName="EmployeeTable" msprop:Generator_RowEvArgName="EmployeeTableRowChangeEvent">
+        <xs:element name="EmployeeTable" msprop:Generator_TableClassName="EmployeeTableDataTable" msprop:Generator_TableVarName="tableEmployeeTable" msprop:Generator_TablePropName="EmployeeTable" msprop:Generator_RowDeletingName="EmployeeTableRowDeleting" msprop:Generator_RowChangingName="EmployeeTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeTableRowDeleted" msprop:Generator_UserTableName="EmployeeTable" msprop:Generator_RowChangedName="EmployeeTableRowChanged" msprop:Generator_RowEvArgName="EmployeeTableRowChangeEvent" msprop:Generator_RowClassName="EmployeeTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -272,7 +290,7 @@ FROM            tbl_employee</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TimelogTable" msprop:Generator_TableClassName="TimelogTableDataTable" msprop:Generator_TableVarName="tableTimelogTable" msprop:Generator_RowChangedName="TimelogTableRowChanged" msprop:Generator_TablePropName="TimelogTable" msprop:Generator_RowDeletingName="TimelogTableRowDeleting" msprop:Generator_RowChangingName="TimelogTableRowChanging" msprop:Generator_RowEvHandlerName="TimelogTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TimelogTableRowDeleted" msprop:Generator_RowClassName="TimelogTableRow" msprop:Generator_UserTableName="TimelogTable" msprop:Generator_RowEvArgName="TimelogTableRowChangeEvent">
+        <xs:element name="TimelogTable" msprop:Generator_TableClassName="TimelogTableDataTable" msprop:Generator_TableVarName="tableTimelogTable" msprop:Generator_TablePropName="TimelogTable" msprop:Generator_RowDeletingName="TimelogTableRowDeleting" msprop:Generator_RowChangingName="TimelogTableRowChanging" msprop:Generator_RowEvHandlerName="TimelogTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TimelogTableRowDeleted" msprop:Generator_UserTableName="TimelogTable" msprop:Generator_RowChangedName="TimelogTableRowChanged" msprop:Generator_RowEvArgName="TimelogTableRowChangeEvent" msprop:Generator_RowClassName="TimelogTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -286,6 +304,20 @@ FROM            tbl_employee</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DepartmentTable" msprop:Generator_TableClassName="DepartmentTableDataTable" msprop:Generator_TableVarName="tableDepartmentTable" msprop:Generator_TablePropName="DepartmentTable" msprop:Generator_RowDeletingName="DepartmentTableRowDeleting" msprop:Generator_RowChangingName="DepartmentTableRowChanging" msprop:Generator_RowEvHandlerName="DepartmentTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DepartmentTableRowDeleted" msprop:Generator_UserTableName="DepartmentTable" msprop:Generator_RowChangedName="DepartmentTableRowChanged" msprop:Generator_RowEvArgName="DepartmentTableRowChangeEvent" msprop:Generator_RowClassName="DepartmentTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="dept_name" msprop:Generator_ColumnVarNameInTable="columndept_name" msprop:Generator_ColumnPropNameInRow="dept_name" msprop:Generator_ColumnPropNameInTable="dept_nameColumn" msprop:Generator_UserColumnName="dept_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -294,6 +326,10 @@ FROM            tbl_employee</CommandText>
     </xs:unique>
     <xs:unique name="TimelogTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:TimelogTable" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="DepartmentTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DepartmentTable" />
       <xs:field xpath="mstns:ID" />
     </xs:unique>
   </xs:element>

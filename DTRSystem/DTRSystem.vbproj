@@ -74,6 +74,9 @@
     <Compile Include="DTRDataSet.vb">
       <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DepartmentPage.xaml.vb">
+      <DependentUpon>DepartmentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LeaveManagementPage.xaml.vb">
       <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\DepartmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LeaveManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

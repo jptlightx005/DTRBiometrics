@@ -2,6 +2,7 @@
     Dim registrationTab As TabItem
     Dim employeeTab As TabItem
     Dim reportsTab As TabItem
+    Dim departmentTab As TabItem
 
     Public Sub New()
 
@@ -44,6 +45,12 @@
         End If
         tab_panels.SelectedItem = employeeTab
     End Sub
+    Private Sub mnu_departments_Click(sender As Object, e As RoutedEventArgs) Handles mnu_departments.Click
+        If departmentTab Is Nothing Then
+            departmentTab = NewTab(New DepartmentPage, "Departments")
+        End If
+        tab_panels.SelectedItem = departmentTab
+    End Sub
 
     Private Function NewTab(ByRef pg As Page, header As String) As TabItem
         Dim tab As New TabItem
@@ -58,4 +65,5 @@
 
         Return tab
     End Function
+
 End Class
