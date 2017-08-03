@@ -14,6 +14,7 @@ Public Class DTRBiometricWindow
     Dim employeeFound As EmployeeTableRow
 
     Dim dateTimer As DispatcherTimer
+    Dim resetTimer As DispatcherTimer
 
     Public Sub New()
 
@@ -27,6 +28,10 @@ Public Class DTRBiometricWindow
         AddHandler dateTimer.Tick, AddressOf dateTimer_Tick
         dateTimer.Interval = New TimeSpan(0, 0, 1)
         dateTimer.Start()
+
+        resetTimer = New DispatcherTimer
+        AddHandler resetTimer.Tick, AddressOf resetTimer_Tick
+        resetTimer.Interval = New TimeSpan(0, 0, 5)
 
         lblEmpName.Content = ""
         lblDepartment.Content = ""
@@ -164,9 +169,19 @@ Public Class DTRBiometricWindow
                 File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
             End If
         End If
+        resetTimer.Stop()
+        resetTimer.Start()
     End Sub
     Private Sub dateTimer_Tick(sender As Object, e As EventArgs)
         lblTime.Content = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")
+    End Sub
+
+    Private Sub resetTimer_Tick(sender As Object, e As EventArgs)
+        lblEmpName.Content = ""
+        txbStatus.Text = "Waiting"
+        lblMessage.Content = ""
+        imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
+        resetTimer.Stop()
     End Sub
     Function Coalesce(obj As Object)
         If IsDBNull(obj) Then
