@@ -60,4 +60,17 @@ Module DTRBiometricSystemModule
             Return New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         End Try
     End Function
+    Function Coalesce(obj As Object)
+        If IsDBNull(obj) Then
+            If obj.GetType() = GetType(String) Then
+                Return ""
+            ElseIf obj.GetType() = GetType(Integer) Then
+                Return 0
+            Else
+                Return Nothing
+            End If
+        Else
+            Return obj
+        End If
+    End Function
 End Module

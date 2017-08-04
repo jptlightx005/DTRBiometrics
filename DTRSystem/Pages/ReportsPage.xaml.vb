@@ -19,4 +19,21 @@
             timeLogDataGrid.ItemsSource = tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
         End If
     End Sub
+
+    Private Sub btnPrint_Click(sender As Object, e As RoutedEventArgs) Handles btnPrint.Click
+        Dim webReportWindow As New DTRReportWebWindow
+        'webReportWindow.allMonth = chkAllMonths.IsChecked
+        'If Not chkAllMonths.IsChecked Then
+        '    If fromPicker.SelectedDate Is Nothing And toPicker.SelectedDate Is Nothing Then
+        '        MsgBox("Please select dates!", vbExclamation)
+        '        Return
+        '    End If
+        '    webReportWindow.fromMonth = fromPicker.SelectedDate.Value
+        '    webReportWindow.toMonth = toPicker.SelectedDate.Value
+
+        'End If
+
+        'webReportWindow.selectedDep = department_list(cmb_dep.SelectedIndex)
+        webReportWindow.ShowDialog()
+    End Sub
 End Class

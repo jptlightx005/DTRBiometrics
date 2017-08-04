@@ -28,5 +28,6 @@
                 <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Hours" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Page>
