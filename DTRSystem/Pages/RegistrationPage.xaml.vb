@@ -28,6 +28,7 @@ Class RegistrationPage
         employeeRow.first_name = ""
         employeeRow.middle_name = ""
         employeeRow.last_name = ""
+        employeeRow.emp_type = ""
         employeeRow.deptID = 0
         employeeRow.desgID = 0
         employeeRow.work_timeb = 0
@@ -92,7 +93,7 @@ Class RegistrationPage
         isValid = isValid And txtFName.Text.Length > 0
         isValid = isValid And txtMName.Text.Length > 0
         isValid = isValid And txtLName.Text.Length > 0
-
+        isValid = isValid And cmbEmpType.Text.Length > 0
         Return isValid
     End Function
 
