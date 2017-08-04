@@ -15,6 +15,8 @@ Module DTRBiometricSystemModule
     Public tblLogAdapter As New TimelogTableAdapter
     Public tblDeptAdapter As New DepartmentTableAdapter
 
+    Public tblEmployeeFullAdapter As New EmployeeFullTableAdapter
+
     Sub Main()
         applicationPath = AppDomain.CurrentDomain.BaseDirectory
         myDocumentsFolder = My.Computer.FileSystem.SpecialDirectories.MyDocuments

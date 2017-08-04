@@ -11,7 +11,7 @@ Public Class DTRBiometricWindow
     Dim idList As List(Of Integer)
     Public otemplate As Object
 
-    Dim employeeFound As EmployeeTableRow
+    Dim employeeFound As EmployeeFullRow
 
     Dim dateTimer As DispatcherTimer
     Dim resetTimer As DispatcherTimer
@@ -55,7 +55,7 @@ Public Class DTRBiometricWindow
         fpHandle = fp.CreateFPCacheDB
 
         Dim i = 0
-        For Each row In tblEmployeeAdapter.GetData
+        For Each row In tblEmployeeFullAdapter.GetData
 
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
@@ -101,7 +101,7 @@ Public Class DTRBiometricWindow
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim filter = String.Format("ID = {0}", idList(fi))
-            Dim rows = tblEmployeeAdapter.GetData().Select(filter)
+            Dim rows = tblEmployeeFullAdapter.GetData().Select(filter)
 
             If rows.Count > 0 Then
                 employeeFound = rows(0)
@@ -164,6 +164,7 @@ Public Class DTRBiometricWindow
 
                 txbStatus.Text = "Record Found"
                 lblEmpName.Content = Coalesce(employeeFound("full_name"))
+                lblDepartment.Content = Coalesce(employeeFound("dept_name"))
                 imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
                 File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
@@ -180,6 +181,8 @@ Public Class DTRBiometricWindow
         lblEmpName.Content = ""
         txbStatus.Text = "Waiting"
         lblMessage.Content = ""
+        lblDepartment.Content = ""
+        lblDesignation.Content = ""
         imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         resetTimer.Stop()
     End Sub
