@@ -18,11 +18,22 @@
                 <TextBox x:Name="txtFName" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,102,10,0"/>
                 <TextBox x:Name="txtMName" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,133,0,0"/>
                 <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,164,0,20"/>
+                <ComboBox x:Name="cmbEmpType" Text="{Binding Path=emp_type}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,192,0,10"  Width="166" IsEditable="True">
+                    <ComboBoxItem Content="Permanent"/>
+                    <ComboBoxItem Content="Part-Time"/>
+                    <ComboBoxItem Content="Official"/>
+                </ComboBox>
+                <ComboBox x:Name="cmbDepartment" SelectedValue="{Binding Path=deptID}" DisplayMemberPath="dept_name" SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,219,0,10" Width="166"/>
+                <ComboBox x:Name="cmbDesignation" SelectedValue="{Binding Path=desgID}" DisplayMemberPath="designation_name" SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,250,0,10" Width="166"/>
                 <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
                 <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="94"/>
+                <Label Content="EmployeeType" HorizontalAlignment="Left" Margin="9,188,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Department" HorizontalAlignment="Left" Margin="20,215,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label Content="Designation" HorizontalAlignment="Left" Margin="21,246,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+
             </Grid>
         </Border>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="226,254,0,0"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="226,329,0,0" IsEnabled="False"/>
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="226,10,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Page>

@@ -18,6 +18,8 @@ Class RegistrationPage
         txtMName.Text = ""
         txtLName.Text = ""
         lblStatus.Content = "No Fingerprint Enrolled"
+
+        regPage_Initialized(Me, New EventArgs)
     End Sub
 
     'Page Events
@@ -26,9 +28,15 @@ Class RegistrationPage
         employeeRow.first_name = ""
         employeeRow.middle_name = ""
         employeeRow.last_name = ""
+        employeeRow.emp_type = ""
+        employeeRow.deptID = 0
+        employeeRow.desgID = 0
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
         grdEmployee.DataContext = employeeRow
+
+        cmbDepartment.ItemsSource = tblDeptAdapter.GetData
+        cmbDesignation.ItemsSource = tblDesgAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
@@ -85,7 +93,7 @@ Class RegistrationPage
         isValid = isValid And txtFName.Text.Length > 0
         isValid = isValid And txtMName.Text.Length > 0
         isValid = isValid And txtLName.Text.Length > 0
-
+        isValid = isValid And cmbEmpType.Text.Length > 0
         Return isValid
     End Function
 

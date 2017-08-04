@@ -20,9 +20,8 @@
                     <MenuItem x:Name="mnu_register" Header="_Register Employee"/>
                     <MenuItem x:Name="mnu_employee" Header="_Employee Information"/>
                 </MenuItem>
-                <MenuItem Header="_Administration" IsEnabled="False">
+                <MenuItem Header="_Administration">
                     <MenuItem x:Name="mnu_departments" Header="_Departments"/>
-                    <MenuItem x:Name="mnu_corporation" Header="_Corporation"/>
                     <MenuItem x:Name="mnu_designation" Header="_Designation"/>
                     <Separator/>
                     <MenuItem x:Name="mnu_controls" Header="_Controls"/>

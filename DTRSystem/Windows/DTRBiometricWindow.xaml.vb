@@ -2,6 +2,8 @@
 Imports System.IO
 Imports System.Media
 Imports System.Threading
+Imports System.Windows.Threading
+
 Imports DTRSystem.DTRDataSet
 Public Class DTRBiometricWindow
     Dim WithEvents fp As ZKFPEngX
@@ -9,8 +11,10 @@ Public Class DTRBiometricWindow
     Dim idList As List(Of Integer)
     Public otemplate As Object
 
-    Dim employeeFound As EmployeeTableRow
+    Dim employeeFound As EmployeeFullRow
 
+    Dim dateTimer As DispatcherTimer
+    Dim resetTimer As DispatcherTimer
 
     Public Sub New()
 
@@ -20,6 +24,19 @@ Public Class DTRBiometricWindow
         ' Add any initialization after the InitializeComponent() call.
         fp = New ZKFPEngX
         idList = New List(Of Integer)
+        dateTimer = New DispatcherTimer
+        AddHandler dateTimer.Tick, AddressOf dateTimer_Tick
+        dateTimer.Interval = New TimeSpan(0, 0, 1)
+        dateTimer.Start()
+
+        resetTimer = New DispatcherTimer
+        AddHandler resetTimer.Tick, AddressOf resetTimer_Tick
+        resetTimer.Interval = New TimeSpan(0, 0, 5)
+
+        lblEmpName.Content = ""
+        lblDepartment.Content = ""
+        lblDesignation.Content = ""
+        lblMessage.Content = ""
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
@@ -38,7 +55,7 @@ Public Class DTRBiometricWindow
         fpHandle = fp.CreateFPCacheDB
 
         Dim i = 0
-        For Each row In tblEmployeeAdapter.GetData
+        For Each row In tblEmployeeFullAdapter.GetData
 
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
@@ -78,12 +95,16 @@ Public Class DTRBiometricWindow
         beep.Start()
 
         If fi = -1 Then
-            txtEmpName.Text = ""
+            lblEmpName.Content = ""
+            lblMessage.Content = ""
+            lblDepartment.Content = ""
+            lblDesignation.Content = ""
             txbStatus.Text = "Not registered"
+            lblMessage.Content = "You are not registered!"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
             Dim filter = String.Format("ID = {0}", idList(fi))
-            Dim rows = tblEmployeeAdapter.GetData().Select(filter)
+            Dim rows = tblEmployeeFullAdapter.GetData().Select(filter)
 
             If rows.Count > 0 Then
                 employeeFound = rows(0)
@@ -92,6 +113,7 @@ Public Class DTRBiometricWindow
             Debug.Print("Found {0}'s record!", employeeFound.first_name)
 
             If Not employeeFound Is Nothing Then
+                lblMessage.Content = String.Format("You have logged in at {0}", DateTime.Now.ToString("hh:mm:ss tt"))
 
                 Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
                 Dim timeLogFound As DTRDataSet.TimelogTableRow
@@ -106,13 +128,14 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
                     If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
-                            timeLogFound.TimeInAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+
+                            timeLogFound.TimeInAM = DateTime.Now
                         End If
 
                         'AM Out 12PM-1PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutAM")) Then
-                            timeLogFound.TimeOutAM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeOutAM = DateTime.Now
                         End If
 
                         'TimeCalculation
@@ -124,13 +147,13 @@ Public Class DTRBiometricWindow
                         'PM IN 1PM-5PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
-                            timeLogFound.TimeInPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeInPM = DateTime.Now
                         End If
 
                         'PM OUT 5PM-8PM
                     ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeOutPM")) Then
-                            timeLogFound.TimeOutPM = DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")
+                            timeLogFound.TimeOutPM = DateTime.Now
                         End If
 
                         'TimeCalculation
@@ -143,12 +166,29 @@ Public Class DTRBiometricWindow
                 End If
 
                 txbStatus.Text = "Record Found"
-                txtEmpName.Text = Coalesce(employeeFound("full_name"))
+                lblEmpName.Content = Coalesce(employeeFound("full_name"))
+                lblDepartment.Content = Coalesce(employeeFound("dept_name"))
+                lblDesignation.Content = Coalesce(employeeFound("designation_name"))
                 imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
                 File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
             End If
         End If
+        resetTimer.Stop()
+        resetTimer.Start()
+    End Sub
+    Private Sub dateTimer_Tick(sender As Object, e As EventArgs)
+        lblTime.Content = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt")
+    End Sub
+
+    Private Sub resetTimer_Tick(sender As Object, e As EventArgs)
+        lblEmpName.Content = ""
+        txbStatus.Text = "Waiting"
+        lblMessage.Content = ""
+        lblDepartment.Content = ""
+        lblDesignation.Content = ""
+        imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
+        resetTimer.Stop()
     End Sub
     Function Coalesce(obj As Object)
         If IsDBNull(obj) Then

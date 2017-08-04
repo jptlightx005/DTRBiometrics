@@ -74,6 +74,12 @@
     <Compile Include="DTRDataSet.vb">
       <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DepartmentPage.xaml.vb">
+      <DependentUpon>DepartmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DesignationPage.xaml.vb">
+      <DependentUpon>DesignationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LeaveManagementPage.xaml.vb">
       <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
     </Compile>
@@ -91,6 +97,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\DepartmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DesignationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LeaveManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,7 +278,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dtr-biometric.accdb" />
+    <Content Include="dtr-biometric.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

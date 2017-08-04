@@ -4,7 +4,8 @@ Class EmployeeInformationPage
     Dim selectedEmployee As EmployeeTableRow
     Private Sub employeePage_Initialized(sender As Object, e As EventArgs) Handles employeePage.Initialized
         cmbEmployees.ItemsSource = tblEmployeeAdapter.GetData
-        'cmbDepartment.ItemsSource = tblDepartmentAdapter.GetData
+        cmbDepartment.ItemsSource = tblDeptAdapter.GetData
+        cmbDesignation.ItemsSource = tblDesgAdapter.GetData
     End Sub
 
     Private Sub cmbEmployees_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbEmployees.SelectionChanged
@@ -15,6 +16,10 @@ Class EmployeeInformationPage
 
             grdEmpForm.DataContext = selectedEmployee
             imgEmpPicture.Source = DataToBitmap(selectedEmployee("picture"))
+
+            btnSave.IsEnabled = True
+        Else
+            btnSave.IsEnabled = False
         End If
     End Sub
 
