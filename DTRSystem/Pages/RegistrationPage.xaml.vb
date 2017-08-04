@@ -28,9 +28,12 @@ Class RegistrationPage
         employeeRow.first_name = ""
         employeeRow.middle_name = ""
         employeeRow.last_name = ""
+        employeeRow.deptID = 0
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
         grdEmployee.DataContext = employeeRow
+
+        cmbDepartment.ItemsSource = tblDeptAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
