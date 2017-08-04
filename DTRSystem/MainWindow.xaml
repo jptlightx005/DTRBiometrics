@@ -22,7 +22,7 @@
                 </MenuItem>
                 <MenuItem Header="_Administration">
                     <MenuItem x:Name="mnu_departments" Header="_Departments"/>
-                    <MenuItem x:Name="mnu_designation" Header="_Designation" IsEnabled="False"/>
+                    <MenuItem x:Name="mnu_designation" Header="_Designation"/>
                     <Separator/>
                     <MenuItem x:Name="mnu_controls" Header="_Controls"/>
                 </MenuItem>

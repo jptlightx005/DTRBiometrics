@@ -77,6 +77,9 @@
     <Compile Include="Pages\DepartmentPage.xaml.vb">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DesignationPage.xaml.vb">
+      <DependentUpon>DesignationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LeaveManagementPage.xaml.vb">
       <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
       <SubType>Designer</SubType>
     </None>
     <Page Include="Pages\DepartmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DesignationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,7 +14,7 @@ Module DTRBiometricSystemModule
     Public tblEmployeeAdapter As New EmployeeTableAdapter
     Public tblLogAdapter As New TimelogTableAdapter
     Public tblDeptAdapter As New DepartmentTableAdapter
-
+    Public tblDesgAdapter As New DesignationTableAdapter
     Public tblEmployeeFullAdapter As New EmployeeFullTableAdapter
 
     Sub Main()
