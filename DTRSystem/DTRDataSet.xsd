@@ -287,15 +287,16 @@ FROM            tbl_employee</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EmployeeFullTableAdapter" GeneratorDataComponentClassName="EmployeeFullTableAdapter" Name="EmployeeFull" UserDataComponentName="EmployeeFullTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DTRCnStr (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DTRCnStr (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        tbl_employee.ID, tbl_employee.EmployeeID, tbl_employee.biometric, tbl_employee.first_name, tbl_employee.middle_name, tbl_employee.last_name, 
                          tbl_employee.emp_type, tbl_employee.deptID, tbl_employee.desgID, tbl_employee.work_timeb, tbl_employee.work_timee, tbl_employee.picture, 
                          tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') + tbl_employee.last_name AS full_name, 
-                         tbl_department.dept_name
-FROM            (tbl_employee INNER JOIN
-                         tbl_department ON tbl_employee.deptID = tbl_department.ID)</CommandText>
+                         tbl_department.dept_name, tbl_designation.designation_name
+FROM            ((tbl_employee INNER JOIN
+                         tbl_department ON tbl_employee.deptID = tbl_department.ID) INNER JOIN
+                         tbl_designation ON tbl_employee.desgID = tbl_designation.ID)</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -316,6 +317,7 @@ FROM            (tbl_employee INNER JOIN
               <Mapping SourceColumn="picture" DataSetColumn="picture" />
               <Mapping SourceColumn="full_name" DataSetColumn="full_name" />
               <Mapping SourceColumn="dept_name" DataSetColumn="dept_name" />
+              <Mapping SourceColumn="designation_name" DataSetColumn="designation_name" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -509,6 +511,13 @@ FROM            (tbl_employee INNER JOIN
                 </xs:simpleType>
               </xs:element>
               <xs:element name="dept_name" msprop:Generator_ColumnVarNameInTable="columndept_name" msprop:Generator_ColumnPropNameInRow="dept_name" msprop:Generator_ColumnPropNameInTable="dept_nameColumn" msprop:Generator_UserColumnName="dept_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="designation_name" msprop:Generator_ColumnVarNameInTable="columndesignation_name" msprop:Generator_ColumnPropNameInRow="designation_name" msprop:Generator_ColumnPropNameInTable="designation_nameColumn" msprop:Generator_UserColumnName="designation_name" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />

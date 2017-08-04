@@ -96,6 +96,9 @@ Public Class DTRBiometricWindow
 
         If fi = -1 Then
             lblEmpName.Content = ""
+            lblMessage.Content = ""
+            lblDepartment.Content = ""
+            lblDesignation.Content = ""
             txbStatus.Text = "Not registered"
             lblMessage.Content = "You are not registered!"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
@@ -165,6 +168,7 @@ Public Class DTRBiometricWindow
                 txbStatus.Text = "Record Found"
                 lblEmpName.Content = Coalesce(employeeFound("full_name"))
                 lblDepartment.Content = Coalesce(employeeFound("dept_name"))
+                lblDesignation.Content = Coalesce(employeeFound("designation_name"))
                 imgEmployee.Source = DataToBitmap(employeeFound.picture)
 
                 File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
