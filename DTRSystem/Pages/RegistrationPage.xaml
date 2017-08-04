@@ -31,7 +31,7 @@
                          TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="102,152,0,0"/>
                 <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" 
                          TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="102,180,0,10"/>
-                <ComboBox x:Name="cmbEmpType" Text="{Binding Path=emp_type}" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,208,0,0"  Width="166" IsEditable="True">
+                <ComboBox x:Name="cmbEmpType" Text="{Binding Path=emp_type}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,208,0,0"  Width="166" IsEditable="True">
                     <ComboBoxItem Content="Permanent"/>
                     <ComboBoxItem Content="Part-Time"/>
                     <ComboBoxItem Content="Official"/>
