@@ -294,8 +294,8 @@ FROM            tbl_employee</CommandText>
                          tbl_employee.emp_type, tbl_employee.deptID, tbl_employee.desgID, tbl_employee.work_timeb, tbl_employee.work_timee, tbl_employee.picture, 
                          tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') + tbl_employee.last_name AS full_name, 
                          tbl_department.dept_name, tbl_designation.designation_name
-FROM            ((tbl_employee INNER JOIN
-                         tbl_department ON tbl_employee.deptID = tbl_department.ID) INNER JOIN
+FROM            ((tbl_employee LEFT OUTER JOIN
+                         tbl_department ON tbl_employee.deptID = tbl_department.ID) LEFT OUTER JOIN
                          tbl_designation ON tbl_employee.desgID = tbl_designation.ID)</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -375,7 +375,7 @@ FROM            ((tbl_employee INNER JOIN
   <xs:element name="DTRDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DTRDataSet" msprop:Generator_UserDSName="DTRDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="EmployeeTable" msprop:Generator_TableClassName="EmployeeTableDataTable" msprop:Generator_TableVarName="tableEmployeeTable" msprop:Generator_TablePropName="EmployeeTable" msprop:Generator_RowDeletingName="EmployeeTableRowDeleting" msprop:Generator_RowChangingName="EmployeeTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeTableRowDeleted" msprop:Generator_UserTableName="EmployeeTable" msprop:Generator_RowChangedName="EmployeeTableRowChanged" msprop:Generator_RowEvArgName="EmployeeTableRowChangeEvent" msprop:Generator_RowClassName="EmployeeTableRow">
+        <xs:element name="EmployeeTable" msprop:Generator_TableClassName="EmployeeTableDataTable" msprop:Generator_TableVarName="tableEmployeeTable" msprop:Generator_RowChangedName="EmployeeTableRowChanged" msprop:Generator_TablePropName="EmployeeTable" msprop:Generator_RowDeletingName="EmployeeTableRowDeleting" msprop:Generator_RowChangingName="EmployeeTableRowChanging" msprop:Generator_RowEvHandlerName="EmployeeTableRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeTableRowDeleted" msprop:Generator_RowClassName="EmployeeTableRow" msprop:Generator_UserTableName="EmployeeTable" msprop:Generator_RowEvArgName="EmployeeTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -430,7 +430,7 @@ FROM            ((tbl_employee INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TimelogTable" msprop:Generator_TableClassName="TimelogTableDataTable" msprop:Generator_TableVarName="tableTimelogTable" msprop:Generator_TablePropName="TimelogTable" msprop:Generator_RowDeletingName="TimelogTableRowDeleting" msprop:Generator_RowChangingName="TimelogTableRowChanging" msprop:Generator_RowEvHandlerName="TimelogTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TimelogTableRowDeleted" msprop:Generator_UserTableName="TimelogTable" msprop:Generator_RowChangedName="TimelogTableRowChanged" msprop:Generator_RowEvArgName="TimelogTableRowChangeEvent" msprop:Generator_RowClassName="TimelogTableRow">
+        <xs:element name="TimelogTable" msprop:Generator_TableClassName="TimelogTableDataTable" msprop:Generator_TableVarName="tableTimelogTable" msprop:Generator_RowChangedName="TimelogTableRowChanged" msprop:Generator_TablePropName="TimelogTable" msprop:Generator_RowDeletingName="TimelogTableRowDeleting" msprop:Generator_RowChangingName="TimelogTableRowChanging" msprop:Generator_RowEvHandlerName="TimelogTableRowChangeEventHandler" msprop:Generator_RowDeletedName="TimelogTableRowDeleted" msprop:Generator_RowClassName="TimelogTableRow" msprop:Generator_UserTableName="TimelogTable" msprop:Generator_RowEvArgName="TimelogTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -444,7 +444,7 @@ FROM            ((tbl_employee INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DepartmentTable" msprop:Generator_TableClassName="DepartmentTableDataTable" msprop:Generator_TableVarName="tableDepartmentTable" msprop:Generator_RowChangedName="DepartmentTableRowChanged" msprop:Generator_TablePropName="DepartmentTable" msprop:Generator_RowDeletingName="DepartmentTableRowDeleting" msprop:Generator_RowChangingName="DepartmentTableRowChanging" msprop:Generator_RowEvHandlerName="DepartmentTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DepartmentTableRowDeleted" msprop:Generator_RowClassName="DepartmentTableRow" msprop:Generator_UserTableName="DepartmentTable" msprop:Generator_RowEvArgName="DepartmentTableRowChangeEvent">
+        <xs:element name="DepartmentTable" msprop:Generator_TableClassName="DepartmentTableDataTable" msprop:Generator_TableVarName="tableDepartmentTable" msprop:Generator_TablePropName="DepartmentTable" msprop:Generator_RowDeletingName="DepartmentTableRowDeleting" msprop:Generator_RowChangingName="DepartmentTableRowChanging" msprop:Generator_RowEvHandlerName="DepartmentTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DepartmentTableRowDeleted" msprop:Generator_UserTableName="DepartmentTable" msprop:Generator_RowChangedName="DepartmentTableRowChanged" msprop:Generator_RowEvArgName="DepartmentTableRowChangeEvent" msprop:Generator_RowClassName="DepartmentTableRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
@@ -458,7 +458,7 @@ FROM            ((tbl_employee INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="EmployeeFull" msprop:Generator_TableClassName="EmployeeFullDataTable" msprop:Generator_TableVarName="tableEmployeeFull" msprop:Generator_TablePropName="EmployeeFull" msprop:Generator_RowDeletingName="EmployeeFullRowDeleting" msprop:Generator_RowChangingName="EmployeeFullRowChanging" msprop:Generator_RowEvHandlerName="EmployeeFullRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeFullRowDeleted" msprop:Generator_UserTableName="EmployeeFull" msprop:Generator_RowChangedName="EmployeeFullRowChanged" msprop:Generator_RowEvArgName="EmployeeFullRowChangeEvent" msprop:Generator_RowClassName="EmployeeFullRow">
+        <xs:element name="EmployeeFull" msprop:Generator_TableClassName="EmployeeFullDataTable" msprop:Generator_TableVarName="tableEmployeeFull" msprop:Generator_RowChangedName="EmployeeFullRowChanged" msprop:Generator_TablePropName="EmployeeFull" msprop:Generator_RowDeletingName="EmployeeFullRowDeleting" msprop:Generator_RowChangingName="EmployeeFullRowChanging" msprop:Generator_RowEvHandlerName="EmployeeFullRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeeFullRowDeleted" msprop:Generator_RowClassName="EmployeeFullRow" msprop:Generator_UserTableName="EmployeeFull" msprop:Generator_RowEvArgName="EmployeeFullRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
@@ -527,7 +527,7 @@ FROM            ((tbl_employee INNER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DesignationTable" msprop:Generator_TableClassName="DesignationTableDataTable" msprop:Generator_TableVarName="tableDesignationTable" msprop:Generator_TablePropName="DesignationTable" msprop:Generator_RowDeletingName="DesignationTableRowDeleting" msprop:Generator_RowChangingName="DesignationTableRowChanging" msprop:Generator_RowEvHandlerName="DesignationTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DesignationTableRowDeleted" msprop:Generator_UserTableName="DesignationTable" msprop:Generator_RowChangedName="DesignationTableRowChanged" msprop:Generator_RowEvArgName="DesignationTableRowChangeEvent" msprop:Generator_RowClassName="DesignationTableRow">
+        <xs:element name="DesignationTable" msprop:Generator_TableClassName="DesignationTableDataTable" msprop:Generator_TableVarName="tableDesignationTable" msprop:Generator_RowChangedName="DesignationTableRowChanged" msprop:Generator_TablePropName="DesignationTable" msprop:Generator_RowDeletingName="DesignationTableRowDeleting" msprop:Generator_RowChangingName="DesignationTableRowChanging" msprop:Generator_RowEvHandlerName="DesignationTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DesignationTableRowDeleted" msprop:Generator_RowClassName="DesignationTableRow" msprop:Generator_UserTableName="DesignationTable" msprop:Generator_RowEvArgName="DesignationTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />

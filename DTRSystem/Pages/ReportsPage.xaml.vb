@@ -22,6 +22,14 @@
 
     Private Sub btnPrint_Click(sender As Object, e As RoutedEventArgs) Handles btnPrint.Click
         Dim webReportWindow As New DTRReportWebWindow
+        Dim employees = tblEmployeeFullAdapter.GetData.Select("ID = " & cmbEmployees.SelectedValue)
+        If employees.Count > 0 Then
+            webReportWindow.employee = employees(0)
+            webReportWindow.ShowDialog()
+        Else
+            MsgBox("Employee is not found", vbExclamation)
+        End If
+
         'webReportWindow.allMonth = chkAllMonths.IsChecked
         'If Not chkAllMonths.IsChecked Then
         '    If fromPicker.SelectedDate Is Nothing And toPicker.SelectedDate Is Nothing Then
@@ -34,6 +42,9 @@
         'End If
 
         'webReportWindow.selectedDep = department_list(cmb_dep.SelectedIndex)
-        webReportWindow.ShowDialog()
+    End Sub
+
+    Private Sub cmbEmployees_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbEmployees.SelectionChanged
+        btnPrint.IsEnabled = cmbEmployees.SelectedIndex >= 0
     End Sub
 End Class

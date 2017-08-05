@@ -1,6 +1,8 @@
 ﻿Imports System.IO.File
 Imports SMSCSFuncs
+Imports DTRSystem.DTRDataSet
 Public Class DTRReportWebWindow
+    Public employee As EmployeeFullRow
     Public Sub New()
 
         ' This call is required by the designer.
@@ -14,9 +16,7 @@ Public Class DTRReportWebWindow
 
     End Sub
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        Dim records = tblLogAdapter.GetData
-
-
+        Dim records = tblLogAdapter.GetEmployeeTableLog(employee.ID)
 
         Dim htmlTable As String = ""
         For Each timeLog In records
@@ -33,12 +33,15 @@ Public Class DTRReportWebWindow
             htmlTable += String.Format("<td>{0}</td>", timeOutAM) & vbCrLf
             htmlTable += String.Format("<td>{0}</td>", timeInPM) & vbCrLf
             htmlTable += String.Format("<td>{0}</td>", timeOutPM) & vbCrLf
+            htmlTable += String.Format("<td>{0}</td>", timeLog.TotalTime) & vbCrLf
             htmlTable += "</tr>" & vbCrLf
         Next
 
         Dim HTMLReportPage As String = ReadAllText(applicationPath & "\MonthlyReports\MonthlyReportPage.html")
         Dim monthStr As String = "ALL"
-        Dim finalHTML = HTMLReportPage.Replace("{0}", htmlTable).Replace("{1}", applicationPath.Replace("\", "/") & "MonthlyReports/").Replace("{2}", monthStr)
+        Dim cleanHTML1 = HTMLReportPage.Replace("{0}", htmlTable).Replace("{1}", applicationPath.Replace("\", "/") & "MonthlyReports/").Replace("{2}", monthStr)
+        Dim cleanHTML2 = cleanHTML1.Replace("{3}", employee.full_name).Replace("{4}", Coalesce(employee("designation_name")))
+        Dim finalHTML = cleanHTML2
         Debug.Print("Test: {0}", finalHTML)
         wb_report.NavigateToString(finalHTML)
     End Sub
@@ -51,4 +54,12 @@ Public Class DTRReportWebWindow
             Return newDate.ToString("hh:mm tt")
         End If
     End Function
+
+    Private Sub btnPrint_Click(sender As Object, e As RoutedEventArgs) Handles btnPrint.Click
+        webbrowser_extension.PrintDocument(wb_report)
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
+        Close()
+    End Sub
 End Class
