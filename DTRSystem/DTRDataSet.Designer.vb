@@ -5187,10 +5187,10 @@ Namespace DTRDataSetTableAdapters
                 "                         tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee" & _
                 ".middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') + tbl_employee.last" & _
                 "_name AS full_name, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         tbl_department.dept_name, tbl_des" & _
-                "ignation.designation_name" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            ((tbl_employee INNER JOIN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "          " & _
-                "               tbl_department ON tbl_employee.deptID = tbl_department.ID) INNER " & _
-                "JOIN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         tbl_designation ON tbl_employee.desgID = tbl_desi" & _
-                "gnation.ID)"
+                "ignation.designation_name" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FROM            ((tbl_employee LEFT OUTER JOIN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "     " & _
+                "                    tbl_department ON tbl_employee.deptID = tbl_department.ID) L" & _
+                "EFT OUTER JOIN" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "                         tbl_designation ON tbl_employee.desgID " & _
+                "= tbl_designation.ID)"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
 

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Random Title</title>
+    <style type="text/css" media="print">
+        @page {
+            size: auto;
+            margin: 0mm;
+        }
+
+        html {
+            background-color: #FFF;
+            margin: 0px;
+        }
+
+        body {
+            border: solid 1px white;
+            margin: 5mm 15mm 5mm 15mm;
+        }
+    </style>
+    <style type="text/css" > span .label {
+            color: #000;
+            border: 0px;
+        }
+
+        span .detail {
+            display: table-cell;
+            border-bottom: 1px solid black;
+        }
+    </style>
+
+    <script src="{1}bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{1}js/general.js"></script>
+    <script src="{1}js/sidebar.js"></script>
+    <script src="{1}js/search.js"></script>
+    <link rel="stylesheet" href="{1}bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+    <center><h1>REPORTS</h1></center>
+    <center>TIME PERIODS: <b>{2}</b></center>
+
+    <div class="row" style="margin-left:0px">
+        <span>
+            <span class="label">NAME:</span>
+            <span class="detail" style="width:250px;">{3}</span>
+        </span>
+
+        <span>
+            <span class="label">POSTION:</span>
+            <span class="detail" style="width:250px;">{4}</span>
+        </span>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-sm-2">Date</th>
+                <th class="col-sm-2">Time in AM</th>
+                <th class="col-sm-2">Time out AM</th>
+                <th class="col-sm-2">Time in PM</th>
+                <th class="col-sm-2">Time out PM</th>
+                <th class="col-sm-1">Total Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            {0}
+        </tbody>
+    </table>
+</body>
+</html>

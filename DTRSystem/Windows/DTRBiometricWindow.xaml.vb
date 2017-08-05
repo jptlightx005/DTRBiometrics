@@ -190,19 +190,6 @@ Public Class DTRBiometricWindow
         imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         resetTimer.Stop()
     End Sub
-    Function Coalesce(obj As Object)
-        If IsDBNull(obj) Then
-            If obj.GetType() = GetType(String) Then
-                Return ""
-            ElseIf obj.GetType() = GetType(Integer) Then
-                Return 0
-            Else
-                Return Nothing
-            End If
-        Else
-            Return obj
-        End If
-    End Function
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
         fp.CancelCapture()
