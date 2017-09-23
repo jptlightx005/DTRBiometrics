@@ -81,6 +81,7 @@ Public Class DTRBiometricWindow
         sTemp = fp.GetTemplate
 
         Dim score = 8
+        'Selects the ID of the Employee in the ID Lists
         Dim fi = fp.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
 
         Dim beep As New Thread(Sub()
@@ -94,7 +95,7 @@ Public Class DTRBiometricWindow
                                End Sub)
         beep.Start()
 
-        If fi = -1 Then
+        If fi = -1 Then 'if employee is not found
             lblEmpName.Content = ""
             lblMessage.Content = ""
             lblDepartment.Content = ""
@@ -103,8 +104,8 @@ Public Class DTRBiometricWindow
             lblMessage.Content = "You are not registered!"
             imgEmployee.Source = New BitmapImage(New Uri("pack://siteoforigin:,,,/Resources/placeholder.png", UriKind.Absolute))
         Else
-            Dim filter = String.Format("ID = {0}", idList(fi))
-            Dim rows = tblEmployeeFullAdapter.GetData().Select(filter)
+            Dim filter = String.Format("ID = {0}", idList(fi)) 'actual ID of the employee
+            Dim rows = tblEmployeeFullAdapter.GetData().Select(filter) '
 
             If rows.Count > 0 Then
                 employeeFound = rows(0)
@@ -115,7 +116,7 @@ Public Class DTRBiometricWindow
             If Not employeeFound Is Nothing Then
                 lblMessage.Content = String.Format("You have logged in at {0}", DateTime.Now.ToString("hh:mm:ss tt"))
 
-                Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows
+                Dim logRows = tblLogAdapter.GetTimeLog(employeeFound.ID, Now.Date).Rows 'looks for employee's log on the day
                 Dim timeLogFound As DTRDataSet.TimelogTableRow
                 If logRows.Count <= 0 Then
                     tblLogAdapter.Insert(employeeFound.ID, Now.Date, Nothing, Nothing, Nothing, Nothing, 0)
@@ -126,41 +127,54 @@ Public Class DTRBiometricWindow
 
                 'AM IN 7AM-12PM
                 If Not timeLogFound Is Nothing Then
-                    If Now.TimeOfDay >= New TimeSpan(7, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 0, 0) Then
+
+
+                    If Now.TimeOfDay >= New TimeSpan(6, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
-
                             timeLogFound.TimeInAM = DateTime.Now
-                        End If
+                        Else
+                            If Date.Compare(Now, timeLogFound.TimeInAM.AddMinutes(30)) < 0 Then
+                                lblMessage.Content = String.Format("You have just logged in at {0}", timeLogFound("TimeInAM"))
+                                lblMessage.Content &= vbCrLf & "Wait for 30 minutes, fag"
+                            Else
+                                If IsDBNull(timeLogFound("TimeOutAM")) Then
+                                    timeLogFound.TimeOutAM = DateTime.Now
 
-                        'AM Out 12PM-1PM
-                    ElseIf Now.TimeOfDay >= New TimeSpan(12, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
-                        If IsDBNull(timeLogFound("TimeOutAM")) Then
-                            timeLogFound.TimeOutAM = DateTime.Now
-                        End If
+                                    'TimeCalculation
+                                    'If Not IsDBNull(timeLogFound("timeinpm")) Then
+                                    '    Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
+                                    '    timeLogFound.TotalTime += total.TotalHours
+                                    'End If
+                                Else
+                                    lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutAM"))
+                                End If
 
-                        'TimeCalculation
-                        If Not IsDBNull(timeLogFound("TimeInAM")) Then
-                            Dim total As TimeSpan = timeLogFound.TimeOutAM - timeLogFound.TimeInAM
-                            timeLogFound.TotalTime += total.TotalHours
+                            End If
                         End If
 
                         'PM IN 1PM-5PM
-                    ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(17, 0, 0) Then
+                    ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(21, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
                             timeLogFound.TimeInPM = DateTime.Now
+                        Else
+                            If Date.Compare(Now, timeLogFound.TimeInPM.AddMinutes(30)) < 0 Then
+                                lblMessage.Content = String.Format("You have just logged in at {0}", timeLogFound("TimeInAM"))
+                                lblMessage.Content &= vbCrLf & "Wait for 30 minutes, fag"
+                            Else
+                                If IsDBNull(timeLogFound("TimeOutPM")) Then
+                                    timeLogFound.TimeOutPM = DateTime.Now
+
+                                    'TimeCalculation
+                                    'If Not IsDBNull(timeLogFound("timeinpm")) Then
+                                    '    Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
+                                    '    timeLogFound.TotalTime += total.TotalHours
+                                    'End If
+                                Else
+                                    lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutPM"))
+                                End If
+                            End If
                         End If
 
-                        'PM OUT 5PM-8PM
-                    ElseIf Now.TimeOfDay >= New TimeSpan(17, 0, 0) And Now.TimeOfDay < New TimeSpan(20, 0, 0) Then
-                        If IsDBNull(timeLogFound("TimeOutPM")) Then
-                            timeLogFound.TimeOutPM = DateTime.Now
-                        End If
-
-                        'TimeCalculation
-                        If Not IsDBNull(timeLogFound("TimeInPM")) Then
-                            Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
-                            timeLogFound.TotalTime += total.TotalHours
-                        End If
                     End If
                     tblLogAdapter.Update(timeLogFound)
                 End If
