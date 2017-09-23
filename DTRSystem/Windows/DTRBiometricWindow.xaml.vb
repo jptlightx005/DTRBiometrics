@@ -135,7 +135,7 @@ Public Class DTRBiometricWindow
                         Else
                             If Date.Compare(Now, timeLogFound.TimeInAM.AddMinutes(30)) < 0 Then
                                 lblMessage.Content = String.Format("You have just logged in at {0}", timeLogFound("TimeInAM"))
-                                lblMessage.Content &= vbCrLf & "Wait for 30 minutes, fag"
+                                lblMessage.Content &= vbCrLf & "Wait for 30 minutes."
                             Else
                                 If IsDBNull(timeLogFound("TimeOutAM")) Then
                                     timeLogFound.TimeOutAM = DateTime.Now
@@ -159,7 +159,7 @@ Public Class DTRBiometricWindow
                         Else
                             If Date.Compare(Now, timeLogFound.TimeInPM.AddMinutes(30)) < 0 Then
                                 lblMessage.Content = String.Format("You have just logged in at {0}", timeLogFound("TimeInAM"))
-                                lblMessage.Content &= vbCrLf & "Wait for 30 minutes, fag"
+                                lblMessage.Content &= vbCrLf & "Wait for 30 minutes."
                             Else
                                 If IsDBNull(timeLogFound("TimeOutPM")) Then
                                     timeLogFound.TimeOutPM = DateTime.Now
