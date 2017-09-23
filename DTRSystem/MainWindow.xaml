@@ -13,24 +13,6 @@
                     <MenuItem x:Name="mnu_logout" Header="_Logout" IsEnabled="False"/>
                     <MenuItem x:Name="mnu_close" Header="_Close" />
                 </MenuItem>
-                <MenuItem Header="_Attendance">
-                    <MenuItem x:Name="mnu_daily" Header="_Daily Time Records"/>
-                </MenuItem>
-                <MenuItem Header="_Employee Details">
-                    <MenuItem x:Name="mnu_register" Header="_Register Employee"/>
-                    <MenuItem x:Name="mnu_employee" Header="_Employee Information"/>
-                </MenuItem>
-                <MenuItem Header="_Administration">
-                    <MenuItem x:Name="mnu_departments" Header="_Departments"/>
-                    <MenuItem x:Name="mnu_designation" Header="_Designation"/>
-                    <Separator/>
-                    <MenuItem x:Name="mnu_controls" Header="_Controls"/>
-                </MenuItem>
-                <MenuItem Header="_Reports" IsEnabled="False">
-                    <MenuItem x:Name="mnu_report" Header="_Daily Time Record"/>
-                    <MenuItem x:Name="mnu_leave" Header="_Leave Management"/>
-                    <MenuItem x:Name="mnu_payroll" Header="_Payroll"/>
-                </MenuItem>
                 <MenuItem Header="_About" IsEnabled="False"/>
             </Menu>
         </DockPanel>
@@ -64,9 +46,16 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
+                <Button Click="tblrLeave_Click">
+                    <StackPanel Width="65">
+                        <Image Source="pack://siteoforigin:,,,/Resources/All_reports.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
+                        <Label Content="Leave" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Separator/>
                 <Button x:Name="btnClose">
                     <StackPanel Width="65">
-                        <Image Source="pack://siteoforigin:,,,/Resources/close-button-icon-30064.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
+                        <Image Source="pack://siteoforigin:,,,/Resources/close-button-icon-30064.png" HorizontalAlignment="Left" Height="25" Margin="20,0,0,0"/>
                         <Label Content="Close" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -74,7 +63,7 @@
         </DockPanel>
         <Grid Margin="0,85,0,0">
             <TabControl x:Name="tab_panels"  Margin="0,0,0,0" Background="{x:Null}" >
-   
+
             </TabControl>
         </Grid>
     </Grid>

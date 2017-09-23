@@ -2,6 +2,7 @@
     Dim registrationTab As TabItem
     Dim employeeTab As TabItem
     Dim reportsTab As TabItem
+    Dim leaveTab As TabItem
     Dim departmentTab As TabItem
     Dim designationTab As TabItem
 
@@ -23,17 +24,9 @@
         Me.Close()
     End Sub
 
-    Private Sub mnu_register_Click(sender As Object, e As RoutedEventArgs) Handles mnu_register.Click
-        If registrationTab Is Nothing Then
-            registrationTab = NewTab(New RegistrationPage, "Register")
-        End If
-        tab_panels.SelectedItem = registrationTab
-    End Sub
-
     Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
         If employeeTab Is Nothing Then
             Dim empPage As New EmployeeInformationPage
-            AddHandler empPage.btnAdd.Click, AddressOf mnu_register_Click
 
             employeeTab = NewTab(empPage, "Employee")
         End If
@@ -42,22 +35,17 @@
 
     Private Sub tlbrReports_Click(sender As Object, e As RoutedEventArgs)
         If reportsTab Is Nothing Then
-            employeeTab = NewTab(New ReportsPage, "Reports")
+            reportsTab = NewTab(New ReportsPage, "Reports")
         End If
-        tab_panels.SelectedItem = employeeTab
-    End Sub
-    Private Sub mnu_departments_Click(sender As Object, e As RoutedEventArgs) Handles mnu_departments.Click
-        If departmentTab Is Nothing Then
-            departmentTab = NewTab(New DepartmentPage, "Departments")
-        End If
-        tab_panels.SelectedItem = departmentTab
+        tab_panels.SelectedItem = reportsTab
     End Sub
 
-    Private Sub mnu_designation_Click(sender As Object, e As RoutedEventArgs) Handles mnu_designation.Click
-        If designationTab Is Nothing Then
-            designationTab = NewTab(New DesignationPage, "Designations")
+
+    Private Sub tblrLeave_Click(sender As Object, e As RoutedEventArgs)
+        If leaveTab Is Nothing Then
+            leaveTab = NewTab(New LeaveManagementpage, "Leave")
         End If
-        tab_panels.SelectedItem = designationTab
+        tab_panels.SelectedItem = leaveTab
     End Sub
     Private Function NewTab(ByRef pg As Page, header As String) As TabItem
         Dim tab As New TabItem
