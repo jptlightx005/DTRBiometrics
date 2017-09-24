@@ -19,7 +19,10 @@
             <TreeViewItem Header="Employee">
                 <TreeViewItem x:Name="treeAdd" Header="Add"/>
                 <TreeViewItem x:Name="treeEdit" Header="Edit"/>
-                <TreeViewItem x:Name="treeLeave" Header="Leave"/>
+                <TreeViewItem x:Name="treeLeave" Header="Leave">
+                    <TreeViewItem x:Name="treeLCAdd" Header="Add Credit"/>
+                    <TreeViewItem x:Name="treeLCApply" Header="Apply"/>
+                </TreeViewItem>
             </TreeViewItem>
         </TreeView>
 

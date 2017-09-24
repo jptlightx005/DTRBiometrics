@@ -83,6 +83,9 @@
     <Compile Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml.vb">
       <DependentUpon>EmployeeEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Employee Sub-pages\LeaveApplication.xaml.vb">
+      <DependentUpon>LeaveApplication.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EmployeePage.xaml.vb">
       <DependentUpon>EmployeePage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Employee Sub-pages\LeaveApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

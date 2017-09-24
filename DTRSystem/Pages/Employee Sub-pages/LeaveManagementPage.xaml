@@ -5,17 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d"
-      d:DesignHeight="300" d:DesignWidth="600"
+      d:DesignHeight="500" d:DesignWidth="600"
       Title="LeavePage">
     <Grid x:Name="grdLeave">
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
-        <Label Content="Vacation Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,10,0,0"/>
-        <TextBox x:Name="txtVLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="210,36,0,0" Text="0"/>
-        <Label Content="Sick Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,64,0,0"/>
-        <TextBox x:Name="txtSLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="210,90,0,0" Text="0"/>
-        <Button x:Name="btnVCAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="340,36,0,0"/>
+        <Label Content="Vacation Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,242,0,0"/>
+        <TextBox x:Name="txtVLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="17,268,0,0" Text="0"/>
+        <Label Content="Sick Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,296,0,0"/>
+        <TextBox x:Name="txtSLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="17,322,0,0" Text="0"/>
+        <Button x:Name="btnVCAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,268,0,0"/>
         <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,10,0,0">
             <TextBlock x:Name="employee_name" Text="{Binding Path=first_name}" TextDecorations="Underline"/>
@@ -37,7 +37,7 @@
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,130,0,0">
             <TextBlock x:Name="deparment" TextDecorations="Underline"/>
         </Label>
-        <Button x:Name="btnSCAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="340,90,0,0"/>
+        <Button x:Name="btnSCAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,322,0,0"/>
         <Label Content="Vacation Leave Credits:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,161,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="147,161,0,0">
             <TextBlock x:Name="vacationcredits" TextDecorations="Underline"/>

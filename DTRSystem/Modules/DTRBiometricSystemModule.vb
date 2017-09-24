@@ -17,6 +17,7 @@ Module DTRBiometricSystemModule
     Public tblDesgAdapter As New DesignationTableAdapter
     Public tblEmployeeFullAdapter As New EmployeeFullTableAdapter
     Public tblLeaveCreditsAdapter As New LeaveCreditsTableAdapter
+    Public tblLeaveApplicationAdapter As New LeaveApplicationsTableAdapter
 
     Sub Main()
         applicationPath = AppDomain.CurrentDomain.BaseDirectory
