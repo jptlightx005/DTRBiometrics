@@ -26,8 +26,7 @@
 
     Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
         If employeeTab Is Nothing Then
-            Dim empPage As New EmployeeInformationPage
-
+            Dim empPage As New EmployeePage
             employeeTab = NewTab(empPage, "Employee")
         End If
         tab_panels.SelectedItem = employeeTab
@@ -53,7 +52,7 @@
 
         Dim frm As New Frame
         frm.Content = pg
-
+        frm.NavigationUIVisibility = NavigationUIVisibility.Hidden
         tab.Content = frm
 
         tab_panels.Items.Add(tab)

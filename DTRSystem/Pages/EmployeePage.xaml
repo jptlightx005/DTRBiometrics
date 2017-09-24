@@ -1,0 +1,28 @@
+﻿<Page x:Class="EmployeePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="400"
+      Title="EmployeePage" ShowsNavigationUI="False">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
+        <TreeView x:Name="employeeTree" HorizontalAlignment="Left" Margin="10,10,0,10" Width="126">
+            <TreeViewItem Header="Employee">
+                <TreeViewItem x:Name="treeAdd" Header="Add"/>
+                <TreeViewItem Header="Edit"/>
+                <TreeViewItem Header="Leave"/>
+            </TreeViewItem>
+        </TreeView>
+        
+        
+        <ComboBox VerticalAlignment="Top" Margin="141,10,10,0" HorizontalAlignment="Left" Width="250"/>
+        <Grid Margin="141,37,10,10">
+            <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden"/>
+        </Grid>
+
+    </Grid>
+</Page>
