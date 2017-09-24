@@ -1,18 +1,14 @@
 ﻿Imports DTRSystem.DTRDataSet
-
-Class EmployeeInformationPage
-    Dim selectedEmployee As EmployeeTableRow
-    Private Sub employeePage_Initialized(sender As Object, e As EventArgs) Handles employeePage.Initialized
-        cmbEmployees.ItemsSource = tblEmployeeAdapter.GetData
+Class EmployeeEditPage
+    Public selectedEmployee As EmployeeTableRow
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+        ChangeEmployee(selectedEmployee)
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
         cmbDesignation.ItemsSource = tblDesgAdapter.GetData
     End Sub
-
-    Private Sub cmbEmployees_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbEmployees.SelectionChanged
-        Dim filterExpression = String.Format("ID = {0}", cmbEmployees.SelectedValue)
-        Dim result = tblEmployeeAdapter.GetData.Select(filterExpression)
-        If result.Count > 0 Then
-            selectedEmployee = result(0)
+    Public Sub ChangeEmployee(emp As EmployeeTableRow)
+        If Not emp Is Nothing Then
+            selectedEmployee = emp
 
             grdEmpForm.DataContext = selectedEmployee
             imgEmpPicture.Source = DataToBitmap(selectedEmployee("picture"))
@@ -21,8 +17,8 @@ Class EmployeeInformationPage
         Else
             btnSave.IsEnabled = False
         End If
-    End Sub
 
+    End Sub
     Private Sub btnSave_Click(sender As Object, e As RoutedEventArgs) Handles btnSave.Click
         If tblEmployeeAdapter.Update(selectedEmployee) = 1 Then
             MsgBox("Successfully updated!", vbInformation)
@@ -30,4 +26,6 @@ Class EmployeeInformationPage
             MsgBox("Failed to Update!", vbExclamation)
         End If
     End Sub
+
+    
 End Class

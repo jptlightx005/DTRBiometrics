@@ -1,4 +1,4 @@
-﻿<Page x:Class="EmployeePage"
+﻿<Page x:Name="employeePage" x:Class="EmployeePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,15 +11,19 @@
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <TreeView x:Name="employeeTree" HorizontalAlignment="Left" Margin="10,10,0,10" Width="126">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
             <TreeViewItem Header="Employee">
                 <TreeViewItem x:Name="treeAdd" Header="Add"/>
-                <TreeViewItem Header="Edit"/>
-                <TreeViewItem Header="Leave"/>
+                <TreeViewItem x:Name="treeEdit" Header="Edit"/>
+                <TreeViewItem x:Name="treeLeave" Header="Leave"/>
             </TreeViewItem>
         </TreeView>
-        
-        
-        <ComboBox VerticalAlignment="Top" Margin="141,10,10,0" HorizontalAlignment="Left" Width="250"/>
+
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="first_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
         <Grid Margin="141,37,10,10">
             <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden"/>
         </Grid>

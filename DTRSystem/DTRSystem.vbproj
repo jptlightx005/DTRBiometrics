@@ -80,14 +80,14 @@
     <Compile Include="Pages\DesignationPage.xaml.vb">
       <DependentUpon>DesignationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml.vb">
+      <DependentUpon>EmployeeEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EmployeePage.xaml.vb">
       <DependentUpon>EmployeePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LeaveManagementPage.xaml.vb">
+    <Compile Include="Pages\Employee Sub-pages\LeaveManagementPage.xaml.vb">
       <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\EmployeeInformationPage.xaml.vb">
-      <DependentUpon>EmployeeInformationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReportsPage.xaml.vb">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
@@ -111,19 +111,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LeaveManagementPage.xaml">
+    <Page Include="Pages\Employee Sub-pages\LeaveManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EmployeeInformationPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\RegistrationPage.xaml">
+    <Page Include="Pages\Employee Sub-pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,7 +145,7 @@
     </Compile>
     <Compile Include="Modules\DBFunctions.vb" />
     <Compile Include="Modules\DTRBiometricSystemModule.vb" />
-    <Compile Include="Pages\RegistrationPage.xaml.vb">
+    <Compile Include="Pages\Employee Sub-pages\RegistrationPage.xaml.vb">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DTRBiometricWindow.xaml.vb">
@@ -356,5 +356,6 @@
       <Name>DTRFuncs</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
