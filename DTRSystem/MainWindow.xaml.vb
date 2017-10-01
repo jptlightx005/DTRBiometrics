@@ -41,10 +41,11 @@
 
 
     Private Sub tblrLeave_Click(sender As Object, e As RoutedEventArgs)
-        If leaveTab Is Nothing Then
-            leaveTab = NewTab(New LeaveManagementpage, "Leave")
+        If employeeTab Is Nothing Then
+            Dim empPage As New EmployeePage
+            employeeTab = NewTab(empPage, "Employee")
         End If
-        tab_panels.SelectedItem = leaveTab
+        tab_panels.SelectedItem = employeeTab
     End Sub
     Private Function NewTab(ByRef pg As Page, header As String) As TabItem
         Dim tab As New TabItem

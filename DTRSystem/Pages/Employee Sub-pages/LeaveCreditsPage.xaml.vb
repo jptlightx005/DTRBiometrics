@@ -1,21 +1,21 @@
 ﻿Imports DTRSystem.DTRDataSetTableAdapters
 Imports DTRSystem.DTRDataSet
-Class LeaveApplication
+Class LeaveCreditsPage
     Dim employee As EmployeeFullRow
 
     Dim vacleavecredits As Double = 0
     Dim sickleavecredits As Double = 0
+
     Public Sub ChangeEmployee(emp As EmployeeTableRow)
         If Not emp Is Nothing Then
             Dim employees = tblEmployeeFullAdapter.GetData.Select("ID = " & emp.ID)
             If employees.Count > 0 Then
                 employee = employees(0)
-                grdLeaveApp.DataContext = employee
+                grdLeave.DataContext = employee
                 deparment.Text = IIf(Not IsDBNull(employee("dept_name")), employee("dept_name"), "")
                 designation.Text = IIf(Not IsDBNull(employee("designation_name")), employee("designation_name"), "")
 
                 GetTotalCredits(employee)
-                leaveApplicationsDataGrid.ItemsSource = tblLeaveApplicationAdapter.GetData.Select("EmpID = " & employee.ID)
             Else
                 MsgBox("Employee is not found", vbExclamation)
             End If
@@ -53,33 +53,55 @@ Class LeaveApplication
 
         vacationcredits.Text = vacleavecredits
         sickcredits.Text = sickleavecredits
+        dateupdated.Text = date_modified
+    End Sub
+
+    Private Sub btnVCAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnVCAdd.Click
+        Dim dataTable = New LeaveCreditsTableDataTable
+        Dim lctransaction As LeaveCreditsTableRow = dataTable.NewRow
+        lctransaction.EmpID = employee.ID
+
+        lctransaction.VC_Earned = Decimal.Parse(txtVLCredits.Text)
+        lctransaction.VC_Used = 0
+        lctransaction.VC_Balance = lctransaction.VC_Earned + vacleavecredits
+
+        lctransaction.SC_Earned = 0
+        lctransaction.SC_Used = 0
+        lctransaction.SC_Balance = 0
+
+        lctransaction.DateOfTransaction = Now
+
+        dataTable.Rows.Add(lctransaction)
+
+        If tblLeaveCreditsAdapter.Update(dataTable) = 1 Then
+            MsgBox("Successfully added credits!", vbInformation)
+            GetTotalCredits(employee)
+        Else
+            MsgBox("Failed to add!", vbInformation)
+        End If
 
     End Sub
 
-    Private Sub btnSubmit_Click(sender As Object, e As RoutedEventArgs) Handles btnSubmit.Click
-        Dim dataTable As New LeaveApplicationsTableDataTable
-        Dim leaveapplication As LeaveApplicationsTableRow = dataTable.NewRow
-        leaveapplication.EmpID = employee.ID
+    Private Sub btnSCAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnSCAdd.Click
+        Dim dataTable = New LeaveCreditsTableDataTable
+        Dim lctransaction As LeaveCreditsTableRow = dataTable.NewRow
+        lctransaction.EmpID = employee.ID
 
-        leaveapplication.Reason = txtReason.Text
-        leaveapplication.ContactDuringLeave = txtContact.Text
+        lctransaction.VC_Earned = 0
+        lctransaction.VC_Used = 0
+        lctransaction.VC_Balance = 0
 
-        leaveapplication.LeaveFrom = leaveFromPicker.SelectedDate.Value
-        leaveapplication.FromDuration = (cmbLeaveFromDuration.SelectedIndex + 1) * 0.5
-        leaveapplication.FromComment = ""
+        lctransaction.SC_Earned = Decimal.Parse(txtSLCredits.Text)
+        lctransaction.SC_Used = 0
+        lctransaction.SC_Balance = lctransaction.SC_Earned + sickleavecredits
 
-        leaveapplication.LeaveTo = leaveToPicker.SelectedDate.Value
-        leaveapplication.ToDuration = (cmbLeaveToDuration.SelectedIndex + 1) * 0.5
-        leaveapplication.ToComment = ""
+        lctransaction.DateOfTransaction = Now
 
-        leaveapplication.LeaveType = cmbLeaveType.Text
-        leaveapplication.NumberOfDays = DateDiff(DateInterval.Day, leaveFromPicker.SelectedDate.Value, leaveToPicker.SelectedDate.Value) + 1
+        dataTable.Rows.Add(lctransaction)
 
-        dataTable.Rows.Add(leaveapplication)
-        If tblLeaveApplicationAdapter.Update(dataTable) = 1 Then
-            MsgBox("Successfully added application!", vbInformation)
+        If tblLeaveCreditsAdapter.Update(dataTable) = 1 Then
+            MsgBox("Successfully added credits!", vbInformation)
             GetTotalCredits(employee)
-            leaveApplicationsDataGrid.ItemsSource = tblLeaveApplicationAdapter.GetData.Select("EmpID = " & employee.ID)
         Else
             MsgBox("Failed to add!", vbInformation)
         End If

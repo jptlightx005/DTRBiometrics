@@ -2,8 +2,8 @@
 Class EmployeePage
     Dim regPage As RegistrationPage
     Dim editPage As EmployeeEditPage
-    Dim leavePage As LeaveManagementpage
-    Dim leaveApplicationPage As LeaveApplication
+    Dim leavePage As LeaveCreditsPage
+    Dim leaveApplicationPage As LeaveApplicationPage
     Dim activePage As Page
     Private Sub employeePage_Initialized(sender As Object, e As EventArgs) Handles MyBase.Initialized
         cmbEmployees.ItemsSource = tblEmployeeAdapter.GetData
@@ -64,7 +64,7 @@ Class EmployeePage
 
     Private Sub treeLCAdd_Selected(sender As Object, e As RoutedEventArgs) Handles treeLCAdd.Selected
         If leavePage Is Nothing Then
-            leavePage = New LeaveManagementpage
+            leavePage = New LeaveCreditsPage
         End If
 
         If cmbEmployees.SelectedIndex >= 0 Then
@@ -83,7 +83,7 @@ Class EmployeePage
 
     Private Sub treeLCApply_Selected(sender As Object, e As RoutedEventArgs) Handles treeLCApply.Selected
         If leaveApplicationPage Is Nothing Then
-            leaveApplicationPage = New LeaveApplication
+            leaveApplicationPage = New LeaveApplicationPage
         End If
 
         If cmbEmployees.SelectedIndex >= 0 Then
