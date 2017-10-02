@@ -83,14 +83,17 @@
     <Compile Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml.vb">
       <DependentUpon>EmployeeEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Employee Sub-pages\LeaveApplicationPage.xaml.vb">
-      <DependentUpon>LeaveApplicationPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\EmployeePage.xaml.vb">
       <DependentUpon>EmployeePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Employee Sub-pages\LeaveCreditsPage.xaml.vb">
+    <Compile Include="Pages\Leave Sub-pages\LeaveApplicationPage.xaml.vb">
+      <DependentUpon>LeaveApplicationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Leave Sub-pages\LeaveCreditsPage.xaml.vb">
       <DependentUpon>LeaveCreditsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LeavePage.xaml.vb">
+      <DependentUpon>LeavePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReportsPage.xaml.vb">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
@@ -118,21 +121,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Employee Sub-pages\LeaveApplicationPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\EmployeePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Employee Sub-pages\LeaveCreditsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Employee Sub-pages\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Leave Sub-pages\LeaveApplicationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Leave Sub-pages\LeaveCreditsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LeavePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ReportsPage.xaml">
       <SubType>Designer</SubType>

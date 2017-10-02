@@ -2,8 +2,7 @@
 Class EmployeePage
     Dim regPage As RegistrationPage
     Dim editPage As EmployeeEditPage
-    Dim leavePage As LeaveCreditsPage
-    Dim leaveApplicationPage As LeaveApplicationPage
+    
     Dim activePage As Page
     Private Sub employeePage_Initialized(sender As Object, e As EventArgs) Handles MyBase.Initialized
         cmbEmployees.ItemsSource = tblEmployeeAdapter.GetData
@@ -38,11 +37,6 @@ Class EmployeePage
         cmbEmployees.Visibility = Windows.Visibility.Visible
         If activePage Is editPage Then
             editPage.ChangeEmployee(selectedEmployee)
-
-        ElseIf activePage Is leavePage Then
-            leavePage.ChangeEmployee(selectedEmployee)
-        ElseIf activePage Is leaveApplicationPage Then
-            leaveApplicationPage.ChangeEmployee(selectedEmployee)
         End If
         
     End Sub
@@ -60,43 +54,5 @@ Class EmployeePage
         End If
         cmbEmployees.Visibility = Windows.Visibility.Visible
         ReplacePage(editPage)
-    End Sub
-
-    Private Sub treeLCAdd_Selected(sender As Object, e As RoutedEventArgs) Handles treeLCAdd.Selected
-        If leavePage Is Nothing Then
-            leavePage = New LeaveCreditsPage
-        End If
-
-        If cmbEmployees.SelectedIndex >= 0 Then
-            Dim filterExpression = String.Format("ID = {0}", cmbEmployees.SelectedValue)
-            Dim result = tblEmployeeAdapter.GetData.Select(filterExpression)
-            If result.Count > 0 Then
-                leavePage.ChangeEmployee(result(0))
-            End If
-        Else
-            leavePage.ChangeEmployee(Nothing)
-        End If
-
-        cmbEmployees.Visibility = Windows.Visibility.Visible
-        ReplacePage(leavePage)
-    End Sub
-
-    Private Sub treeLCApply_Selected(sender As Object, e As RoutedEventArgs) Handles treeLCApply.Selected
-        If leaveApplicationPage Is Nothing Then
-            leaveApplicationPage = New LeaveApplicationPage
-        End If
-
-        If cmbEmployees.SelectedIndex >= 0 Then
-            Dim filterExpression = String.Format("ID = {0}", cmbEmployees.SelectedValue)
-            Dim result = tblEmployeeAdapter.GetData.Select(filterExpression)
-            If result.Count > 0 Then
-                leaveApplicationPage.ChangeEmployee(result(0))
-            End If
-        Else
-            leaveApplicationPage.ChangeEmployee(Nothing)
-        End If
-
-        cmbEmployees.Visibility = Windows.Visibility.Visible
-        ReplacePage(leaveApplicationPage)
     End Sub
 End Class

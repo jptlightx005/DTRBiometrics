@@ -1,11 +1,11 @@
-﻿<Page x:Name="employeePage" x:Class="EmployeePage"
+﻿<Page x:Name="leaveMgmtPage" x:Class="LeavePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="400"
-      Title="EmployeePage" ShowsNavigationUI="False">
+      d:DesignHeight="300" d:DesignWidth="600"
+      Title="LeavePage">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
@@ -16,16 +16,15 @@
                     <Setter Property="IsExpanded" Value="True"/>
                 </Style>
             </TreeView.ItemContainerStyle>
-            <TreeViewItem Header="Employee">
-                <TreeViewItem x:Name="treeAdd" Header="Add"/>
-                <TreeViewItem x:Name="treeEdit" Header="Edit"/>
+            <TreeViewItem Header="Leave">
+                <TreeViewItem x:Name="treeAdd" Header="Add Credit"/>
+                <TreeViewItem x:Name="treeLeave" Header="Apply Leave"/>
             </TreeViewItem>
         </TreeView>
 
         <ComboBox x:Name="cmbEmployees" DisplayMemberPath="first_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
         <Grid Margin="141,37,10,10">
-            <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="leaveFrame" Content="" NavigationUIVisibility="Hidden"/>
         </Grid>
-
     </Grid>
 </Page>
