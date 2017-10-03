@@ -33,6 +33,8 @@ Class RegistrationPage
         employeeRow.desgID = 0
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
+        employeeRow.salarygrade = 0
+        employeeRow.stepgrade = 0
         grdEmployee.DataContext = employeeRow
 
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
@@ -61,6 +63,8 @@ Class RegistrationPage
                 employeeRow.work_timeb = 8
                 employeeRow.work_timee = 17
                 employeeRow.picture = image
+                employeeRow.salarygrade = cmbSalaryGrade.SelectedValue
+                employeeRow.stepgrade = cmbStepGrade.SelectedIndex + 1
 
                 dataTable.Rows.Add(employeeRow)
 

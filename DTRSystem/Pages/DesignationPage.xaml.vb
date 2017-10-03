@@ -43,7 +43,7 @@ Class DesignationPage
 
     Private Sub btnRemove_Click(sender As Object, e As RoutedEventArgs) Handles btnRemove.Click
         Dim selectedRow As DesignationTableRow = dataSet.DesignationTable.Rows(designationDataGrid.SelectedIndex)
-        tblDesgAdapter.Delete(selectedRow.ID, selectedRow.designation_name)
+        tblDesgAdapter.Delete(selectedRow.ID, selectedRow.DeptID, selectedRow.designation_name)
         designationDataGrid.DataContext = dataSet.DesignationTable.DefaultView
         tblDesgAdapter.Fill(dataSet.DesignationTable)
         MsgBox("Successfully removed!", vbInformation)

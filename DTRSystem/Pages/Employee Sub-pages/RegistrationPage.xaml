@@ -12,13 +12,13 @@
         </Grid.Background>
         <Label Content="Register Employee" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,42,10,0" Width="280" VerticalAlignment="Top">
-            <Grid>
-                <Label Content="First Name*"  HorizontalAlignment="Left" Margin="24,124,0,0" VerticalAlignment="Top" 
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,42,10,0" VerticalAlignment="Top">
+            <Grid Margin="1,0,-1,0">
+                <Label Content="First Name*"  HorizontalAlignment="Left" Margin="222,21,0,0" VerticalAlignment="Top" 
                        HorizontalContentAlignment="Right"/>
-                <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" 
+                <Label Content="Middle Name*" HorizontalAlignment="Left" Margin="208,52,0,0" VerticalAlignment="Top" 
                        HorizontalContentAlignment="Right"/>
-                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="26,180,0,0" VerticalAlignment="Top" 
+                <Label Content="Last Name*" HorizontalAlignment="Left" Margin="224,80,0,0" VerticalAlignment="Top" 
                        HorizontalContentAlignment="Right"/>
                 <Label Content="Type*" HorizontalAlignment="Left" Margin="56,206,0,0" VerticalAlignment="Top" 
                        HorizontalContentAlignment="Right"/>
@@ -27,11 +27,11 @@
                 <Label Content="Designation" HorizontalAlignment="Left" Margin="26,259,0,0" VerticalAlignment="Top" 
                        HorizontalContentAlignment="Right"/>
                 <TextBox x:Name="txtFName" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="101,124,0,0"/>
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,21,0,0"/>
                 <TextBox x:Name="txtMName" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="102,152,0,0"/>
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Margin="300,52,0,0"/>
                 <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Margin="102,180,0,10"/>
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Margin="300,80,0,0"/>
                 <ComboBox x:Name="cmbEmpType" Text="{Binding Path=emp_type}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,208,0,0"  Width="166" IsEditable="True">
                     <ComboBoxItem Content="Permanent"/>
                     <ComboBoxItem Content="Part-Time"/>
@@ -41,14 +41,67 @@
                           SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,235,0,0" Width="166"/>
                 <ComboBox x:Name="cmbDesignation" SelectedValue="{Binding Path=desgID}" DisplayMemberPath="designation_name" 
                           SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,263,0,10" Width="166"/>
-                <Image x:Name="imgEmpPicture" HorizontalAlignment="Center" Height="75" Margin="0,10,0,0" VerticalAlignment="Top" 
-                       Width="75" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
-                <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Center" Margin="92,93,92,0" VerticalAlignment="Top" 
+                <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="144" Margin="36,21,407,0" VerticalAlignment="Top" 
+                       Width="135" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
+                <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="56,179,428,0" VerticalAlignment="Top" 
                         Width="94"/>
-                
-
-
-
+                <Label Content="Address"  HorizontalAlignment="Left" Margin="241,125,0,0" VerticalAlignment="Top" 
+                	HorizontalContentAlignment="Right"/>
+                <Label Content="Age" HorizontalAlignment="Left" Margin="263,153,0,0" VerticalAlignment="Top" 
+                	HorizontalContentAlignment="Right"/>
+                <Label Content="Birthday" HorizontalAlignment="Left" Margin="241,179,0,0" VerticalAlignment="Top" 
+                	HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txtAddress" Text="{Binding first_name}" HorizontalAlignment="Left" Height="23" 
+                	TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,125,0,0"/>
+                <TextBox x:Name="txtAge" Text="{Binding middle_name}" HorizontalAlignment="Left" Height="23" 
+                	TextWrapping="Wrap" VerticalAlignment="Top" Width="103" Margin="300,153,0,0"/>
+                <DatePicker x:Name="birthDatePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="301,180,0,0"/>
+                <Label Content="Salary Grade" HorizontalAlignment="Left" Margin="295,235,0,0" VerticalAlignment="Top" 
+                	HorizontalContentAlignment="Right"/>
+                <Label Content="Step Increment" HorizontalAlignment="Left" Margin="287,259,0,0" VerticalAlignment="Top" 
+                	HorizontalContentAlignment="Right"/>
+                <ComboBox x:Name="cmbSalaryGrade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,235,0,0" Width="166">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="6"/>
+                    <ComboBoxItem Content="7"/>
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="9"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="13"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="15"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="17"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="19"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="21"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="23"/>
+                    <ComboBoxItem Content="24"/>
+                    <ComboBoxItem Content="25"/>
+                    <ComboBoxItem Content="26"/>
+                    <ComboBoxItem Content="27"/>
+                    <ComboBoxItem Content="28"/>
+                    <ComboBoxItem Content="29"/>
+                    <ComboBoxItem Content="30"/>
+                </ComboBox>
+                <ComboBox x:Name="cmbStepGrade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,263,0,0" Width="166">
+                    <ComboBoxItem Content="Step 1"/>
+                    <ComboBoxItem Content="Step 2"/>
+                    <ComboBoxItem Content="Step 3"/>
+                    <ComboBoxItem Content="Step 4"/>
+                    <ComboBoxItem Content="Step 5"/>
+                    <ComboBoxItem Content="Step 6"/>
+                    <ComboBoxItem Content="Step 7"/>
+                    <ComboBoxItem Content="Step 8"/>
+                </ComboBox>
             </Grid>
         </Border>
         <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="215,420,0,10" VerticalAlignment="Top" Width="75"/>
@@ -56,7 +109,7 @@
             <Grid>
                 <Label Content="Biometric:" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
                 <Button x:Name="btnEnroll" Content="Enroll" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81"/>
-                <Label x:Name="lblStatus" Content="No Fingerprint Enrolled" HorizontalAlignment="Left" Margin="100,39,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblStatus" Content="No Fingerprint Enrolled" HorizontalAlignment="Left" Margin="76,43,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
     </Grid>
