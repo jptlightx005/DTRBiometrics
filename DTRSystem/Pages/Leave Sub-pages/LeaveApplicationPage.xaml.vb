@@ -57,31 +57,94 @@ Class LeaveApplicationPage
     End Sub
 
     Private Sub btnSubmit_Click(sender As Object, e As RoutedEventArgs) Handles btnSubmit.Click
+        Dim leaveToDate As Date = New Date
+        If chkMultipleDays.IsChecked Then
+            leaveToDate = leaveToPicker.SelectedDate.Value
+        Else
+            leaveToDate = leaveFromPicker.SelectedDate.Value
+        End If
+
+        Dim totalNumberOfDays = DateDiff(DateInterval.Day, leaveFromPicker.SelectedDate.Value, leaveToDate) + 1
+        Dim creditsToBeUsed = 0
+
+        If cmbLeaveType.SelectedIndex = 0 Then 'Vacation Leave
+            creditsToBeUsed = vacleavecredits
+        ElseIf cmbLeaveType.SelectedIndex = 1 Then 'Sick Leave
+            creditsToBeUsed = sickleavecredits
+        ElseIf cmbLeaveType.SelectedIndex = 2 Then 'Forced Leave
+            creditsToBeUsed = vacleavecredits + sickleavecredits
+        End If
+
+        Debug.Print("Total: {0} left: {1}", totalNumberOfDays, creditsToBeUsed)
+        If totalNumberOfDays > creditsToBeUsed Then
+            MsgBox("Insufficient credits", vbExclamation, "Choke me Daddy")
+            Return
+        End If
+
         Dim dataTable As New LeaveApplicationsTableDataTable
         Dim leaveapplication As LeaveApplicationsTableRow = dataTable.NewRow
+
+
         leaveapplication.EmpID = employee.ID
 
         leaveapplication.Reason = txtReason.Text
         leaveapplication.ContactDuringLeave = txtContact.Text
 
         leaveapplication.LeaveFrom = leaveFromPicker.SelectedDate.Value
-        leaveapplication.FromDuration = (cmbLeaveFromDuration.SelectedIndex + 1) * 0.5
         leaveapplication.FromComment = ""
 
-        leaveapplication.LeaveTo = leaveToPicker.SelectedDate.Value
-        leaveapplication.ToDuration = (cmbLeaveToDuration.SelectedIndex + 1) * 0.5
+        leaveapplication.LeaveTo = leaveToDate
         leaveapplication.ToComment = ""
 
         leaveapplication.LeaveType = cmbLeaveType.Text
-        leaveapplication.NumberOfDays = DateDiff(DateInterval.Day, leaveFromPicker.SelectedDate.Value, leaveToPicker.SelectedDate.Value) + 1
+        leaveapplication.NumberOfDays = totalNumberOfDays
 
         dataTable.Rows.Add(leaveapplication)
         If tblLeaveApplicationAdapter.Update(dataTable) = 1 Then
-            MsgBox("Successfully added application!", vbInformation)
-            GetTotalCredits(employee)
-            leaveApplicationsDataGrid.ItemsSource = tblLeaveApplicationAdapter.GetData.Select("EmpID = " & employee.ID)
+
+            Dim lcDataTable = New LeaveCreditsTableDataTable
+            Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
+            lctransaction.EmpID = employee.ID
+
+
+            If cmbLeaveType.SelectedIndex = 0 Then 'Vacation Leave
+                lctransaction.VC_Earned = 0
+                lctransaction.VC_Used = totalNumberOfDays
+                lctransaction.VC_Balance = vacleavecredits - totalNumberOfDays
+
+                lctransaction.SC_Earned = 0
+                lctransaction.SC_Used = 0
+                lctransaction.SC_Balance = 0
+            ElseIf cmbLeaveType.SelectedIndex = 1 Then 'Sick Leave
+                lctransaction.VC_Earned = 0
+                lctransaction.VC_Used = 0
+                lctransaction.VC_Balance = 0
+
+                lctransaction.SC_Earned = 0
+                lctransaction.SC_Used = totalNumberOfDays
+                lctransaction.SC_Balance = sickleavecredits - totalNumberOfDays
+            ElseIf cmbLeaveType.SelectedIndex = 2 Then 'Forced Leave
+                'creditsToBeUsed = vacleavecredits + sickleavecredits
+            End If
+            lctransaction.DateOfTransaction = Now
+            lcDataTable.Rows.Add(lctransaction)
+
+            If tblLeaveCreditsAdapter.Update(lcDataTable) = 1 Then
+                MsgBox("Successfully added application!", vbInformation)
+                GetTotalCredits(employee)
+                leaveApplicationsDataGrid.ItemsSource = tblLeaveApplicationAdapter.GetData.Select("EmpID = " & employee.ID)
+            Else
+                MsgBox("Failed to add!", vbInformation)
+            End If
+
+            'GetTotalCredits(employee)
+
         Else
             MsgBox("Failed to add!", vbInformation)
         End If
+    End Sub
+
+    Private Sub chkMultipleDays_Click(sender As Object, e As RoutedEventArgs) Handles chkMultipleDays.Click
+        leaveToPicker.IsEnabled = chkMultipleDays.IsChecked
     End Sub
 End Class
