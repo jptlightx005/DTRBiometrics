@@ -19,8 +19,8 @@
         <Border BorderBrush="Black" BorderThickness="1" Margin="20,50,20,23">
             <Grid>
                 <Label x:Name="lblTime" Content="August 3, 2017 10:12:36 P.M." HorizontalAlignment="Left" VerticalAlignment="Top" Margin="509,38,0,0" FontSize="24" />
-                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="480" Margin="89,109,0,0" VerticalAlignment="Top" Width="445">
-                    <Image x:Name="imgEmployee" Margin="0" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
+                <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="480" Margin="54,109,0,0" VerticalAlignment="Top" Width="470">
+                    <Image x:Name="imgEmployee" Margin="1,1,0,9" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill" HorizontalAlignment="Left" Width="465"/>
                 </Border>
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="578,288,0,0">
                     <Label Content="Employee Name:" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontSize="24" VerticalAlignment="Top"/>

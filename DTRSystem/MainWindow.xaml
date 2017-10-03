@@ -4,7 +4,7 @@
     Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/HAHAHAHA.jpg" Stretch="UniformToFill" />
         </Grid.Background>
         <DockPanel Height="22" LastChildFill="False" VerticalAlignment="Top">
             <Menu DockPanel.Dock="Top">
