@@ -1,6 +1,6 @@
 ﻿Imports DTRSystem.DTRDataSet
 Class LeavePage
-    Dim leavePage As LeaveCreditsPage
+    Dim leaveCreditPage As LeaveCreditsPage
     Dim leaveApplicationPage As LeaveApplicationPage
     Dim activePage As Page
 
@@ -34,26 +34,28 @@ Class LeavePage
         cmbEmployees.Visibility = Windows.Visibility.Visible
         If activePage Is leaveApplicationPage Then
             leaveApplicationPage.ChangeEmployee(selectedEmployee)
+        ElseIf activePage Is leaveCreditPage Then
+            leaveCreditPage.ChangeEmployee(selectedEmployee)
         End If
     End Sub
 
     Private Sub treeAdd_Selected(sender As Object, e As RoutedEventArgs) Handles treeAdd.Selected
-        If leavePage Is Nothing Then
-            leavePage = New LeaveCreditsPage
+        If leaveCreditPage Is Nothing Then
+            leaveCreditPage = New LeaveCreditsPage
         End If
 
         If cmbEmployees.SelectedIndex >= 0 Then
             Dim filterExpression = String.Format("ID = {0}", cmbEmployees.SelectedValue)
             Dim result = tblEmployeeAdapter.GetData.Select(filterExpression)
             If result.Count > 0 Then
-                leavePage.ChangeEmployee(result(0))
+                leaveCreditPage.ChangeEmployee(result(0))
             End If
         Else
-            leavePage.ChangeEmployee(Nothing)
+            leaveCreditPage.ChangeEmployee(Nothing)
         End If
 
         cmbEmployees.Visibility = Windows.Visibility.Visible
-        ReplacePage(leavePage)
+        ReplacePage(leaveCreditPage)
     End Sub
 
     Private Sub treeLeave_Selected(sender As Object, e As RoutedEventArgs) Handles treeLeave.Selected

@@ -54,44 +54,21 @@ Class LeaveCreditsPage
         vacationcredits.Text = vacleavecredits
         sickcredits.Text = sickleavecredits
         dateupdated.Text = date_modified
+
+        leaveCreditsDataGrid.ItemsSource = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & employee.ID)
     End Sub
 
-    Private Sub btnVCAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnVCAdd.Click
+    Private Sub btnAddCredit_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCredit.Click
         Dim dataTable = New LeaveCreditsTableDataTable
         Dim lctransaction As LeaveCreditsTableRow = dataTable.NewRow
         lctransaction.EmpID = employee.ID
 
-        lctransaction.VC_Earned = Decimal.Parse(txtVLCredits.Text)
+        Dim credit = Decimal.Parse(txtCredits.Text)
+        lctransaction.VC_Earned = credit
         lctransaction.VC_Used = 0
         lctransaction.VC_Balance = lctransaction.VC_Earned + vacleavecredits
 
-        lctransaction.SC_Earned = 0
-        lctransaction.SC_Used = 0
-        lctransaction.SC_Balance = 0
-
-        lctransaction.DateOfTransaction = Now
-
-        dataTable.Rows.Add(lctransaction)
-
-        If tblLeaveCreditsAdapter.Update(dataTable) = 1 Then
-            MsgBox("Successfully added credits!", vbInformation)
-            GetTotalCredits(employee)
-        Else
-            MsgBox("Failed to add!", vbInformation)
-        End If
-
-    End Sub
-
-    Private Sub btnSCAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnSCAdd.Click
-        Dim dataTable = New LeaveCreditsTableDataTable
-        Dim lctransaction As LeaveCreditsTableRow = dataTable.NewRow
-        lctransaction.EmpID = employee.ID
-
-        lctransaction.VC_Earned = 0
-        lctransaction.VC_Used = 0
-        lctransaction.VC_Balance = 0
-
-        lctransaction.SC_Earned = Decimal.Parse(txtSLCredits.Text)
+        lctransaction.SC_Earned = credit
         lctransaction.SC_Used = 0
         lctransaction.SC_Balance = lctransaction.SC_Earned + sickleavecredits
 

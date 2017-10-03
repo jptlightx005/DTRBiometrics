@@ -7,15 +7,24 @@
       mc:Ignorable="d"
       d:DesignHeight="500" d:DesignWidth="600"
       Title="LeavePage">
+    <Page.Resources>
+        <Style x:Key="DataGridColumnSeparatorStyle" TargetType="DataGridCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="Gray"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid x:Name="grdLeave">
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <Label Content="Vacation Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,242,0,0"/>
-        <TextBox x:Name="txtVLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="17,268,0,0" Text="0"/>
-        <Label Content="Sick Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,296,0,0"/>
-        <TextBox x:Name="txtSLCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="17,322,0,0" Text="0"/>
-        <Button x:Name="btnVCAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,268,0,0"/>
+        <TextBox x:Name="txtCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="17,268,0,0" Text="0"/>
+        <Button x:Name="btnAddCredit" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,268,0,0"/>
         <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,10,0,0">
             <TextBlock x:Name="employee_name" Text="{Binding Path=first_name}" TextDecorations="Underline"/>
@@ -37,7 +46,6 @@
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,130,0,0">
             <TextBlock x:Name="deparment" TextDecorations="Underline"/>
         </Label>
-        <Button x:Name="btnSCAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,322,0,0"/>
         <Label Content="Vacation Leave Credits:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,161,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="147,161,0,0">
             <TextBlock x:Name="vacationcredits" TextDecorations="Underline"/>
@@ -50,18 +58,17 @@
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,213,0,0">
             <TextBlock x:Name="dateupdated" TextDecorations="Underline"/>
         </Label>
-        <DataGrid x:Name="leaveApplicationsDataGrid" Margin="15,354,404,37" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="leaveCreditsDataGrid" Margin="15,296,10,10" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding LeaveFrom, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
-                <DataGridTextColumn Binding="{Binding FromDuration}" Header="Particular" />
-                <DataGridTextColumn Binding="{Binding LeaveTo, StringFormat=\{0:MMMM dd yyyy\}}" Header="Particular" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid x:Name="leaveApplicationsDataGrid_Copy" Margin="201,354,218,37" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding LeaveFrom, StringFormat=\{0:MMMM dd yyyy\}}" Header="Earned" />
-                <DataGridTextColumn Binding="{Binding FromDuration}" Header="Abs/Und W/P" />
-                <DataGridTextColumn Binding="{Binding LeaveTo, StringFormat=\{0:MMMM dd yyyy\}}" Header="Balance" />
+                <DataGridTextColumn Binding="{Binding DateOfTransaction, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
+                <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
+                <DataGridTextColumn Binding="{Binding VC_Earned}" Header="Vacation Leave Earned" />
+                <DataGridTextColumn Binding="{Binding VC_Used}" Header="Vacation Abs. Und. W/P" />
+                <DataGridTextColumn Binding="{Binding VC_Balance}" Header="BALANCE" />
+                <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
+                <DataGridTextColumn Binding="{Binding SC_Earned}" Header="Sick Leave Earned" />
+                <DataGridTextColumn Binding="{Binding SC_Used}" Header="Sick Leave Abs. Und. W/P" />
+                <DataGridTextColumn Binding="{Binding SC_Balance}" Header="BALANCE" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel HorizontalAlignment="Left" Height="100" Margin="299,293,0,0" VerticalAlignment="Top" Width="100"/>
