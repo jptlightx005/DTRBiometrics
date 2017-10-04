@@ -11,7 +11,7 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-
+        
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         Dim dtrWindow As New DTRBiometricWindow

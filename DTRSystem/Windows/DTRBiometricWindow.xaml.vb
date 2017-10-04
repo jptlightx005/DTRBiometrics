@@ -129,7 +129,7 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
 
 
-                    If Now.TimeOfDay >= New TimeSpan(6, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
+                    If Now.TimeOfDay >= New TimeSpan(6, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 30, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
                             timeLogFound.TimeInAM = DateTime.Now
                         Else
@@ -141,19 +141,32 @@ Public Class DTRBiometricWindow
                                     timeLogFound.TimeOutAM = DateTime.Now
 
                                     'TimeCalculation
-                                    'If Not IsDBNull(timeLogFound("timeinpm")) Then
-                                    '    Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
-                                    '    timeLogFound.TotalTime += total.TotalHours
-                                    'End If
+                                    If Not IsDBNull(timeLogFound("TimeInAM")) Then
+                                        Dim timeBegin = timeLogFound.TimeInAM
+                                        If timeBegin.TimeOfDay < New TimeSpan(8, 0, 0) Then
+                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            a = a + " 08:00 AM" ' 10/04/2017 08:00 AM
+                                            timeBegin = DateTime.Parse(a)
+                                        End If
+
+                                        Dim timeEnd = timeLogFound.TimeOutAM
+                                        If timeEnd.TimeOfDay > New TimeSpan(12, 0, 0) Then
+                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            a = a + " 12:00 PM" ' 10/04/2017 12:00 PM
+                                            timeEnd = DateTime.Parse(a)
+                                        End If
+
+                                        Dim total As TimeSpan = timeEnd - timeBegin
+                                        timeLogFound.TotalTime += total.TotalMinutes
+                                    End If
                                 Else
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutAM"))
                                 End If
-
                             End If
                         End If
 
                         'PM IN 1PM-5PM
-                    ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(21, 0, 0) Then
+                    ElseIf Now.TimeOfDay >= New TimeSpan(12, 30, 0) And Now.TimeOfDay < New TimeSpan(21, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
                             timeLogFound.TimeInPM = DateTime.Now
                         Else
@@ -165,10 +178,24 @@ Public Class DTRBiometricWindow
                                     timeLogFound.TimeOutPM = DateTime.Now
 
                                     'TimeCalculation
-                                    'If Not IsDBNull(timeLogFound("timeinpm")) Then
-                                    '    Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
-                                    '    timeLogFound.TotalTime += total.TotalHours
-                                    'End If
+                                    If Not IsDBNull(timeLogFound("TimeInPM")) Then
+                                        Dim timeBegin = timeLogFound.TimeInPM
+                                        If timeBegin.TimeOfDay < New TimeSpan(13, 0, 0) Then
+                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            a = a + " 01:00 PM" ' 10/04/2017 01:00 PM
+                                            timeBegin = DateTime.Parse(a)
+                                        End If
+
+                                        Dim timeEnd = timeLogFound.TimeOutPM
+                                        If timeEnd.TimeOfDay > New TimeSpan(17, 0, 0) Then
+                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            a = a + " 17:00 PM" ' 10/04/2017 05:00 PM
+                                            timeEnd = DateTime.Parse(a)
+                                        End If
+
+                                        Dim total As TimeSpan = timeEnd - timeBegin
+                                        timeLogFound.TotalTime += total.TotalMinutes
+                                    End If
                                 Else
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutPM"))
                                 End If
