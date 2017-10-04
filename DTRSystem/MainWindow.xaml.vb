@@ -1,5 +1,6 @@
 ﻿Class MainWindow 
     Dim employeeTab As TabItem
+    Dim payrollTab As TabItem
     Dim reportsTab As TabItem
     Dim leaveTab As TabItem
     Dim adminTab As TabItem
@@ -52,6 +53,13 @@
             adminTab = NewTab(adminPage, "Admin")
         End If
         tab_panels.SelectedItem = adminTab
+    End Sub
+
+    Private Sub tlbrPayroll_Click(sender As Object, e As RoutedEventArgs)
+        If payrollTab Is Nothing Then
+            payrollTab = NewTab(New PayrollPage, "Payroll")
+        End If
+        tab_panels.SelectedItem = payrollTab
     End Sub
     Private Function NewTab(ByRef pg As Page, header As String) As TabItem
         Dim tab As New TabItem

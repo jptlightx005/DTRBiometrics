@@ -1,0 +1,33 @@
+﻿<Page x:Class="DTRReportsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Title="ReportsPage">
+    <Grid Margin="0">
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
+        <Label Content="Reports" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="79,36,0,0" VerticalAlignment="Top" Width="254"/>
+        <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="79,63,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Employee:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
+        <DatePicker x:Name="toPicker" Margin="231,62,10,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>
+        <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,61,0,0"/>
+        <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,10" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding EmpID}" Header="Employee ID" />
+                <DataGridTextColumn Binding="{Binding DateOfTheDay, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
+                <DataGridTextColumn Binding="{Binding TimeInAM, StringFormat=\{0:hh:mm tt\}}" Header="Time in AM" />
+                <DataGridTextColumn Binding="{Binding TimeOutAM, StringFormat=\{0:hh:mm tt\}}" Header="Time out AM" />
+                <DataGridTextColumn Binding="{Binding TimeInPM, StringFormat=\{0:hh:mm tt\}}" Header="Time in PM" />
+                <DataGridTextColumn Binding="{Binding TimeOutPM, StringFormat=\{0:hh:mm tt\}}" Header="Time out PM" />
+                <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Hours" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+    </Grid>
+</Page>

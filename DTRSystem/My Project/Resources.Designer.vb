@@ -116,17 +116,17 @@ Namespace My.Resources
         Friend ReadOnly Property HAHAHAHA() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("HAHAHAHA", resourceCulture)
-                Return CType(obj, System.Drawing.Bitmap)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property leave_icon() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("leave_icon", resourceCulture)
-                Return CType(obj, System.Drawing.Bitmap)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
@@ -146,6 +146,16 @@ Namespace My.Resources
         Friend ReadOnly Property not_connected() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("not_connected", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property payroll() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("payroll", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

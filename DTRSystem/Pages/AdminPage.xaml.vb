@@ -5,7 +5,7 @@
     Dim activePage As Page
     Private Sub ReplacePage(ByRef pg As Page)
         activePage = pg
-        employeeFrame.Content = pg
+        adminFrame.Content = pg
     End Sub
 
 

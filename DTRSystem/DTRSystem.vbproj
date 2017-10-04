@@ -101,6 +101,18 @@
     <Compile Include="Pages\LeavePage.xaml.vb">
       <DependentUpon>LeavePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Payroll Sub-pages\SalaryPage.xaml.vb">
+      <DependentUpon>SalaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PayrollPage.xaml.vb">
+      <DependentUpon>PayrollPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Reports Sub-pages\DTRReportsPage.xaml.vb">
+      <DependentUpon>DTRReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Reports Sub-pages\PayrollReportsPage.xaml.vb">
+      <DependentUpon>PayrollReportsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ReportsPage.xaml.vb">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
@@ -154,6 +166,22 @@
     <Page Include="Pages\LeavePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Payroll Sub-pages\SalaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PayrollPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Reports Sub-pages\DTRReportsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Reports Sub-pages\PayrollReportsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ReportsPage.xaml">
       <SubType>Designer</SubType>
@@ -378,6 +406,9 @@
     <Content Include="MonthlyReports\MonthlyReportPage.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\payroll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Benefits-of-Leave-Management-System-in-School-ERP-Software.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

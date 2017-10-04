@@ -24,7 +24,7 @@
         </TreeView>
 
         <Grid Margin="141,10,10,10">
-            <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="adminFrame" Content="" NavigationUIVisibility="Hidden"/>
         </Grid>
 
     </Grid>
