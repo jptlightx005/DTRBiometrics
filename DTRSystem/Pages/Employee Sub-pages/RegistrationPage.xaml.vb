@@ -31,6 +31,9 @@ Class RegistrationPage
         employeeRow.emp_type = ""
         employeeRow.deptID = 0
         employeeRow.desgID = 0
+        employeeRow.age = 0
+        employeeRow.date_of_birth = Now
+        employeeRow.address = ""
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
         employeeRow.salarygrade = 0

@@ -51,11 +51,11 @@
                 	HorizontalContentAlignment="Right"/>
                 <Label Content="Birthday" HorizontalAlignment="Left" Margin="241,179,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
-                <TextBox x:Name="txtAddress" Text="{Binding first_name}" HorizontalAlignment="Left" Height="23" 
+                <TextBox x:Name="txtAddress" Text="{Binding address}" HorizontalAlignment="Left" Height="23" 
                 	TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,125,0,0"/>
-                <TextBox x:Name="txtAge" Text="{Binding middle_name}" HorizontalAlignment="Left" Height="23" 
+                <TextBox x:Name="txtAge" Text="{Binding age}" HorizontalAlignment="Left" Height="23" 
                 	TextWrapping="Wrap" VerticalAlignment="Top" Width="103" Margin="300,153,0,0"/>
-                <DatePicker x:Name="birthDatePicker" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="301,180,0,0"/>
+                <DatePicker x:Name="birthDatePicker" SelectedDate="{Binding date_of_birth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="301,180,0,0"/>
                 <Label Content="Salary Grade" HorizontalAlignment="Left" Margin="295,235,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
                 <Label Content="Step Increment" HorizontalAlignment="Left" Margin="287,259,0,0" VerticalAlignment="Top" 
