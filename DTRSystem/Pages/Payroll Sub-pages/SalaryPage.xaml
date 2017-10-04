@@ -3,27 +3,31 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" d:DesignWidth="300"
-      Title="SalaryPage" Height="393">
+      mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="400"
+      Title="SalaryPage">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <Button x:Name="btnCalculate" Content="Calculate" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,32,10"/>
-        <Label Content="Total Hours Worked:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,54,0,0"/>
-        <Label x:Name="lblHoursWorked" Content="72 hours" Margin="148,54,0,0" VerticalAlignment="Top"/>
-        <Label Content="Total Hours of Work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,85,0,0"/>
-        <Label x:Name="lblHoursOfWork" Content="88 hours" Margin="148,85,0,0" VerticalAlignment="Top"/>
-        <Label Content="Period of Service:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,116,0,0"/>
-        <Label x:Name="lblPeriod" Content="November to December" Margin="148,116,0,0" VerticalAlignment="Top"/>
-        <Label Content="Monthly Rate of Pay:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,147,0,0"/>
-        <Label x:Name="lblPeriod_Copy" Content="P72,000" Margin="148,147,0,0" VerticalAlignment="Top"/>
-        <Label Margin="20,178,171,168" HorizontalContentAlignment="Right">
+        <Label Content="Total Hours Worked:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,76,0,0"/>
+        <Label x:Name="lblHoursWorked" Content="72 hours" Margin="148,76,0,0" VerticalAlignment="Top"/>
+        <Label Content="Total Hours of Work" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,107,0,0"/>
+        <Label x:Name="lblHoursOfWork" Content="88 hours" Margin="148,107,0,0" VerticalAlignment="Top"/>
+        <Label Content="Period of Service:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,138,0,0"/>
+        <Label x:Name="lblPeriod" Content="November to December" Margin="148,138,0,0" VerticalAlignment="Top"/>
+        <Label Content="Monthly Rate of Pay:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="9,169,0,0"/>
+        <Label x:Name="lblMonthlyRate" Content="P72,000" Margin="148,169,0,0" VerticalAlignment="Top"/>
+        <Label Margin="20,200,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="123">
             <TextBlock Text="Amount Accrued for the Period:" TextWrapping="Wrap" TextAlignment="Right" />
         </Label>
-        <Label x:Name="lblPeriod_Copy1" Content="P36,000" Margin="148,178,0,0" VerticalAlignment="Top"/>
-        <Label Content="Withholding Tax:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,328,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="120" Margin="148,330,0,0"/>
+        <Label x:Name="lblKinsenas" Content="P36,000" Margin="148,200,0,0" VerticalAlignment="Top"/>
+        <Label Content="Withholding Tax:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,46"/>
+        <TextBox x:Name="txtWithholding" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1000" VerticalAlignment="Bottom" Width="120" Margin="150,0,0,46"/>
+        <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="134,15,0,0" VerticalAlignment="Top" Width="102"/>
+        <DatePicker x:Name="toPicker" Margin="134,44,0,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>
+        <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="89,13,0,0"/>
+        <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="103,45,0,0"/>
 
     </Grid>
 </Page>

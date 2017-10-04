@@ -1,0 +1,36 @@
+﻿<Window x:Class="PayslipWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="PayslipWindow" Height="600" Width="300" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
+        <Grid Margin="10,10,0,0">
+            <Label Content="Basic Pay:" HorizontalAlignment="Left" Margin="7,127,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblBasicPay" Content="P 5,000" HorizontalAlignment="Left" Margin="80,127,0,0" VerticalAlignment="Top"/>
+            <Label Content="Earnings" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Period" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="From:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+            <Label Content="To:" HorizontalAlignment="Left" Margin="24,67,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblFromDate" Content="Nov 1, 2016" HorizontalAlignment="Left" Margin="80,41,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblToDate" Content="Nov 15, 2016" HorizontalAlignment="Left" Margin="80,67,0,0" VerticalAlignment="Top"/>
+            <Label Content="Deductions" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Withholding Tax" HorizontalAlignment="Left" Margin="7,189,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblWithholding" Content="P 5,000" HorizontalAlignment="Left" Margin="109,189,0,0" VerticalAlignment="Top"/>
+            <Label Content="Misc:" HorizontalAlignment="Left" Margin="67,215,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblMisc" Content="P 5,000" HorizontalAlignment="Left" Margin="109,215,0,0" VerticalAlignment="Top"/>
+            <Label Content="Tardiness:" HorizontalAlignment="Left" Margin="42,241,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblTardiness" Content="P 5,000" HorizontalAlignment="Left" Margin="109,241,0,0" VerticalAlignment="Top"/>
+            <Label Content="Leaves:" HorizontalAlignment="Left" Margin="56,267,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblLeaves" HorizontalAlignment="Left" Margin="109,267,0,0" VerticalAlignment="Top">
+                <TextBlock x:Name="txtbLeaves" TextWrapping="Wrap" Text="P 5,000" TextDecorations="Underline"/>
+            </Label>
+            <Label Content="Subtotal:" HorizontalAlignment="Left" Margin="47,298,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblSubtotal" Content="P 5,000" HorizontalAlignment="Left" Margin="109,298,0,0" VerticalAlignment="Top"/>
+            <Label Content="NET PAY:" HorizontalAlignment="Left" Margin="7,348,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblNetPay" Content="P 5,000" HorizontalAlignment="Left" Margin="80,348,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+    </Grid>
+</Window>
