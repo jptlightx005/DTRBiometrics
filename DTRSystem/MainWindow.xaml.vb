@@ -1,10 +1,8 @@
 ﻿Class MainWindow 
-    Dim registrationTab As TabItem
     Dim employeeTab As TabItem
     Dim reportsTab As TabItem
     Dim leaveTab As TabItem
-    Dim departmentTab As TabItem
-    Dim designationTab As TabItem
+    Dim adminTab As TabItem
 
     Public Sub New()
 
@@ -47,6 +45,14 @@
         End If
         tab_panels.SelectedItem = leaveTab
     End Sub
+
+    Private Sub tlbrAdmin_Click(sender As Object, e As RoutedEventArgs)
+        If adminTab Is Nothing Then
+            Dim adminPage As New AdminPage
+            adminTab = NewTab(adminPage, "Admin")
+        End If
+        tab_panels.SelectedItem = adminTab
+    End Sub
     Private Function NewTab(ByRef pg As Page, header As String) As TabItem
         Dim tab As New TabItem
         tab.Header = header
@@ -60,4 +66,5 @@
 
         Return tab
     End Function
+
 End Class

@@ -74,10 +74,13 @@
     <Compile Include="DTRDataSet.vb">
       <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartmentPage.xaml.vb">
+    <Compile Include="Pages\AdminPage.xaml.vb">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin Sub-pages\DepartmentPage.xaml.vb">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DesignationPage.xaml.vb">
+    <Compile Include="Pages\Admin Sub-pages\DesignationPage.xaml.vb">
       <DependentUpon>DesignationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml.vb">
@@ -109,11 +112,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
-    <Page Include="Pages\DepartmentPage.xaml">
+    <Page Include="Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DesignationPage.xaml">
+    <Page Include="Pages\Admin Sub-pages\DepartmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin Sub-pages\DesignationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

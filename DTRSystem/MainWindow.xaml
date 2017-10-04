@@ -32,7 +32,7 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button IsEnabled="False">
+                <Button Click="tlbrAdmin_Click">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/admin_icon.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Admin" HorizontalAlignment="Center"/>

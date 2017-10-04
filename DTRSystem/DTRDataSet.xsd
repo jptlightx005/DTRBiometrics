@@ -735,6 +735,28 @@ FROM            ((tbl_employee LEFT OUTER JOIN
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DesignationFullTableAdapter" GeneratorDataComponentClassName="DesignationFullTableAdapter" Name="DesignationFullTable" UserDataComponentName="DesignationFullTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DTRCnStr (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        tbl_designation.ID, tbl_designation.DeptID, tbl_designation.designation_name, tbl_department.dept_name, tbl_department.ID AS DepartmentID
+FROM            (tbl_designation INNER JOIN
+                         tbl_department ON tbl_designation.DeptID = tbl_department.ID)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ID" DataSetColumn="ID" />
+              <Mapping SourceColumn="designation_name" DataSetColumn="designation_name" />
+              <Mapping SourceColumn="DeptID" DataSetColumn="DeptID" />
+              <Mapping SourceColumn="dept_name" DataSetColumn="dept_name" />
+              <Mapping SourceColumn="DepartmentID" DataSetColumn="DepartmentID" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -1018,6 +1040,29 @@ FROM            ((tbl_employee LEFT OUTER JOIN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="DesignationFullTable" msprop:Generator_TableClassName="DesignationFullTableDataTable" msprop:Generator_TableVarName="tableDesignationFullTable" msprop:Generator_TablePropName="DesignationFullTable" msprop:Generator_RowDeletingName="DesignationFullTableRowDeleting" msprop:Generator_RowChangingName="DesignationFullTableRowChanging" msprop:Generator_RowEvHandlerName="DesignationFullTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DesignationFullTableRowDeleted" msprop:Generator_UserTableName="DesignationFullTable" msprop:Generator_RowChangedName="DesignationFullTableRowChanged" msprop:Generator_RowEvArgName="DesignationFullTableRowChangeEvent" msprop:Generator_RowClassName="DesignationFullTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" minOccurs="0" />
+              <xs:element name="designation_name" msprop:Generator_ColumnVarNameInTable="columndesignation_name" msprop:Generator_ColumnPropNameInRow="designation_name" msprop:Generator_ColumnPropNameInTable="designation_nameColumn" msprop:Generator_UserColumnName="designation_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DeptID" msprop:Generator_ColumnVarNameInTable="columnDeptID" msprop:Generator_ColumnPropNameInRow="DeptID" msprop:Generator_ColumnPropNameInTable="DeptIDColumn" msprop:Generator_UserColumnName="DeptID" type="xs:int" minOccurs="0" />
+              <xs:element name="dept_name" msprop:Generator_ColumnVarNameInTable="columndept_name" msprop:Generator_ColumnPropNameInRow="dept_name" msprop:Generator_ColumnPropNameInTable="dept_nameColumn" msprop:Generator_UserColumnName="dept_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DepartmentID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnDepartmentID" msprop:Generator_ColumnPropNameInRow="DepartmentID" msprop:Generator_ColumnPropNameInTable="DepartmentIDColumn" msprop:Generator_UserColumnName="DepartmentID" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -1046,6 +1091,10 @@ FROM            ((tbl_employee LEFT OUTER JOIN
     </xs:unique>
     <xs:unique name="SalaryGradeTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:SalaryGradeTable" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="DesignationFullTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DesignationFullTable" />
       <xs:field xpath="mstns:ID" />
     </xs:unique>
   </xs:element>
