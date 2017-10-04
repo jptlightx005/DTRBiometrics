@@ -155,7 +155,8 @@ Public Class DTRBiometricWindow
                                             a = a + " 12:00 PM" ' 10/04/2017 12:00 PM
                                             timeEnd = DateTime.Parse(a)
                                         End If
-
+                                        Debug.Print("AM: Begin: {0}", timeBegin.ToString)
+                                        Debug.Print("AM: End: {0}", timeEnd.ToString)
                                         Dim total As TimeSpan = timeEnd - timeBegin
                                         timeLogFound.TotalTime += total.TotalMinutes
                                     End If
@@ -192,7 +193,8 @@ Public Class DTRBiometricWindow
                                             a = a + " 17:00 PM" ' 10/04/2017 05:00 PM
                                             timeEnd = DateTime.Parse(a)
                                         End If
-
+                                        Debug.Print("PM: Begin: {0}", timeBegin.ToString)
+                                        Debug.Print("PM: End: {0}", timeEnd.ToString)
                                         Dim total As TimeSpan = timeEnd - timeBegin
                                         timeLogFound.TotalTime += total.TotalMinutes
                                     End If
