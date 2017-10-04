@@ -59,23 +59,21 @@ Class RegistrationPage
                 End If
 
                 employeeRow.biometric = File.ReadAllBytes(applicationPath & "\fptemp.tpl")
-                File.Delete(applicationPath & "\fptemp.tpl")
                 employeeRow.work_timeb = 8
                 employeeRow.work_timee = 17
                 employeeRow.picture = image
-                employeeRow.salarygrade = cmbSalaryGrade.SelectedValue
+                employeeRow.salarygrade = cmbSalaryGrade.SelectedIndex + 1
                 employeeRow.stepgrade = cmbStepGrade.SelectedIndex + 1
-
                 dataTable.Rows.Add(employeeRow)
-
                 If tblEmployeeAdapter.Update(dataTable) = 1 Then
+                    File.Delete(applicationPath & "\fptemp.tpl")
                     MsgBox("Successfully registered!", vbInformation)
                     EmptyBoxes()
                 Else
-                    MsgBox("Registration failed!", vbInformation)
+                    MsgBox("Registration failed! Error 2", vbInformation)
                 End If
             Catch ex As Exception
-                MsgBox("Registration failed!", vbInformation)
+                MsgBox("Registration failed! Error 1", vbInformation)
             End Try
         Else
             MsgBox("Registration Failed! One or more required fields is empty!", vbExclamation)
