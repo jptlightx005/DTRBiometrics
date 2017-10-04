@@ -144,14 +144,14 @@ Public Class DTRBiometricWindow
                                     If Not IsDBNull(timeLogFound("TimeInAM")) Then
                                         Dim timeBegin = timeLogFound.TimeInAM
                                         If timeBegin.TimeOfDay < New TimeSpan(8, 0, 0) Then
-                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 08:00 AM" ' 10/04/2017 08:00 AM
                                             timeBegin = DateTime.Parse(a)
                                         End If
 
                                         Dim timeEnd = timeLogFound.TimeOutAM
                                         If timeEnd.TimeOfDay > New TimeSpan(12, 0, 0) Then
-                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 12:00 PM" ' 10/04/2017 12:00 PM
                                             timeEnd = DateTime.Parse(a)
                                         End If
@@ -182,14 +182,14 @@ Public Class DTRBiometricWindow
                                     If Not IsDBNull(timeLogFound("TimeInPM")) Then
                                         Dim timeBegin = timeLogFound.TimeInPM
                                         If timeBegin.TimeOfDay < New TimeSpan(13, 0, 0) Then
-                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 01:00 PM" ' 10/04/2017 01:00 PM
                                             timeBegin = DateTime.Parse(a)
                                         End If
 
                                         Dim timeEnd = timeLogFound.TimeOutPM
                                         If timeEnd.TimeOfDay > New TimeSpan(17, 0, 0) Then
-                                            Dim a = Now.ToString("MM/dd/yyyy")
+                                            Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 17:00 PM" ' 10/04/2017 05:00 PM
                                             timeEnd = DateTime.Parse(a)
                                         End If
