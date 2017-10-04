@@ -1,7 +1,7 @@
 ﻿Class AdminPage
     Dim deptPage As DepartmentPage
     Dim desgPage As DesignationPage
-
+    Dim salGPage As SalaryGradePage
     Dim activePage As Page
     Private Sub ReplacePage(ByRef pg As Page)
         activePage = pg
@@ -23,5 +23,13 @@
         End If
 
         ReplacePage(desgPage)
+    End Sub
+
+    Private Sub treeSalG_Selected(sender As Object, e As RoutedEventArgs) Handles treeSalG.Selected
+        If salGPage Is Nothing Then
+            salGPage = New SalaryGradePage
+        End If
+
+        ReplacePage(salGPage)
     End Sub
 End Class

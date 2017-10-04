@@ -74,6 +74,9 @@
     <Compile Include="DTRDataSet.vb">
       <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin Sub-pages\SalaryGradePage.xaml.vb">
+      <DependentUpon>SalaryGradePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdminPage.xaml.vb">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
+    <Page Include="Pages\Admin Sub-pages\SalaryGradePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
