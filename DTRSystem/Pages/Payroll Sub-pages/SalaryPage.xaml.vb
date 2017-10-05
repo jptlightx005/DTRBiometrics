@@ -8,6 +8,7 @@ Class SalaryPage
     Dim totalTime As Double 'in minutes
 
     Dim awols As Double
+    Dim lates As Double
     Public Sub ChangeEmployee(emp As EmployeeTableRow)
         If Not emp Is Nothing Then
             Dim employees = tblEmployeeFullAdapter.GetData.Select("ID = " & emp.ID)
@@ -40,8 +41,8 @@ Class SalaryPage
         payslipWindow.basicPay = partialSalary
 
         payslipWindow.withholding = Double.Parse(txtWithholding.Text)
-        payslipWindow.misc = 363.3 + 125 + 100
-        payslipWindow.tardiness = 0 'to be calculated
+        payslipWindow.misc = Double.Parse(txtSSS.Text) + Double.Parse(txtPhilhealth.Text) + Double.Parse(txtPagibig.Text)
+        payslipWindow.tardiness = lates * ratePerMinute 'to be calculated
         payslipWindow.leaves = awols * ratePerMinute
 
         payslipWindow.Show()
@@ -55,26 +56,44 @@ Class SalaryPage
         Dim fromDate = fromPicker.SelectedDate.Value
         Dim toDate = toPicker.SelectedDate.Value
         Dim filter As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromDate, toDate)
-        Debug.Print("filter ""{0}""", filter)
         Dim rows = tblLogAdapter.GetEmployeeTableLog(employee.ID).Select(filter)
-        Dim totalMinutes As Integer = 0
 
+        Dim totalMinutes As Integer = 0
+        Dim totalDays As Integer = Weekdays(fromDate, toDate)
+
+        Dim presents As New List(Of Date)
+        Dim wDays = WorkingDays(fromDate, toDate)
+        Dim absences As New List(Of Date)
+        lates = 0
         For Each row As TimelogTableRow In rows
             totalMinutes += row.TotalTime
+            lates += (8 * 60) - row.TotalTime
+            Debug.Print("Testing: {0} - {1} = {0}", (8 * 60), row.TotalTime, (8 * 60) - row.TotalTime)
+            Debug.Print("lates test: {0}", lates)
+            For Each d In wDays
+                If d.Date = row.DateOfTheDay Then
+                    presents.Add(d)
+                    wDays.Remove(d)
+                    Exit For
+                End If
+            Next
+            absences.AddRange(wDays)
         Next
 
-
+        Debug.Print("Abscenses: {0} days", absences.Count)
+        Debug.Print("Lates: {0} min", lates)
+        awols = absences.Count * 8 * 60
         workedTime = totalMinutes
-        totalTime = Weekdays(fromDate, toDate) * 8 * 60
+        totalTime = totalDays * 8 * 60
 
         lblPeriod.Content = String.Format("{0} {1}-{2}", MonthName(fromDate.Month), fromDate.Day, toDate.Day)
-        lblHoursWorked.Content = (workedTime / 60) & " hrs"
+        lblHoursWorked.Content = (workedTime / 60).ToString("0.00") & " hrs"
         lblHoursOfWork.Content = (totalTime / 60) & " hrs"
 
 
     End Sub
 
-    Public Shared Function Weekdays(ByRef startDate As Date, ByRef endDate As Date) As Integer
+    Public Shared Function Weekdays(ByVal startDate As Date, ByVal endDate As Date) As Integer
         Dim numWeekdays As Integer
         Dim totalDays As Integer
         Dim WeekendDays As Integer
@@ -82,13 +101,11 @@ Class SalaryPage
         WeekendDays = 0
 
         totalDays = DateDiff(DateInterval.Day, startDate, endDate) + 1
-
         For i As Integer = 1 To totalDays
-
-            If DatePart(dateinterval.weekday, startDate) = 1 Then
+            If DatePart(DateInterval.Weekday, startDate) = 1 Then
                 WeekendDays = WeekendDays + 1
             End If
-            If DatePart(dateinterval.weekday, startDate) = 7 Then
+            If DatePart(DateInterval.Weekday, startDate) = 7 Then
                 WeekendDays = WeekendDays + 1
             End If
             startDate = DateAdd("d", 1, startDate)
@@ -97,5 +114,26 @@ Class SalaryPage
         numWeekdays = totalDays - WeekendDays
 
         Return numWeekdays
+    End Function
+
+    Public Shared Function WorkingDays(ByVal startDate As Date, ByVal endDate As Date) As List(Of Date)
+        Dim wDays As New List(Of Date)
+        Dim totalDays As Integer
+
+        totalDays = DateDiff(DateInterval.Day, startDate, endDate) + 1
+
+        For i As Integer = 1 To totalDays
+            Dim isWeekend As Boolean = False
+            If startDate.DayOfWeek = DayOfWeek.Sunday Then
+                isWeekend = True
+            ElseIf startDate.DayOfWeek = DayOfWeek.Saturday Then
+                isWeekend = True
+            End If
+            If Not isWeekend Then
+                wDays.Add(startDate)
+            End If
+            startDate = DateAdd("d", 1, startDate)
+        Next
+        Return wDays
     End Function
 End Class
