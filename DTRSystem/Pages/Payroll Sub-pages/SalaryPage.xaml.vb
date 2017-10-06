@@ -30,7 +30,7 @@ Class SalaryPage
     End Sub
 
     Private Sub btnCalculate_Click(sender As Object, e As RoutedEventArgs) Handles btnCalculate.Click
-        awols = totalTime - workedTime
+        'awols = totalTime - workedTime
         Dim partialSalary = employeeSalary / 2
         Dim ratePerMinute = partialSalary / totalTime
 
@@ -77,9 +77,9 @@ Class SalaryPage
                     Exit For
                 End If
             Next
-            absences.AddRange(wDays)
-        Next
 
+        Next
+        absences.AddRange(wDays)
         Debug.Print("Abscenses: {0} days", absences.Count)
         Debug.Print("Lates: {0} min", lates)
         awols = absences.Count * 8 * 60

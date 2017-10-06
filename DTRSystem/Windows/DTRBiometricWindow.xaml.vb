@@ -5,6 +5,7 @@ Imports System.Threading
 Imports System.Windows.Threading
 
 Imports DTRSystem.DTRDataSet
+Imports DTRSystem.DTRDataSetTableAdapters
 Public Class DTRBiometricWindow
     Dim WithEvents fp As ZKFPEngX
     Dim fpHandle As Integer
@@ -16,6 +17,7 @@ Public Class DTRBiometricWindow
     Dim dateTimer As DispatcherTimer
     Dim resetTimer As DispatcherTimer
 
+    Dim vacleavecredits As Double = 0
     Public Sub New()
 
         ' This call is required by the designer.
@@ -68,7 +70,23 @@ Public Class DTRBiometricWindow
             File.Delete(fileName)
         Next
     End Sub
+    Public Function GetTotalCredits(emp As EmployeeFullRow) As Double
+        Dim leaveCreditTransactions = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & emp.ID)
+        vacleavecredits = 0
+        For Each lctransac As LeaveCreditsTableRow In leaveCreditTransactions
+            Dim vc_earned = lctransac.VC_Earned
+            Dim vc_used = lctransac.VC_Used
+            Dim vc_bal = lctransac.VC_Balance
 
+            vacleavecredits += vc_earned - vc_used
+            Debug.Print("Is v equal {0} == {1}", vacleavecredits, vc_bal)
+            If vacleavecredits <> vc_bal Then
+                vacleavecredits -= vc_earned - vc_used
+                Debug.Print("Deducted v = {0}", vacleavecredits)
+            End If
+        Next
+        Return vacleavecredits
+    End Function
     Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
         Me.Close()
         dtrMainWindow.Show()
@@ -159,6 +177,34 @@ Public Class DTRBiometricWindow
                                         Debug.Print("AM: End: {0}", timeEnd.ToString)
                                         Dim total As TimeSpan = timeEnd - timeBegin
                                         timeLogFound.TotalTime += total.TotalMinutes
+
+                                        If total.TotalMinutes < 240 Then
+                                            'calculate leave
+                                            Dim lateMinutes As TimeSpan = New TimeSpan(0, 240, 0) - total
+
+                                            Dim lcDataTable = New LeaveCreditsTableDataTable
+                                            Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
+
+                                            Dim creditsToBeFuckingDeducted = lateMinutes.TotalMinutes / 480
+                                            lctransaction.EmpID = employeeFound.ID
+                                            lctransaction.VC_Earned = 0
+                                            lctransaction.VC_Used = creditsToBeFuckingDeducted
+                                            lctransaction.VC_Balance = GetTotalCredits(employeeFound) - creditsToBeFuckingDeducted
+
+                                            lctransaction.SC_Earned = 0
+                                            lctransaction.SC_Used = 0
+                                            lctransaction.SC_Balance = 0
+
+                                            lctransaction.DateOfTransaction = Now
+
+                                            lcDataTable.Rows.Add(lctransaction)
+
+                                            If tblLeaveCreditsAdapter.Update(lcDataTable) = 1 Then
+                                                Debug.Print("Successfully added credits!", vbInformation)
+                                            Else
+                                                Debug.Print("Failed to add!", vbInformation)
+                                            End If
+                                        End If
                                     End If
                                 Else
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutAM"))
@@ -184,19 +230,51 @@ Public Class DTRBiometricWindow
                                         If timeBegin.TimeOfDay < New TimeSpan(13, 0, 0) Then
                                             Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 01:00 PM" ' 10/04/2017 01:00 PM
-                                            timeBegin = DateTime.Parse(a)
+                                            timeBegin = DateTime.ParseExact(a, "dd/MM/yyyy hh:mm tt", Nothing)
                                         End If
 
                                         Dim timeEnd = timeLogFound.TimeOutPM
                                         If timeEnd.TimeOfDay > New TimeSpan(17, 0, 0) Then
                                             Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 17:00 PM" ' 10/04/2017 05:00 PM
-                                            timeEnd = DateTime.Parse(a)
+                                            timeEnd = DateTime.ParseExact(a, "dd/MM/yyyy hh:mm tt", Nothing)
                                         End If
                                         Debug.Print("PM: Begin: {0}", timeBegin.ToString)
                                         Debug.Print("PM: End: {0}", timeEnd.ToString)
                                         Dim total As TimeSpan = timeEnd - timeBegin
+                                        Debug.Print("Test: {0}", total.TotalMinutes)
+                                        Debug.Print("Meh: {0}", total)
                                         timeLogFound.TotalTime += total.TotalMinutes
+
+                                        If total.TotalMinutes < 240 Then
+                                            'calculate leave
+                                            Dim lateMinutes As TimeSpan = New TimeSpan(0, 240, 0) - total
+
+                                            Dim lcDataTable = New LeaveCreditsTableDataTable
+                                            Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
+
+                                            Dim creditsToBeFuckingDeducted = Int(lateMinutes.TotalMinutes) / 480
+                                            Debug.Print("{0} / 480", lateMinutes.TotalMinutes)
+                                            Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
+                                            lctransaction.EmpID = employeeFound.ID
+                                            lctransaction.VC_Earned = 0
+                                            lctransaction.VC_Used = creditsToBeFuckingDeducted
+                                            lctransaction.VC_Balance = GetTotalCredits(employeeFound) - creditsToBeFuckingDeducted
+
+                                            lctransaction.SC_Earned = 0
+                                            lctransaction.SC_Used = 0
+                                            lctransaction.SC_Balance = 0
+
+                                            lctransaction.DateOfTransaction = Now
+
+                                            lcDataTable.Rows.Add(lctransaction)
+
+                                            If tblLeaveCreditsAdapter.Update(lcDataTable) = 1 Then
+                                                Debug.Print("Successfully added credits!", vbInformation)
+                                            Else
+                                                Debug.Print("Failed to add!", vbInformation)
+                                            End If
+                                        End If
                                     End If
                                 Else
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutPM"))
