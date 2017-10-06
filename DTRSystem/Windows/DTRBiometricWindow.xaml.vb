@@ -185,7 +185,9 @@ Public Class DTRBiometricWindow
                                             Dim lcDataTable = New LeaveCreditsTableDataTable
                                             Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
 
-                                            Dim creditsToBeFuckingDeducted = lateMinutes.TotalMinutes / 480
+                                            Dim creditsToBeFuckingDeducted = Math.Round(lateMinutes.TotalMinutes) / 480
+                                            Debug.Print("{0} / 480", Math.Round(lateMinutes.TotalMinutes))
+                                            Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
                                             lctransaction.EmpID = employeeFound.ID
                                             lctransaction.VC_Earned = 0
                                             lctransaction.VC_Used = creditsToBeFuckingDeducted
@@ -253,8 +255,8 @@ Public Class DTRBiometricWindow
                                             Dim lcDataTable = New LeaveCreditsTableDataTable
                                             Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
 
-                                            Dim creditsToBeFuckingDeducted = Int(lateMinutes.TotalMinutes) / 480
-                                            Debug.Print("{0} / 480", lateMinutes.TotalMinutes)
+                                            Dim creditsToBeFuckingDeducted = Math.Round(lateMinutes.TotalMinutes) / 480
+                                            Debug.Print("{0} / 480", Math.Round(lateMinutes.TotalMinutes))
                                             Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
                                             lctransaction.EmpID = employeeFound.ID
                                             lctransaction.VC_Earned = 0
