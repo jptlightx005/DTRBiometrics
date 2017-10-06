@@ -117,7 +117,36 @@ Class SalaryPage
                 Next
             Next
         End If
-        
+
+
+
+        'lates calculations
+        Debug.Print("Lates before: {0}", lates)
+        For Each leaveCreditLog As LeaveCreditsTableRow In tblLeaveCreditsAdapter.GetData.Select("EmpID = " & employee.ID)
+            For Each d In presents
+                If leaveCreditLog.DateOfTransaction.Date = d.Date And leaveCreditLog.VC_Used < 1.0 Then
+                    Dim balance = leaveCreditLog.VC_Balance
+                    Debug.Print("Balance left: {0}", balance)
+                    If balance >= 0 Then
+                        balance = 0
+                    End If
+                    Debug.Print("To be deducted: {0}", balance)
+                    Dim minutes = Math.Round((leaveCreditLog.VC_Used + balance) * 480)
+                    Debug.Print("Aaaa: {0}", (leaveCreditLog.VC_Used + balance))
+                    Debug.Print("Bbbb: {0}", (leaveCreditLog.VC_Used + balance) * 480)
+                    Debug.Print("CCCC: {0}", minutes)
+                    lates -= minutes
+                    Debug.Print("Lates ded: {0}", lates)
+                    Exit For
+                End If
+            Next
+            
+        Next
+
+        If lates < 0 Then
+            lates = 0
+        End If
+
         Debug.Print("Abscenses: {0} days", absences.Count)
         Debug.Print("Lates: {0} min", lates)
         awols = absences.Count * 8 * 60 'calculating days of absent * hours per day * minutes per hour

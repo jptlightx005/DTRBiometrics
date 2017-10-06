@@ -246,11 +246,17 @@ Public Class DTRBiometricWindow
                                         Dim total As TimeSpan = timeEnd - timeBegin
                                         Debug.Print("Test: {0}", total.TotalMinutes)
                                         Debug.Print("Meh: {0}", total)
+
+                                        Dim minutes = 240
+                                        If timeLogFound.TotalTime = 0 Then
+                                            minutes = 480
+                                        End If
                                         timeLogFound.TotalTime += total.TotalMinutes
 
                                         If total.TotalMinutes < 240 Then
                                             'calculate leave
-                                            Dim lateMinutes As TimeSpan = New TimeSpan(0, 240, 0) - total
+                                            
+                                            Dim lateMinutes As TimeSpan = New TimeSpan(0, minutes, 0) - total
 
                                             Dim lcDataTable = New LeaveCreditsTableDataTable
                                             Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow

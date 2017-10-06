@@ -53,8 +53,8 @@ Class LeaveApplicationPage
             date_modified = lctransac.DateOfTransaction.ToString("MMMM dd, yyyy")
         Next
 
-        vacationcredits.Text = vacleavecredits
-        sickcredits.Text = sickleavecredits
+        vacationcredits.Text = Math.Round(vacleavecredits, 3)
+        sickcredits.Text = Math.Round(sickleavecredits, 3)
 
     End Sub
 
