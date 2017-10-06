@@ -53,39 +53,78 @@ Class SalaryPage
     End Sub
 
     Private Sub toPicker_SelectedDateChanged(sender As Object, e As SelectionChangedEventArgs) Handles toPicker.SelectedDateChanged
-        Dim fromDate = fromPicker.SelectedDate.Value
-        Dim toDate = toPicker.SelectedDate.Value
-        Dim filter As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromDate, toDate)
-        Dim rows = tblLogAdapter.GetEmployeeTableLog(employee.ID).Select(filter)
+        Dim fromDate = fromPicker.SelectedDate.Value 'date from selected
+        Dim toDate = toPicker.SelectedDate.Value 'date to selected
+        Dim filter As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromDate, toDate) 'filter to get logs between fromdate and todate
+        Dim rows = tblLogAdapter.GetEmployeeTableLog(employee.ID).Select(filter) 'gets the rows using the above filter
 
-        Dim totalMinutes As Integer = 0
-        Dim totalDays As Integer = Weekdays(fromDate, toDate)
+        Dim totalMinutes As Integer = 0 'initialize total minute worked
+        Dim totalDays As Integer = Weekdays(fromDate, toDate) 'assigns total working days between dates
 
-        Dim presents As New List(Of Date)
-        Dim wDays = WorkingDays(fromDate, toDate)
-        Dim absences As New List(Of Date)
-        lates = 0
-        For Each row As TimelogTableRow In rows
-            totalMinutes += row.TotalTime
-            lates += (8 * 60) - row.TotalTime
+        Dim presents As New List(Of Date) 'initializes present days array
+        Dim wDays = WorkingDays(fromDate, toDate) 'assigns working days array between dates
+        Dim absences As New List(Of Date) 'initializes absent days array
+
+
+        lates = 0 're-initializes lates
+        For Each row As TimelogTableRow In rows 'for each time log in imported logs
+            totalMinutes += row.TotalTime 'adds total minutes worked from the log
+            lates += (8 * 60) - row.TotalTime 'adds late from 480 - total time worked (if fully worked, 480 - 480 = 0)
             Debug.Print("Testing: {0} - {1} = {0}", (8 * 60), row.TotalTime, (8 * 60) - row.TotalTime)
             Debug.Print("lates test: {0}", lates)
-            For Each d In wDays
-                If d.Date = row.DateOfTheDay Then
-                    presents.Add(d)
-                    wDays.Remove(d)
-                    Exit For
+            For Each d In wDays ' for each days in working days
+                If d.Date = row.DateOfTheDay Then 'if the working day is the same as the log's date
+                    presents.Add(d) 'adds the days to the present days array
+                    wDays.Remove(d) 'removes the day from the working days array
+                    Exit For 'stops the loop
                 End If
             Next
 
         Next
-        absences.AddRange(wDays)
+        absences.AddRange(wDays) 'adds the working days left from the array into the absences array
+
+
+
+        'leaves counting
+        Dim leaves As New List(Of Date) 'initializes leaves array
+
+        Dim leaveApp As LeaveApplicationsTableRow 'declaring leave application row
+        For Each row As LeaveApplicationsTableRow In tblLeaveApplicationAdapter.GetData.Select("EmpID = " & employee.ID) 'for each application from the database
+            If row.LeaveFrom.Date >= fromDate And row.LeaveFrom <= toDate Or _
+                 row.LeaveTo.Date >= fromDate And row.LeaveTo <= toDate Then 'if the application's start or end date is between the selected dates
+                leaveApp = row 'selects the application
+                Exit For 'stops the loop
+            End If
+        Next
+
+        If Not leaveApp Is Nothing Then 'if leave application is not empty, will start calculating
+            Dim leaveStartDate = leaveApp.LeaveFrom 'assigns the leave application start date
+            Dim leaveEndDate = leaveApp.LeaveTo 'assigns the leave application end date
+            If leaveStartDate < fromDate Then 'if the start date was before the date from selected
+                leaveStartDate = fromDate 'change the leave start to the selected start date
+            End If
+            If leaveEndDate > toDate Then 'if the end date was ater the date to selected
+                leaveEndDate = toDate 'change the leave end to the selected end date
+            End If
+            Dim lDays = WorkingDays(leaveStartDate, leaveEndDate) 'initializes leave days array
+            For Each ld In lDays 'for each day in leave days
+                For Each d In absences ' for eac day in absent days
+                    If d.Date = ld.Date Then 'if absent day is the same as leave day
+                        presents.Add(d) 'the employee is paid , so the absent day is considered present
+                        absences.Remove(d) 'removes the absent day from the absent array
+                        Exit For 'stops the loop
+                    End If
+                Next
+            Next
+        End If
+        
         Debug.Print("Abscenses: {0} days", absences.Count)
         Debug.Print("Lates: {0} min", lates)
-        awols = absences.Count * 8 * 60
-        workedTime = totalMinutes
-        totalTime = totalDays * 8 * 60
+        awols = absences.Count * 8 * 60 'calculating days of absent * hours per day * minutes per hour
+        workedTime = totalMinutes 'total worked time in minutes
+        totalTime = totalDays * 8 * 60 'total working time in minutes
 
+        'asigns values to the labels
         lblPeriod.Content = String.Format("{0} {1}-{2}", MonthName(fromDate.Month), fromDate.Day, toDate.Day)
         lblHoursWorked.Content = (workedTime / 60).ToString("0.00") & " hrs"
         lblHoursOfWork.Content = (totalTime / 60) & " hrs"

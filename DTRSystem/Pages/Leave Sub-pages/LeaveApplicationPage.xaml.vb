@@ -25,6 +25,8 @@ Class LeaveApplicationPage
     Public Sub GetTotalCredits(emp As EmployeeFullRow)
         Dim leaveCreditTransactions = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & emp.ID)
         Dim date_modified = "---- --, ----"
+        vacleavecredits = 0
+        sickleavecredits = 0
         For Each lctransac As LeaveCreditsTableRow In leaveCreditTransactions
             Dim vc_earned = lctransac.VC_Earned
             Dim vc_used = lctransac.VC_Used
@@ -32,10 +34,10 @@ Class LeaveApplicationPage
 
             vacleavecredits += vc_earned - vc_used
             Debug.Print("Is v equal {0} == {1}", vacleavecredits, vc_bal)
-            If vacleavecredits <> vc_bal Then
-                vacleavecredits -= vc_earned - vc_used
-                Debug.Print("Deducted v = {0}", vacleavecredits)
-            End If
+            'If vacleavecredits <> vc_bal Then
+            '    vacleavecredits -= vc_earned - vc_used
+            '    Debug.Print("Deducted v = {0}", vacleavecredits)
+            'End If
 
             Dim sc_earned = lctransac.SC_Earned
             Dim sc_used = lctransac.SC_Used
@@ -43,10 +45,10 @@ Class LeaveApplicationPage
 
             sickleavecredits += sc_earned - sc_used
             Debug.Print("Is s equal {0} == {1}", sickleavecredits, sc_bal)
-            If sickleavecredits <> sc_bal Then
-                sickleavecredits -= sc_earned - sc_used
-                Debug.Print("Deducted s = {0}", sickleavecredits)
-            End If
+            'If sickleavecredits <> sc_bal Then
+            '    sickleavecredits -= sc_earned - sc_used
+            '    Debug.Print("Deducted s = {0}", sickleavecredits)
+            'End If
 
             date_modified = lctransac.DateOfTransaction.ToString("MMMM dd, yyyy")
         Next
