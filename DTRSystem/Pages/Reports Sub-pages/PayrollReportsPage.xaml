@@ -5,28 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300"
-      Title="PayrollReportsPage">
+      Title="PayrollReportsPage" Initialized="Page_Initialized">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <Label Content="Reports" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="79,36,-33,0" VerticalAlignment="Top" Width="254"/>
-        <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="79,63,0,0" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Employee:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
+        <ComboBox x:Name="cmbDepartments" DisplayMemberPath="dept_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="91,36,0,0" VerticalAlignment="Top" Width="254"/>
+        <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="91,63,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Department:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
         <DatePicker x:Name="toPicker" Margin="231,62,-33,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>
-        <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,61,0,0"/>
+        <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,61,0,0"/>
         <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
         <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
         <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,183" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding EmpID}" Header="Employee ID" />
-                <DataGridTextColumn Binding="{Binding DateOfTheDay, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
-                <DataGridTextColumn Binding="{Binding TimeInAM, StringFormat=\{0:hh:mm tt\}}" Header="Time in AM" />
-                <DataGridTextColumn Binding="{Binding TimeOutAM, StringFormat=\{0:hh:mm tt\}}" Header="Time out AM" />
-                <DataGridTextColumn Binding="{Binding TimeInPM, StringFormat=\{0:hh:mm tt\}}" Header="Time in PM" />
-                <DataGridTextColumn Binding="{Binding TimeOutPM, StringFormat=\{0:hh:mm tt\}}" Header="Time out PM" />
-                <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Minutes" />
+                <DataGridTextColumn Binding="{Binding full_name}" Header="Name" />
+                <DataGridTextColumn Binding="{Binding designation}" Header="Designation" />
+                <DataGridTextColumn Binding="{Binding from, StringFormat=\{0:hh:mm tt\}}" Header="From Date" />
+                <DataGridTextColumn Binding="{Binding to, StringFormat=\{0:hh:mm tt\}}" Header="To Date" />
+                <DataGridTextColumn Binding="{Binding monthly, StringFormat=N2}" Header="Monthly Rate" />
+                <DataGridTextColumn Binding="{Binding partial, StringFormat=N2}" Header="Amount Accrued" />
+                <DataGridTextColumn Binding="{Binding tax, StringFormat=N2}" Header="Withholding Tax" />
+                <DataGridTextColumn Binding="{Binding gsis, StringFormat=N2}" Header="Government Service Insurance System" />
+                <DataGridTextColumn Binding="{Binding totaldeductions, StringFormat=N2}" Header="Total Deductions" />
+                <DataGridTextColumn Binding="{Binding netpay}" Header="Net Pay" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,-126,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
