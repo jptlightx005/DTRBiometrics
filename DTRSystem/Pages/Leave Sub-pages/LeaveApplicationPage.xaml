@@ -53,6 +53,8 @@
         <DataGrid x:Name="leaveApplicationsDataGrid" Margin="15,327,10,37" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding LeaveType}" Header="Leave Type" />
+                <DataGridTextColumn Binding="{Binding Reason}" Header="Reason" />
+                <DataGridTextColumn Binding="{Binding ContactDuringLeave}" Header="Contact" />
                 <DataGridTextColumn Binding="{Binding LeaveFrom, StringFormat=\{0:MMMM dd yyyy\}}" Header="From Date" />
                 <DataGridTextColumn Binding="{Binding LeaveTo, StringFormat=\{0:MMMM dd yyyy\}}" Header="To Date" />
                 <DataGridTextColumn Binding="{Binding NumberOfDays}" Header="Number of Days" />

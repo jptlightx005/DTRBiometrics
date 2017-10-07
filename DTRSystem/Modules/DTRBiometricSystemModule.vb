@@ -77,4 +77,48 @@ Module DTRBiometricSystemModule
             Return obj
         End If
     End Function
+
+    Public Function Weekdays(ByVal startDate As Date, ByVal endDate As Date) As Integer
+        Dim numWeekdays As Integer
+        Dim totalDays As Integer
+        Dim WeekendDays As Integer
+        numWeekdays = 0
+        WeekendDays = 0
+
+        totalDays = DateDiff(DateInterval.Day, startDate, endDate) + 1
+        For i As Integer = 1 To totalDays
+            If DatePart(DateInterval.Weekday, startDate) = 1 Then
+                WeekendDays = WeekendDays + 1
+            End If
+            If DatePart(DateInterval.Weekday, startDate) = 7 Then
+                WeekendDays = WeekendDays + 1
+            End If
+            startDate = DateAdd("d", 1, startDate)
+        Next
+
+        numWeekdays = totalDays - WeekendDays
+
+        Return numWeekdays
+    End Function
+
+    Public Function WorkingDays(ByVal startDate As Date, ByVal endDate As Date) As List(Of Date)
+        Dim wDays As New List(Of Date)
+        Dim totalDays As Integer
+
+        totalDays = DateDiff(DateInterval.Day, startDate, endDate) + 1
+
+        For i As Integer = 1 To totalDays
+            Dim isWeekend As Boolean = False
+            If startDate.DayOfWeek = DayOfWeek.Sunday Then
+                isWeekend = True
+            ElseIf startDate.DayOfWeek = DayOfWeek.Saturday Then
+                isWeekend = True
+            End If
+            If Not isWeekend Then
+                wDays.Add(startDate)
+            End If
+            startDate = DateAdd("d", 1, startDate)
+        Next
+        Return wDays
+    End Function
 End Module

@@ -90,8 +90,7 @@ Class SalaryPage
 
         Dim leaveApp As LeaveApplicationsTableRow 'declaring leave application row
         For Each row As LeaveApplicationsTableRow In tblLeaveApplicationAdapter.GetData.Select("EmpID = " & employee.ID) 'for each application from the database
-            If row.LeaveFrom.Date >= fromDate And row.LeaveFrom <= toDate Or _
-                 row.LeaveTo.Date >= fromDate And row.LeaveTo <= toDate Then 'if the application's start or end date is between the selected dates
+            If row.LeaveFrom.Date <= toDate.Date And row.LeaveTo >= fromDate Then 'if the application range overlaps with current leave
                 leaveApp = row 'selects the application
                 Exit For 'stops the loop
             End If
@@ -140,7 +139,6 @@ Class SalaryPage
                     Exit For
                 End If
             Next
-
         Next
 
         If lates < 0 Then
@@ -160,48 +158,4 @@ Class SalaryPage
 
 
     End Sub
-
-    Public Shared Function Weekdays(ByVal startDate As Date, ByVal endDate As Date) As Integer
-        Dim numWeekdays As Integer
-        Dim totalDays As Integer
-        Dim WeekendDays As Integer
-        numWeekdays = 0
-        WeekendDays = 0
-
-        totalDays = DateDiff(DateInterval.Day, startDate, endDate) + 1
-        For i As Integer = 1 To totalDays
-            If DatePart(DateInterval.Weekday, startDate) = 1 Then
-                WeekendDays = WeekendDays + 1
-            End If
-            If DatePart(DateInterval.Weekday, startDate) = 7 Then
-                WeekendDays = WeekendDays + 1
-            End If
-            startDate = DateAdd("d", 1, startDate)
-        Next
-
-        numWeekdays = totalDays - WeekendDays
-
-        Return numWeekdays
-    End Function
-
-    Public Shared Function WorkingDays(ByVal startDate As Date, ByVal endDate As Date) As List(Of Date)
-        Dim wDays As New List(Of Date)
-        Dim totalDays As Integer
-
-        totalDays = DateDiff(DateInterval.Day, startDate, endDate) + 1
-
-        For i As Integer = 1 To totalDays
-            Dim isWeekend As Boolean = False
-            If startDate.DayOfWeek = DayOfWeek.Sunday Then
-                isWeekend = True
-            ElseIf startDate.DayOfWeek = DayOfWeek.Saturday Then
-                isWeekend = True
-            End If
-            If Not isWeekend Then
-                wDays.Add(startDate)
-            End If
-            startDate = DateAdd("d", 1, startDate)
-        Next
-        Return wDays
-    End Function
 End Class
