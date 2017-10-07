@@ -140,7 +140,7 @@ Class SalaryPage
                     Exit For
                 End If
             Next
-            
+
         Next
 
         If lates < 0 Then

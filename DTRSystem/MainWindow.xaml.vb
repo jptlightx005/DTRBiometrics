@@ -1,4 +1,5 @@
-﻿Class MainWindow 
+﻿Imports SMSCSFuncs
+Class MainWindow
     Dim employeeTab As TabItem
     Dim payrollTab As TabItem
     Dim reportsTab As TabItem
@@ -11,7 +12,7 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        
+
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         Dim dtrWindow As New DTRBiometricWindow
@@ -61,9 +62,10 @@
         End If
         tab_panels.SelectedItem = payrollTab
     End Sub
-    Private Function NewTab(ByRef pg As Page, header As String) As TabItem
-        Dim tab As New TabItem
-        tab.Header = header
+    Private Function NewTab(ByRef pg As Page, header As String) As ClosableTab
+        Dim tab As New SMSCSFuncs.ClosableTab
+        tab.Title = header
+        AddHandler tab.OnTabClose, AddressOf Me.Tab_Closed
 
         Dim frm As New Frame
         frm.Content = pg
@@ -74,5 +76,20 @@
 
         Return tab
     End Function
-
+    Sub Tab_Closed(sender As Object, e As EventArgs)
+        If sender Is employeeTab Then
+            employeeTab = Nothing
+        ElseIf sender Is payrollTab Then
+            payrollTab = Nothing
+        ElseIf sender Is reportsTab Then
+            reportsTab = Nothing
+        ElseIf sender Is leaveTab Then
+            leaveTab = Nothing
+        ElseIf sender Is adminTab Then
+            adminTab = Nothing
+        Else
+            Debug.Print("Tab not found!")
+        End If
+     
+    End Sub
 End Class
