@@ -1,4 +1,5 @@
-﻿Class DTRReportsPage
+﻿Imports SMSCSFuncs
+Class DTRReportsPage
 
     Public Sub New()
 

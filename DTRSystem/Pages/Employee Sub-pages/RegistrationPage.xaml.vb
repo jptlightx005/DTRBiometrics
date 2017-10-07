@@ -41,7 +41,6 @@ Class RegistrationPage
         grdEmployee.DataContext = employeeRow
 
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
-        cmbDesignation.ItemsSource = tblDesgAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
@@ -110,5 +109,10 @@ Class RegistrationPage
             imgEmpPicture.Source = New BitmapImage(New Uri(fileDialog.FileName))
             imageFileName = fileDialog.FileName
         End If
+    End Sub
+
+    Private Sub cmbDepartment_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDepartment.SelectionChanged
+        Dim filter = String.Format("DeptID = {0} ", cmbDepartment.SelectedValue)
+        cmbDesignation.ItemsSource = tblDesgAdapter.GetData.Select(filter)
     End Sub
 End Class

@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:SMSCSFuncs="clr-namespace:SMSCSFuncs;assembly=DTRFuncs"
       mc:Ignorable="d" 
       Title="ReportsPage">
     <Grid Margin="0">
@@ -25,7 +26,7 @@
                 <DataGridTextColumn Binding="{Binding TimeOutAM, StringFormat=\{0:hh:mm tt\}}" Header="Time out AM" />
                 <DataGridTextColumn Binding="{Binding TimeInPM, StringFormat=\{0:hh:mm tt\}}" Header="Time in PM" />
                 <DataGridTextColumn Binding="{Binding TimeOutPM, StringFormat=\{0:hh:mm tt\}}" Header="Time out PM" />
-                <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Hours" />
+                <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Minutes" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>

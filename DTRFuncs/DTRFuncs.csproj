@@ -53,6 +53,7 @@
       <DependentUpon>CloseableHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Closable Tab\ClosableTab.cs" />
+    <Compile Include="MathConverter.cs" />
     <Compile Include="webbrowser_extension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
