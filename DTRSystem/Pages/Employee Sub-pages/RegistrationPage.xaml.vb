@@ -17,6 +17,8 @@ Class RegistrationPage
         txtFName.Text = ""
         txtMName.Text = ""
         txtLName.Text = ""
+        cmbSalaryGrade.SelectedIndex = -1
+        cmbStepGrade.SelectedIndex = -1
         lblStatus.Content = "No Fingerprint Enrolled"
 
         regPage_Initialized(Me, New EventArgs)
@@ -77,8 +79,6 @@ Class RegistrationPage
             Catch ex As Exception
                 MsgBox("Registration failed! Error 1", vbInformation)
             End Try
-        Else
-            MsgBox("Registration Failed! One or more required fields is empty!", vbExclamation)
         End If
     End Sub
 
@@ -91,14 +91,53 @@ Class RegistrationPage
         End If
     End Sub
     Function ValidateFields() As Boolean
-        Dim isValid As Boolean = True
-        Dim i As Integer = 0
 
-        isValid = isValid And txtFName.Text.Length > 0
-        isValid = isValid And txtMName.Text.Length > 0
-        isValid = isValid And txtLName.Text.Length > 0
-        isValid = isValid And cmbEmpType.Text.Length > 0
-        Return isValid
+
+        If txtFName.Text.Length = 0 Then
+            MsgBox("Must fill up First Name!", vbExclamation)
+            Return False
+        End If
+
+        If txtMName.Text.Length = 0 Then
+            MsgBox("Must fill up Middle Name!", vbExclamation)
+            Return False
+        End If
+
+        If txtLName.Text.Length = 0 Then
+            MsgBox("Must fill up Last Name!", vbExclamation)
+            Return False
+        End If
+
+        If cmbEmpType.Text.Length = 0 Then
+            MsgBox("Must fill up Employment Type!", vbExclamation)
+            Return False
+        End If
+
+        If cmbDepartment.SelectedIndex < 0 Then
+            MsgBox("Must select Department!", vbExclamation)
+            Return False
+        End If
+
+        If cmbDesignation.SelectedIndex < 0 Then
+            MsgBox("Must select Designation!", vbExclamation)
+            Return False
+        End If
+
+        If cmbSalaryGrade.SelectedIndex < 0 Then
+            MsgBox("Must select Salary Grade!", vbExclamation)
+            Return False
+        End If
+
+        If cmbStepGrade.SelectedIndex < 0 Then
+            MsgBox("Must select Step Grade!", vbExclamation)
+            Return False
+        End If
+
+        If Not hasFingerPrint Then
+            MsgBox("Must register a fingerprint first!", vbExclamation)
+            Return False
+        End If
+        Return True
     End Function
 
     Private Sub btnBrowse_Click(sender As Object, e As RoutedEventArgs) Handles btnBrowse.Click
