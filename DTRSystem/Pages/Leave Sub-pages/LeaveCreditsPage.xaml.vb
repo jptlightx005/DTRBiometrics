@@ -55,32 +55,62 @@ Class LeaveCreditsPage
         sickcredits.Text = sickleavecredits
         dateupdated.Text = date_modified
 
-        leaveCreditsDataGrid.ItemsSource = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & employee.ID)
+        vcDataGrid.ItemsSource = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & employee.ID & " AND (VC_Balance <> 0.00 OR VC_Earned <> 0.00 OR VC_Used <> 0.00)")
+        scDataGrid.ItemsSource = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & employee.ID & " AND (SC_Balance <> 0.00 OR SC_Earned <> 0.00 OR SC_Used <> 0.00)")
     End Sub
 
     Private Sub btnAddCredit_Click(sender As Object, e As RoutedEventArgs) Handles btnAddCredit.Click
-        Dim dataTable = New LeaveCreditsTableDataTable
-        Dim lctransaction As LeaveCreditsTableRow = dataTable.NewRow
-        lctransaction.EmpID = employee.ID
+        If ValidateFields() Then
+            Dim dataTable = New LeaveCreditsTableDataTable
+            Dim lctransaction As LeaveCreditsTableRow = dataTable.NewRow
+            lctransaction.EmpID = employee.ID
 
-        Dim credit = Decimal.Parse(txtCredits.Text)
-        lctransaction.VC_Earned = credit
-        lctransaction.VC_Used = 0
-        lctransaction.VC_Balance = lctransaction.VC_Earned + vacleavecredits
+            Dim credit = Decimal.Parse(txtCredits.Text)
+            lctransaction.VC_Earned = credit
+            lctransaction.VC_Used = 0
+            lctransaction.VC_Balance = lctransaction.VC_Earned + vacleavecredits
 
-        lctransaction.SC_Earned = credit
-        lctransaction.SC_Used = 0
-        lctransaction.SC_Balance = lctransaction.SC_Earned + sickleavecredits
+            lctransaction.SC_Earned = credit
+            lctransaction.SC_Used = 0
+            lctransaction.SC_Balance = lctransaction.SC_Earned + sickleavecredits
 
-        lctransaction.DateOfTransaction = Now
+            lctransaction.DateOfTransaction = Now
+            lctransaction.Remarks = txtRemarks.Text
 
-        dataTable.Rows.Add(lctransaction)
+            Debug.Print("should appear: {0}", lctransaction.Remarks)
+            dataTable.Rows.Add(lctransaction)
 
-        If tblLeaveCreditsAdapter.Update(dataTable) = 1 Then
-            MsgBox("Successfully added credits!", vbInformation)
-            GetTotalCredits(employee)
-        Else
-            MsgBox("Failed to add!", vbInformation)
+            If tblLeaveCreditsAdapter.Update(dataTable) = 1 Then
+                MsgBox("Successfully added credits!", vbInformation)
+                GetTotalCredits(employee)
+                txtCredits.Text = 0
+                txtRemarks.Text = ""
+            Else
+                MsgBox("Failed to add!", vbInformation)
+            End If
         End If
     End Sub
+
+    Function ValidateFields() As Boolean
+        Dim d As Decimal
+
+        If employee Is Nothing Then
+            MsgBox("Select employee first!", vbExclamation)
+            Return False
+        End If
+        If txtCredits.Text = "" Then
+            MsgBox("Credits must not be empty!", vbExclamation)
+            Return False
+        End If
+        If Not Decimal.TryParse(txtCredits.Text, d) Then
+            MsgBox("Invalid decimal input!", vbExclamation)
+            Return False
+        End If
+
+        If d <= 0 Then
+            MsgBox("Invalid credit input! Must be more than 0", vbExclamation)
+            Return False
+        End If
+        Return True
+    End Function
 End Class

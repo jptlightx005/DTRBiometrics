@@ -10,3 +10,9 @@ Namespace DTRDataSetTableAdapters
     Partial Public Class EmployeeTableAdapter
     End Class
 End Namespace
+
+Namespace DTRDataSetTableAdapters
+
+    Partial Public Class LeaveCreditsTableAdapter
+    End Class
+End Namespace
