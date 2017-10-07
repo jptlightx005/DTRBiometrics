@@ -14,7 +14,7 @@
 
         <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,10,0,0">
-            <TextBlock x:Name="employee_name" Text="{Binding first_name}" TextDecorations="Underline"/>
+            <TextBlock x:Name="employee_name" Text="{Binding full_name}" TextDecorations="Underline"/>
         </Label>
         <Label Content="Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="263,10,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="312,10,0,0">

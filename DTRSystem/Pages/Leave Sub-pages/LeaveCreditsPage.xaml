@@ -27,7 +27,7 @@
         <Button x:Name="btnAddCredit" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="549,217,0,0"/>
         <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,10,0,0">
-            <TextBlock x:Name="employee_name" Text="{Binding Path=first_name}" TextDecorations="Underline"/>
+            <TextBlock x:Name="employee_name" Text="{Binding Path=full_name}" TextDecorations="Underline"/>
         </Label>
         <Label Content="Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,41,0,0"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,41,0,0">

@@ -23,6 +23,10 @@ Class SalaryPage
 
                 lblMonthlyRate.Content = "P " & employeeSalary.ToString("N")
                 lblKinsenas.Content = "P " & (employeeSalary / 2).ToString("N")
+
+                If Not fromPicker.SelectedDate Is Nothing And Not toPicker.SelectedDate Is Nothing Then
+                    CalculateTime(fromPicker.SelectedDate, toPicker.SelectedDate)
+                End If
             Else
                 MsgBox("Employee is not found", vbExclamation)
             End If
@@ -41,7 +45,7 @@ Class SalaryPage
         payslipWindow.basicPay = partialSalary
 
         payslipWindow.withholding = Double.Parse(txtWithholding.Text)
-        payslipWindow.misc = Double.Parse(txtSSS.Text) + Double.Parse(txtPhilhealth.Text) + Double.Parse(txtPagibig.Text)
+        payslipWindow.misc = Double.Parse(txtGSIS.Text)
         payslipWindow.tardiness = lates * ratePerMinute 'to be calculated
         payslipWindow.leaves = awols * ratePerMinute
 
@@ -55,6 +59,11 @@ Class SalaryPage
     Private Sub toPicker_SelectedDateChanged(sender As Object, e As SelectionChangedEventArgs) Handles toPicker.SelectedDateChanged
         Dim fromDate = fromPicker.SelectedDate.Value 'date from selected
         Dim toDate = toPicker.SelectedDate.Value 'date to selected
+        CalculateTime(fromDate, toDate)
+    End Sub
+
+    Sub CalculateTime(fromDate As Date, toDate As Date)
+        
         Dim filter As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromDate, toDate) 'filter to get logs between fromdate and todate
         Dim rows = tblLogAdapter.GetEmployeeTableLog(employee.ID).Select(filter) 'gets the rows using the above filter
 
@@ -82,8 +91,6 @@ Class SalaryPage
 
         Next
         absences.AddRange(wDays) 'adds the working days left from the array into the absences array
-
-
 
         'leaves counting
         Dim leaves As New List(Of Date) 'initializes leaves array
@@ -116,8 +123,6 @@ Class SalaryPage
                 Next
             Next
         End If
-
-
 
         'lates calculations
         Debug.Print("Lates before: {0}", lates)
@@ -155,7 +160,5 @@ Class SalaryPage
         lblPeriod.Content = String.Format("{0} {1}-{2}", MonthName(fromDate.Month), fromDate.Day, toDate.Day)
         lblHoursWorked.Content = (workedTime / 60).ToString("0.00") & " hrs"
         lblHoursOfWork.Content = (totalTime / 60) & " hrs"
-
-
     End Sub
 End Class

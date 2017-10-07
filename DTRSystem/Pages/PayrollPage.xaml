@@ -21,7 +21,7 @@
             </TreeViewItem>
         </TreeView>
 
-        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="first_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
         <Grid Margin="141,37,10,10">
             <Frame x:Name="payrollFrame" Content="" NavigationUIVisibility="Hidden"/>
         </Grid>
