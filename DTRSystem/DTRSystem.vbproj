@@ -119,6 +119,9 @@
     <Compile Include="Windows\DTRReportWebWindow.xaml.vb">
       <DependentUpon>DTRReportWebWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PayrollReportWindow.xaml.vb">
+      <DependentUpon>PayrollReportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PayslipWindow.xaml.vb">
       <DependentUpon>PayslipWindow.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\DTRReportWebWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PayrollReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,6 +418,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MonthlyReports\MonthlyReportPage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MonthlyReports\PayrollReportPage.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\payroll.png">

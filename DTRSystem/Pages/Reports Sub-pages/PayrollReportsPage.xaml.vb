@@ -171,6 +171,24 @@ Class PayrollReportsPage
     End Sub
 
     Private Sub btnPrint_Click(sender As Object, e As RoutedEventArgs) Handles btnPrint.Click
+        Dim webReportWindow As New PayrollReportWindow
+        Dim departments = tblDeptAdapter.GetData.Select("ID = " & cmbDepartments.SelectedValue)
+        If departments.Count > 0 Then
+            If fromPicker.SelectedDate Is Nothing And toPicker.SelectedDate Is Nothing Then
+                MsgBox("Must select a start and end dates!", vbExclamation)
+                Return
+            End If
 
+            webReportWindow.department = departments(0)
+
+
+            webReportWindow.records = GetPayrollTable(cmbDepartments.SelectedValue, fromPicker.SelectedDate, toPicker.SelectedDate)
+            webReportWindow.fromDate = fromPicker.SelectedDate
+            webReportWindow.toDate = toPicker.SelectedDate
+
+            webReportWindow.ShowDialog()
+        Else
+            MsgBox("Department is not found", vbExclamation)
+        End If
     End Sub
 End Class
