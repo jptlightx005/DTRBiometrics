@@ -89,12 +89,15 @@ Public Class DTRBiometricWindow
         Return vacleavecredits
     End Function
     Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
-        Me.Close()
+        Me.Hide()
         dtrMainWindow.Show()
         dtrMainWindow.Focus()
     End Sub
 
-    Private Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object)
+    Public Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object)
+        'If isRegisteringFingerprint Then
+        '    Return
+        'End If
         Dim sTemp As Object
         Dim ProcessNum As Long
         sTemp = fprintscanner.GetTemplate
@@ -332,7 +335,7 @@ Public Class DTRBiometricWindow
     End Sub
 
     Private Sub ___No_Name__MouseDown(sender As Object, e As MouseButtonEventArgs) Handles ___No_Name_.MouseDown
-       
+
 
     End Sub
 
@@ -340,5 +343,10 @@ Public Class DTRBiometricWindow
         If e.ChangedButton = MouseButton.Left Then
             Me.DragMove()
         End If
+    End Sub
+
+    Private Sub Window_Closing(sender As Object, e As ComponentModel.CancelEventArgs)
+        e.Cancel = True
+        Me.Hide()
     End Sub
 End Class

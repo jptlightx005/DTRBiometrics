@@ -20,4 +20,10 @@
         End If
 
     End Sub
+
+    Private Sub psswBox_KeyDown(sender As Object, e As KeyEventArgs) Handles psswBox.KeyDown, txtUsername.KeyDown
+        If e.Key = Key.Return Then
+            Button_Click(sender, e)
+        End If
+    End Sub
 End Class

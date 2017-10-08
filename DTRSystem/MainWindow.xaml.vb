@@ -18,26 +18,28 @@ Class MainWindow
 
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
-        Dim dtrWindow As New DTRBiometricWindow
+        If dtrBioWindow Is Nothing Then
+            dtrBioWindow = New DTRBiometricWindow
+        End If
 
         If System.Windows.Forms.Screen.AllScreens.Length > 1 Then
             Dim s2 = Screen.AllScreens(1)
             Dim r2 = s2.WorkingArea
-            dtrWindow.Top = r2.Top
-            dtrWindow.Left = r2.Left
-            dtrWindow.Width = r2.Width
-            dtrWindow.Height = r2.Height
+            dtrBioWindow.Top = r2.Top
+            dtrBioWindow.Left = r2.Left
+            dtrBioWindow.Width = r2.Width
+            dtrBioWindow.Height = r2.Height
         End If
 
         If System.Windows.Forms.Screen.AllScreens.Length = 1 Then
-            dtrWindow.WindowStyle = Windows.WindowStyle.SingleBorderWindow
-            dtrWindow.Width = Screen.PrimaryScreen.WorkingArea.Width
-            dtrWindow.Height = Screen.PrimaryScreen.WorkingArea.Height
+            dtrBioWindow.WindowStyle = Windows.WindowStyle.SingleBorderWindow
+            dtrBioWindow.Width = Screen.PrimaryScreen.WorkingArea.Width
+            dtrBioWindow.Height = Screen.PrimaryScreen.WorkingArea.Height
         End If
 
-        dtrWindow.Show()
-        dtrWindow.WindowState = Windows.WindowState.Maximized
-        
+        dtrBioWindow.Show()
+        dtrBioWindow.WindowState = Windows.WindowState.Maximized
+
         'Me.Hide()
     End Sub
 
@@ -111,11 +113,17 @@ Class MainWindow
         Else
             Debug.Print("Tab not found!")
         End If
-     
+
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         Debug.Print("Number of screens: " & System.Windows.Forms.Screen.AllScreens.Length)
         fprintscanner = New ZKFPEngX
+    End Sub
+
+    Private Sub Window_Closed(sender As Object, e As EventArgs)
+        If Not dtrBioWindow Is Nothing Then
+            dtrBioWindow.Close()
+        End If
     End Sub
 End Class

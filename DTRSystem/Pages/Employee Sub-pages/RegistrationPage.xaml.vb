@@ -45,10 +45,12 @@ Class RegistrationPage
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
-        rgFPWindow = New RegFPWindow
-        rgFPWindow.regPage = Me
-        rgFPWindow.ShowDialog()
-
+        If dtrRegWindow Is Nothing Then
+            dtrRegWindow = New RegFPWindow
+            dtrRegWindow.regPage = Me
+        End If
+        dtrRegWindow.ShowDialog()
+        isRegisteringFingerprint = True
     End Sub
 
     Private Sub btnRegister_Click(sender As Object, e As RoutedEventArgs) Handles btnRegister.Click

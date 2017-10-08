@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:DTRSystem" x:Class="DTRBiometricWindow"
     Title="DTRBiometricWindow" Height="768"
-Width="1366" WindowStyle="None" WindowStartupLocation="Manual" Loaded="Window_Loaded" Closed="Window_Closed" MouseDown="Window_MouseDown">
+Width="1366" WindowStyle="None" WindowStartupLocation="Manual" Loaded="Window_Loaded" Closed="Window_Closed" MouseDown="Window_MouseDown" Closing="Window_Closing">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>

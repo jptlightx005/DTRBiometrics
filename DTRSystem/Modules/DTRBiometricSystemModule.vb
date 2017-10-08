@@ -10,7 +10,8 @@ Module DTRBiometricSystemModule
     Public dtrSystemDB As String
 
     Public dtrMainWindow As MainWindow
-    Public rgFPWindow As RegFPWindow
+    Public dtrBioWindow As DTRBiometricWindow
+    Public dtrRegWindow As RegFPWindow
 
     Public WithEvents fprintscanner As ZKFPEngX
 
@@ -25,6 +26,7 @@ Module DTRBiometricSystemModule
     Public tblLeaveApplicationAdapter As New LeaveApplicationsTableAdapter
     Public tblSalaryGradeAdapter As New SalaryGradeTableAdapter
 
+    Public isRegisteringFingerprint As Boolean
     Sub Main()
         applicationPath = AppDomain.CurrentDomain.BaseDirectory
         myDocumentsFolder = My.Computer.FileSystem.SpecialDirectories.MyDocuments
@@ -36,6 +38,7 @@ Module DTRBiometricSystemModule
 
         Dim app As New System.Windows.Application
         app.Run(New LoginWindow)
+        isRegisteringFingerprint = False
     End Sub
 
     Public Sub InitializeDBIfNotExist()

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RegFPWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="RegFP" Height="550" Width="477" Loaded="Window_Loaded" ResizeMode="NoResize" Closed="Window_Closed">
+    Title="RegFP" Height="550" Width="477" Loaded="Window_Loaded" ResizeMode="NoResize" Closed="Window_Closed" Closing="Window_Closing">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
     </Window.Background>

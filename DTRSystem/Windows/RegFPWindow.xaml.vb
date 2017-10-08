@@ -1,4 +1,5 @@
 ﻿Imports ZKFPEngXControl
+
 Imports System.Drawing
 Imports System.Windows.Interop
 Public Class RegFPWindow
@@ -18,6 +19,8 @@ Public Class RegFPWindow
         AddHandler fprintscanner.OnFeatureInfo, AddressOf Me.fp_OnFeatureInfo
         AddHandler fprintscanner.OnEnroll, AddressOf Me.fp_OnEnroll
         AddHandler fprintscanner.OnImageReceived, AddressOf Me.fp_OnImageReceived
+
+        fprintscanner.s
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
@@ -73,9 +76,19 @@ Public Class RegFPWindow
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
+        
+    End Sub
+
+    Private Sub Window_Closing(sender As Object, e As ComponentModel.CancelEventArgs)
+        e.Cancel = True
         If fprintscanner.IsRegister Then
             fprintscanner.CancelEnroll()
         End If
-        fprintscanner.EndEngine()
+        isRegisteringFingerprint = False
+        Me.Hide()
+
+        RemoveHandler fprintscanner.OnFeatureInfo, AddressOf Me.fp_OnFeatureInfo
+        AddHandler fprintscanner.OnEnroll, AddressOf Me.fp_OnEnroll
+        AddHandler fprintscanner.OnImageReceived, AddressOf Me.fp_OnImageReceived
     End Sub
 End Class
