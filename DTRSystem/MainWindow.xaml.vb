@@ -1,4 +1,5 @@
 ﻿Imports SMSCSFuncs
+
 Class MainWindow
     Dim employeeTab As TabItem
     Dim payrollTab As TabItem
@@ -17,7 +18,7 @@ Class MainWindow
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         Dim dtrWindow As New DTRBiometricWindow
         dtrWindow.Show()
-        Me.Hide()
+        'Me.Hide()
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
@@ -94,8 +95,6 @@ Class MainWindow
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        Debug.Print("Try 1: {0}", CreateGenericPassword)
-        Debug.Print("Try 2: {0}", CreateGenericPassword)
-        Debug.Print("Try 3: {0}", CreateGenericPassword)
+       
     End Sub
 End Class
