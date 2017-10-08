@@ -25,10 +25,19 @@ Class MainWindow
             Dim r2 = s2.WorkingArea
             dtrWindow.Top = r2.Top
             dtrWindow.Left = r2.Left
-            dtrWindow.Show()
-
+            dtrWindow.Width = r2.Width
+            dtrWindow.Height = r2.Height
         End If
+
+        If System.Windows.Forms.Screen.AllScreens.Length = 1 Then
+            dtrWindow.WindowStyle = Windows.WindowStyle.SingleBorderWindow
+            dtrWindow.Width = Screen.PrimaryScreen.WorkingArea.Width
+            dtrWindow.Height = Screen.PrimaryScreen.WorkingArea.Height
+        End If
+
         dtrWindow.Show()
+        dtrWindow.WindowState = Windows.WindowState.Maximized
+        
         'Me.Hide()
     End Sub
 

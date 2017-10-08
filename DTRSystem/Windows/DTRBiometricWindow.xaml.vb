@@ -329,4 +329,15 @@ Public Class DTRBiometricWindow
         fp.CancelCapture()
         fp.EndEngine()
     End Sub
+
+    Private Sub ___No_Name__MouseDown(sender As Object, e As MouseButtonEventArgs) Handles ___No_Name_.MouseDown
+       
+
+    End Sub
+
+    Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)
+        If e.ChangedButton = MouseButton.Left Then
+            Me.DragMove()
+        End If
+    End Sub
 End Class
