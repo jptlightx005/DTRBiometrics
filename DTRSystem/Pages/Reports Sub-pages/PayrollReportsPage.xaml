@@ -6,6 +6,17 @@
       mc:Ignorable="d" 
       d:DesignHeight="300"
       Title="PayrollReportsPage" Initialized="Page_Initialized">
+    <Page.Resources>
+        <Style x:Key="DataGridColumnSeparatorStyle" TargetType="DataGridCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="Gray"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
@@ -18,18 +29,20 @@
         <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,61,0,0"/>
         <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
         <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,183" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="payrollDataGrid" Margin="10,91,10,183" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding full_name}" Header="Name" />
                 <DataGridTextColumn Binding="{Binding designation}" Header="Designation" />
-                <DataGridTextColumn Binding="{Binding from, StringFormat=\{0:hh:mm tt\}}" Header="From Date" />
-                <DataGridTextColumn Binding="{Binding to, StringFormat=\{0:hh:mm tt\}}" Header="To Date" />
+                <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
                 <DataGridTextColumn Binding="{Binding monthly, StringFormat=N2}" Header="Monthly Rate" />
                 <DataGridTextColumn Binding="{Binding partial, StringFormat=N2}" Header="Amount Accrued" />
+                <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
                 <DataGridTextColumn Binding="{Binding tax, StringFormat=N2}" Header="Withholding Tax" />
-                <DataGridTextColumn Binding="{Binding gsis, StringFormat=N2}" Header="Government Service Insurance System" />
+                <DataGridTextColumn Binding="{Binding gsis, StringFormat=N2}" Header="GSIS" />
+                <DataGridTextColumn Binding="{Binding others, StringFormat=N2}" Header="Other Deductions" />
                 <DataGridTextColumn Binding="{Binding totaldeductions, StringFormat=N2}" Header="Total Deductions" />
-                <DataGridTextColumn Binding="{Binding netpay}" Header="Net Pay" />
+                <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
+                <DataGridTextColumn Binding="{Binding netpay, StringFormat=N2}" Header="Net Pay" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,-126,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
