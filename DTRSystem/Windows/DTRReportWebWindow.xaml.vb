@@ -3,6 +3,7 @@ Imports SMSCSFuncs
 Imports DTRSystem.DTRDataSet
 Public Class DTRReportWebWindow
     Public employee As EmployeeFullRow
+    Public records As TimelogTableDataTable
     Public Sub New()
 
         ' This call is required by the designer.
@@ -16,8 +17,6 @@ Public Class DTRReportWebWindow
 
     End Sub
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        Dim records = tblLogAdapter.GetEmployeeTableLog(employee.ID)
-
         Dim htmlTable As String = ""
         For Each timeLog In records
 
@@ -33,7 +32,7 @@ Public Class DTRReportWebWindow
             htmlTable += String.Format("<td>{0}</td>", timeOutAM) & vbCrLf
             htmlTable += String.Format("<td>{0}</td>", timeInPM) & vbCrLf
             htmlTable += String.Format("<td>{0}</td>", timeOutPM) & vbCrLf
-            htmlTable += String.Format("<td>{0}</td>", timeLog.TotalTime) & vbCrLf
+            htmlTable += String.Format("<td>{0}</td>", (timeLog.TotalTime / 60.0).ToString("N2")) & vbCrLf
             htmlTable += "</tr>" & vbCrLf
         Next
 
@@ -48,7 +47,7 @@ Public Class DTRReportWebWindow
 
     Function ReturnFormattedDateTimeIfNotNull(obj As Object) As String
         If IsDBNull(obj) Then
-            Return ""
+            Return "--:-- --"
         Else
             Dim newDate As DateTime = obj
             Return newDate.ToString("hh:mm tt")

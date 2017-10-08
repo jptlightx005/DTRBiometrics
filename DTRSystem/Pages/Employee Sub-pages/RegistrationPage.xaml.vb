@@ -17,6 +17,8 @@ Class RegistrationPage
         txtFName.Text = ""
         txtMName.Text = ""
         txtLName.Text = ""
+        cmbSalaryGrade.SelectedIndex = -1
+        cmbStepGrade.SelectedIndex = -1
         lblStatus.Content = "No Fingerprint Enrolled"
 
         regPage_Initialized(Me, New EventArgs)
@@ -31,18 +33,29 @@ Class RegistrationPage
         employeeRow.emp_type = ""
         employeeRow.deptID = 0
         employeeRow.desgID = 0
+        employeeRow.age = 0
+        employeeRow.date_of_birth = Now
+        employeeRow.address = ""
         employeeRow.work_timeb = 0
         employeeRow.work_timee = 0
+        employeeRow.salarygrade = 0
+        employeeRow.stepgrade = 0
         grdEmployee.DataContext = employeeRow
 
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
-        cmbDesignation.ItemsSource = tblDesgAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
         Dim regFP As New RegFPWindow
         regFP.regPage = Me
+        isRegisteringFingerprint = True
+        If isRegisteringFingerprint Then
+            Debug.Print("Should be disabled")
+        Else
+            Debug.Print("dfq is going on")
+        End If
         regFP.ShowDialog()
 
+       
     End Sub
 
     Private Sub btnRegister_Click(sender As Object, e As RoutedEventArgs) Handles btnRegister.Click
@@ -57,24 +70,22 @@ Class RegistrationPage
                 End If
 
                 employeeRow.biometric = File.ReadAllBytes(applicationPath & "\fptemp.tpl")
-                File.Delete(applicationPath & "\fptemp.tpl")
                 employeeRow.work_timeb = 8
                 employeeRow.work_timee = 17
                 employeeRow.picture = image
-
+                employeeRow.salarygrade = cmbSalaryGrade.SelectedIndex + 1
+                employeeRow.stepgrade = cmbStepGrade.SelectedIndex + 1
                 dataTable.Rows.Add(employeeRow)
-
                 If tblEmployeeAdapter.Update(dataTable) = 1 Then
+                    File.Delete(applicationPath & "\fptemp.tpl")
                     MsgBox("Successfully registered!", vbInformation)
                     EmptyBoxes()
                 Else
-                    MsgBox("Registration failed!", vbInformation)
+                    MsgBox("Registration failed! Error 2", vbInformation)
                 End If
             Catch ex As Exception
-                MsgBox("Registration failed!", vbInformation)
+                MsgBox("Registration failed! Error 1", vbInformation)
             End Try
-        Else
-            MsgBox("Registration Failed! One or more required fields is empty!", vbExclamation)
         End If
     End Sub
 
@@ -87,14 +98,51 @@ Class RegistrationPage
         End If
     End Sub
     Function ValidateFields() As Boolean
-        Dim isValid As Boolean = True
-        Dim i As Integer = 0
+        If txtFName.Text.Length = 0 Then
+            MsgBox("Must fill up First Name!", vbExclamation)
+            Return False
+        End If
 
-        isValid = isValid And txtFName.Text.Length > 0
-        isValid = isValid And txtMName.Text.Length > 0
-        isValid = isValid And txtLName.Text.Length > 0
-        isValid = isValid And cmbEmpType.Text.Length > 0
-        Return isValid
+        If txtMName.Text.Length = 0 Then
+            MsgBox("Must fill up Middle Name!", vbExclamation)
+            Return False
+        End If
+
+        If txtLName.Text.Length = 0 Then
+            MsgBox("Must fill up Last Name!", vbExclamation)
+            Return False
+        End If
+
+        If cmbEmpType.Text.Length = 0 Then
+            MsgBox("Must fill up Employment Type!", vbExclamation)
+            Return False
+        End If
+
+        If cmbDepartment.SelectedIndex < 0 Then
+            MsgBox("Must select Department!", vbExclamation)
+            Return False
+        End If
+
+        If cmbDesignation.SelectedIndex < 0 Then
+            MsgBox("Must select Designation!", vbExclamation)
+            Return False
+        End If
+
+        If cmbSalaryGrade.SelectedIndex < 0 Then
+            MsgBox("Must select Salary Grade!", vbExclamation)
+            Return False
+        End If
+
+        If cmbStepGrade.SelectedIndex < 0 Then
+            MsgBox("Must select Step Grade!", vbExclamation)
+            Return False
+        End If
+
+        If Not hasFingerPrint Then
+            MsgBox("Must register a fingerprint first!", vbExclamation)
+            Return False
+        End If
+        Return True
     End Function
 
     Private Sub btnBrowse_Click(sender As Object, e As RoutedEventArgs) Handles btnBrowse.Click
@@ -105,5 +153,20 @@ Class RegistrationPage
             imgEmpPicture.Source = New BitmapImage(New Uri(fileDialog.FileName))
             imageFileName = fileDialog.FileName
         End If
+    End Sub
+
+    Private Sub cmbDepartment_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDepartment.SelectionChanged
+        Dim filter = String.Format("DeptID = {0} ", cmbDepartment.SelectedValue)
+        cmbDesignation.ItemsSource = tblDesgAdapter.GetData.Select(filter)
+    End Sub
+
+    Sub txtBoxDidFocus(sender As Object, e As EventArgs) Handles txtFName.GotFocus, txtMName.GotFocus, txtLName.GotFocus, txtAge.GotFocus, txtAddress.GotFocus
+        Dim txtBox As TextBox = sender
+        txtBox.SelectAll()
+    End Sub
+
+    Private Sub birthDatePicker_SelectedDateChanged(sender As Object, e As SelectionChangedEventArgs) Handles birthDatePicker.SelectedDateChanged
+        Dim age = Math.Floor(Now.Subtract(birthDatePicker.SelectedDate).TotalDays / 365.25)
+        txtAge.Text = age
     End Sub
 End Class

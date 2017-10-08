@@ -5,8 +5,9 @@ Imports System.Threading
 Imports System.Windows.Threading
 
 Imports DTRSystem.DTRDataSet
+Imports DTRSystem.DTRDataSetTableAdapters
 Public Class DTRBiometricWindow
-    Dim WithEvents fp As ZKFPEngX
+    Dim WithEvents fpscanner As ZKFPEngX
     Dim fpHandle As Integer
     Dim idList As List(Of Integer)
     Public otemplate As Object
@@ -16,13 +17,15 @@ Public Class DTRBiometricWindow
     Dim dateTimer As DispatcherTimer
     Dim resetTimer As DispatcherTimer
 
+    Dim vacleavecredits As Double = 0
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        fp = New ZKFPEngX
+        fpscanner = New ZKFPEngX
+
         idList = New List(Of Integer)
         dateTimer = New DispatcherTimer
         AddHandler dateTimer.Tick, AddressOf dateTimer_Tick
@@ -40,19 +43,23 @@ Public Class DTRBiometricWindow
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        fp.SensorIndex = 0
-        If (fp.InitEngine = 0) Then
+        Dim a = fpscanner.InitEngine
+        If a = 0 Then
             imgConnected.Visibility = Windows.Visibility.Visible
             lblConnected.Content = "Device Connected"
         Else
             imgConnected.Visibility = Windows.Visibility.Hidden
             lblConnected.Content = "Device Not Connected"
         End If
-        If fp.IsRegister Then
-            fp.CancelEnroll()
+
+        
+
+        If fpscanner.IsRegister Then
+            Debug.Print("Is a register")
+            fpscanner.CancelEnroll()
         End If
 
-        fpHandle = fp.CreateFPCacheDB
+        fpHandle = fpscanner.CreateFPCacheDB
 
         Dim i = 0
         For Each row In tblEmployeeFullAdapter.GetData
@@ -60,7 +67,7 @@ Public Class DTRBiometricWindow
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
 
-            If fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName) = 1 Then
+            If fpscanner.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName) = 1 Then
                 Debug.Print("Succesfully loaded {0}'s biometric...", row.first_name)
                 idList.Add(row.ID)
                 i += 1
@@ -68,21 +75,38 @@ Public Class DTRBiometricWindow
             File.Delete(fileName)
         Next
     End Sub
+    Public Function GetTotalCredits(emp As EmployeeFullRow) As Double
+        Dim leaveCreditTransactions = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & emp.ID)
+        vacleavecredits = 0
+        For Each lctransac As LeaveCreditsTableRow In leaveCreditTransactions
+            Dim vc_earned = lctransac.VC_Earned
+            Dim vc_used = lctransac.VC_Used
+            Dim vc_bal = lctransac.VC_Balance
 
+            vacleavecredits += vc_earned - vc_used
+            Debug.Print("Is v equal {0} == {1}", vacleavecredits, vc_bal)
+        Next
+        Return vacleavecredits
+    End Function
     Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
-        Me.Close()
+        Me.Hide()
         dtrMainWindow.Show()
         dtrMainWindow.Focus()
     End Sub
 
-    Private Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object) Handles fp.OnCapture
+    Private Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object) Handles fpscanner.OnCapture
+        Debug.Print("is capturing from dtr biometrics window")
+        If isRegisteringFingerprint Then
+            Debug.Print("is registering")
+            Return
+        End If
         Dim sTemp As Object
         Dim ProcessNum As Long
-        sTemp = fp.GetTemplate
+        sTemp = fpscanner.GetTemplate
 
         Dim score = 8
         'Selects the ID of the Employee in the ID Lists
-        Dim fi = fp.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
+        Dim fi = fpscanner.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
 
         Dim beep As New Thread(Sub()
                                    Console.Beep(750, 500)
@@ -129,7 +153,7 @@ Public Class DTRBiometricWindow
                 If Not timeLogFound Is Nothing Then
 
 
-                    If Now.TimeOfDay >= New TimeSpan(6, 0, 0) And Now.TimeOfDay < New TimeSpan(13, 0, 0) Then
+                    If Now.TimeOfDay >= New TimeSpan(6, 0, 0) And Now.TimeOfDay < New TimeSpan(12, 30, 0) Then
                         If IsDBNull(timeLogFound("TimeInAM")) Then
                             timeLogFound.TimeInAM = DateTime.Now
                         Else
@@ -141,19 +165,64 @@ Public Class DTRBiometricWindow
                                     timeLogFound.TimeOutAM = DateTime.Now
 
                                     'TimeCalculation
-                                    'If Not IsDBNull(timeLogFound("timeinpm")) Then
-                                    '    Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
-                                    '    timeLogFound.TotalTime += total.TotalHours
-                                    'End If
+                                    If Not IsDBNull(timeLogFound("TimeInAM")) Then
+                                        Dim timeBegin = timeLogFound.TimeInAM
+                                        If timeBegin.TimeOfDay < New TimeSpan(8, 0, 0) Then
+                                            Dim a = Now.ToString("dd/MM/yyyy")
+                                            a = a + " 08:00 AM" ' 10/04/2017 08:00 AM
+                                            timeBegin = DateTime.Parse(a)
+                                        End If
+
+                                        Dim timeEnd = Now
+                                        If Now.TimeOfDay > New TimeSpan(17, 0, 0) Then
+                                            Dim a = Now.ToString("dd/MM/yyyy")
+                                            a = a + " 12:00 PM" ' 10/04/2017 12:00 PM
+                                            timeEnd = DateTime.Parse(a)
+                                        End If
+                                        Debug.Print("AM: Begin: {0}", timeBegin.ToString)
+                                        Debug.Print("AM: End: {0}", timeEnd.ToString)
+                                        Dim total As TimeSpan = timeEnd - timeBegin
+                                        timeLogFound.TotalTime += total.TotalMinutes
+
+                                        If total.TotalMinutes < 240 Then
+                                            'calculate leave
+                                            Dim lateMinutes As TimeSpan = New TimeSpan(0, 240, 0) - total
+
+                                            Dim lcDataTable = New LeaveCreditsTableDataTable
+                                            Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
+
+                                            Dim creditsToBeFuckingDeducted = Math.Round(lateMinutes.TotalMinutes) / 480
+                                            Debug.Print("{0} / 480", Math.Round(lateMinutes.TotalMinutes))
+                                            Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
+                                            lctransaction.EmpID = employeeFound.ID
+                                            lctransaction.Remarks = "Late"
+                                            lctransaction.VC_Earned = 0
+                                            lctransaction.VC_Used = creditsToBeFuckingDeducted
+                                            lctransaction.VC_Balance = GetTotalCredits(employeeFound) - creditsToBeFuckingDeducted
+
+                                            lctransaction.SC_Earned = 0
+                                            lctransaction.SC_Used = 0
+                                            lctransaction.SC_Balance = 0
+
+                                            lctransaction.DateOfTransaction = Now
+
+                                            lcDataTable.Rows.Add(lctransaction)
+
+                                            If tblLeaveCreditsAdapter.Update(lcDataTable) = 1 Then
+                                                Debug.Print("Successfully added credits!", vbInformation)
+                                            Else
+                                                Debug.Print("Failed to add!", vbInformation)
+                                            End If
+                                        End If
+                                    End If
                                 Else
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutAM"))
                                 End If
-
                             End If
                         End If
 
                         'PM IN 1PM-5PM
-                    ElseIf Now.TimeOfDay >= New TimeSpan(13, 0, 0) And Now.TimeOfDay < New TimeSpan(21, 0, 0) Then
+                    ElseIf Now.TimeOfDay >= New TimeSpan(12, 30, 0) And Now.TimeOfDay < New TimeSpan(21, 0, 0) Then
                         If IsDBNull(timeLogFound("TimeInPM")) Then
                             timeLogFound.TimeInPM = DateTime.Now
                         Else
@@ -165,10 +234,67 @@ Public Class DTRBiometricWindow
                                     timeLogFound.TimeOutPM = DateTime.Now
 
                                     'TimeCalculation
-                                    'If Not IsDBNull(timeLogFound("timeinpm")) Then
-                                    '    Dim total As TimeSpan = timeLogFound.TimeOutPM - timeLogFound.TimeInPM
-                                    '    timeLogFound.TotalTime += total.TotalHours
-                                    'End If
+                                    If Not IsDBNull(timeLogFound("TimeInPM")) Then
+                                        Dim timeBegin = timeLogFound.TimeInPM
+                                        If timeBegin.TimeOfDay < New TimeSpan(13, 0, 0) Then
+                                            Dim a = Now.ToString("dd/MM/yyyy")
+                                            a = a + " 01:00 PM" ' 10/04/2017 01:00 PM
+                                            timeBegin = DateTime.ParseExact(a, "dd/MM/yyyy hh:mm tt", Nothing)
+                                        End If
+
+                                        Dim timeEnd = Now
+                                        If Now.TimeOfDay > New TimeSpan(17, 0, 0) Then
+                                            Dim a = Now.ToString("dd/MM/yyyy")
+                                            a = a + " 05:00 PM" ' 10/04/2017 05:00 PM
+
+                                            Debug.Print("Nice try: {0}", a)
+                                            timeEnd = DateTime.ParseExact(a, "dd/MM/yyyy hh:mm tt", Nothing)
+                                        End If
+                                        Debug.Print("PM: Begin: {0}", timeBegin.ToString)
+                                        Debug.Print("PM: End: {0}", timeEnd.ToString)
+                                        Dim total As TimeSpan = timeEnd - timeBegin
+                                        Debug.Print("Test: {0}", total.TotalMinutes)
+                                        Debug.Print("Meh: {0}", total)
+
+                                        Dim minutes = 240
+                                        If timeLogFound.TotalTime = 0 Then
+                                            minutes = 480
+                                        End If
+                                        timeLogFound.TotalTime += total.TotalMinutes
+
+                                        If total.TotalMinutes < 240 Then
+                                            'calculate leave
+
+                                            Dim lateMinutes As TimeSpan = New TimeSpan(0, minutes, 0) - total
+
+                                            Dim lcDataTable = New LeaveCreditsTableDataTable
+                                            Dim lctransaction As LeaveCreditsTableRow = lcDataTable.NewRow
+
+                                            Dim creditsToBeFuckingDeducted = Math.Round(lateMinutes.TotalMinutes) / 480
+                                            Debug.Print("{0} / 480", Math.Round(lateMinutes.TotalMinutes))
+                                            Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
+                                            Debug.Print("Employee has: {0} credits", GetTotalCredits(employeeFound))
+                                            lctransaction.EmpID = employeeFound.ID
+                                            lctransaction.Remarks = "Late"
+                                            lctransaction.VC_Earned = 0
+                                            lctransaction.VC_Used = creditsToBeFuckingDeducted
+                                            lctransaction.VC_Balance = GetTotalCredits(employeeFound) - creditsToBeFuckingDeducted
+
+                                            lctransaction.SC_Earned = 0
+                                            lctransaction.SC_Used = 0
+                                            lctransaction.SC_Balance = 0
+
+                                            lctransaction.DateOfTransaction = Now
+
+                                            lcDataTable.Rows.Add(lctransaction)
+
+                                            If tblLeaveCreditsAdapter.Update(lcDataTable) = 1 Then
+                                                Debug.Print("Successfully added credits!", vbInformation)
+                                            Else
+                                                Debug.Print("Failed to add!", vbInformation)
+                                            End If
+                                        End If
+                                    End If
                                 Else
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutPM"))
                                 End If
@@ -206,7 +332,18 @@ Public Class DTRBiometricWindow
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
-        fp.CancelCapture()
-        fp.EndEngine()
+        fpscanner.CancelCapture()
+        fpscanner.EndEngine()
+    End Sub
+
+    Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)
+        If e.ChangedButton = MouseButton.Left Then
+            Me.DragMove()
+        End If
+    End Sub
+
+    Private Sub Window_Closing(sender As Object, e As ComponentModel.CancelEventArgs)
+        e.Cancel = True
+        Me.Hide()
     End Sub
 End Class

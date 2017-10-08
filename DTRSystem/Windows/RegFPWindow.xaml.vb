@@ -1,4 +1,5 @@
 ﻿Imports ZKFPEngXControl
+
 Imports System.Drawing
 Imports System.Windows.Interop
 Public Class RegFPWindow
@@ -16,7 +17,6 @@ Public Class RegFPWindow
 
         ' Add any initialization after the InitializeComponent() call.
         fp = New ZKFPEngX
-
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
@@ -34,6 +34,11 @@ Public Class RegFPWindow
     End Sub
 
     Private Sub fp_OnFeatureInfo(ByVal AQuality As Long) Handles fp.OnFeatureInfo
+        Debug.Print("is still active from fp window")
+        If Not isRegisteringFingerprint Then
+            Debug.Print("but will not continue executing")
+            Return
+        End If
         Dim sTemp As String
 
         sTemp = ""
@@ -49,6 +54,11 @@ Public Class RegFPWindow
     End Sub
 
     Private Sub fp_OnEnroll(ByVal ActionResult As Boolean, ByVal aTemplate As Object) Handles fp.OnEnroll
+        Debug.Print("is still active from fp window")
+        If Not isRegisteringFingerprint Then
+            Debug.Print("but will not continue executing")
+            Return
+        End If
         If Not ActionResult Then
             MsgBox("Registration failed!", vbExclamation)
         Else
@@ -63,6 +73,11 @@ Public Class RegFPWindow
     End Sub
 
     Private Sub fp_OnImageReceived(ByRef AImageValid As Boolean) Handles fp.OnImageReceived
+        Debug.Print("is still active from fp window")
+        If Not isRegisteringFingerprint Then
+            Debug.Print("but will not continue executing")
+            Return
+        End If
         Dim myHandle As IntPtr = New WindowInteropHelper(Me).Handle
         Dim myGraphics As Graphics = Graphics.FromHwnd(myHandle)
         Dim x = (Me.Width / 2) - (fp.ImageWidth / 2)
@@ -74,7 +89,11 @@ Public Class RegFPWindow
     Private Sub Window_Closed(sender As Object, e As EventArgs)
         If fp.IsRegister Then
             fp.CancelEnroll()
+            fp.CancelCapture()
         End If
-        fp.EndEngine()
+        isRegisteringFingerprint = False
+        If Not isRegisteringFingerprint Then
+            Debug.Print("Will now be enabled")
+        End If
     End Sub
 End Class

@@ -1,0 +1,87 @@
+﻿<Page x:Name="leavePage" x:Class="LeaveCreditsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d"
+      d:DesignHeight="500" d:DesignWidth="1280"
+      Title="LeavePage">
+    <Page.Resources>
+        <Style x:Key="DataGridColumnSeparatorStyle" TargetType="DataGridCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="Gray"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid x:Name="grdLeave">
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
+        <Label Content="Leave Credits" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,10,0,0"/>
+        <TextBox x:Name="txtCredits" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="299,36,0,0" Text="0"/>
+        <Button x:Name="btnAddCredit" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="549,217,0,0"/>
+        <Label Content="Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,10,0,0">
+            <TextBlock x:Name="employee_name" Text="{Binding Path=full_name}" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,41,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,41,0,0">
+            <TextBlock Text="{Binding Source={x:Static sys:DateTime.Today},   
+       StringFormat='{}{0:MMMM dd, yyyy}'}" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,70,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,70,0,0">
+            <TextBlock x:Name="employee_type" Text="{Binding Path=emp_type}" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Designation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,100,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,100,0,0">
+            <TextBlock x:Name="designation" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Department:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,130,0,0">
+            <TextBlock x:Name="deparment" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Vacation Leave Credits:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,161,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="147,161,0,0">
+            <TextBlock x:Name="vacationcredits" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Sick Leave Credits:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,187,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="147,187,0,0">
+            <TextBlock x:Name="sickcredits" TextDecorations="Underline"/>
+        </Label>
+        <Label Content="Date Modified:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,213,0,0"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,213,0,0">
+            <TextBlock x:Name="dateupdated" TextDecorations="Underline"/>
+        </Label>
+
+        <StackPanel Margin="20,244,10,10" Orientation="Horizontal">
+                <DataGrid x:Name="vcDataGrid" Background="White" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,10,0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding DateOfTransaction, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
+                        <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
+                        <DataGridTextColumn Binding="{Binding VC_Earned}" Header="Vacation Leave Earned" />
+                        <DataGridTextColumn Binding="{Binding VC_Used}" Header="Vacation Abs. Und. W/P" />
+                        <DataGridTextColumn Binding="{Binding VC_Balance}" Header="BALANCE" />
+                        <DataGridTextColumn Binding="{Binding RemarksV2, FallbackValue=N/A}" Header="Remarks" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            <DataGrid x:Name="scDataGrid"  Background="White" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding DateOfTransaction, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
+                    <DataGridTemplateColumn MinWidth="0" Width="2" CellStyle="{StaticResource DataGridColumnSeparatorStyle}"/>
+                    <DataGridTextColumn Binding="{Binding SC_Earned}" Header="Sick Leave Earned" />
+                    <DataGridTextColumn Binding="{Binding SC_Used}" Header="Sick Leave Abs. Und. W/P" />
+                    <DataGridTextColumn Binding="{Binding SC_Balance}" Header="BALANCE" />
+                    <DataGridTextColumn Binding="{Binding RemarksV2, FallbackValue=N/A}" Header="Remarks" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <Label Content="Remarks" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,59,0,0"/>
+        <TextBox x:Name="txtRemarks" HorizontalAlignment="Left" Height="127" TextWrapping="Wrap" VerticalAlignment="Top" Width="325" Margin="299,85,0,0"/>
+    </Grid>
+</Page>

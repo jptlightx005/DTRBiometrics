@@ -1,10 +1,13 @@
-﻿Class MainWindow 
-    Dim registrationTab As TabItem
+﻿
+Imports SMSCSFuncs
+Imports System.Windows.Forms
+
+Class MainWindow
     Dim employeeTab As TabItem
+    Dim payrollTab As TabItem
     Dim reportsTab As TabItem
     Dim leaveTab As TabItem
-    Dim departmentTab As TabItem
-    Dim designationTab As TabItem
+    Dim adminTab As TabItem
 
     Public Sub New()
 
@@ -12,12 +15,32 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-
+        isRegisteringFingerprint = False
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
-        Dim dtrWindow As New DTRBiometricWindow
-        dtrWindow.Show()
-        Me.Hide()
+        If dtrBioWindow Is Nothing Then
+            dtrBioWindow = New DTRBiometricWindow
+        End If
+
+        If System.Windows.Forms.Screen.AllScreens.Length > 1 Then
+            Dim s2 = Screen.AllScreens(1)
+            Dim r2 = s2.WorkingArea
+            dtrBioWindow.Top = r2.Top
+            dtrBioWindow.Left = r2.Left
+            dtrBioWindow.Width = r2.Width
+            dtrBioWindow.Height = r2.Height
+        End If
+
+        If System.Windows.Forms.Screen.AllScreens.Length = 1 Then
+            dtrBioWindow.WindowStyle = Windows.WindowStyle.SingleBorderWindow
+            dtrBioWindow.Width = Screen.PrimaryScreen.WorkingArea.Width
+            dtrBioWindow.Height = Screen.PrimaryScreen.WorkingArea.Height
+        End If
+
+        dtrBioWindow.Show()
+        dtrBioWindow.WindowState = Windows.WindowState.Maximized
+
+        'Me.Hide()
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
@@ -26,8 +49,7 @@
 
     Private Sub tlbrEmployee_Click(sender As Object, e As RoutedEventArgs) Handles tlbrEmployee.Click
         If employeeTab Is Nothing Then
-            Dim empPage As New EmployeeInformationPage
-
+            Dim empPage As New EmployeePage
             employeeTab = NewTab(empPage, "Employee")
         End If
         tab_panels.SelectedItem = employeeTab
@@ -43,21 +65,67 @@
 
     Private Sub tblrLeave_Click(sender As Object, e As RoutedEventArgs)
         If leaveTab Is Nothing Then
-            leaveTab = NewTab(New LeaveManagementpage, "Leave")
+            Dim leavePage As New LeavePage
+            leaveTab = NewTab(leavePage, "Leave")
         End If
         tab_panels.SelectedItem = leaveTab
     End Sub
-    Private Function NewTab(ByRef pg As Page, header As String) As TabItem
-        Dim tab As New TabItem
-        tab.Header = header
+
+    Private Sub tlbrAdmin_Click(sender As Object, e As RoutedEventArgs)
+        If adminTab Is Nothing Then
+            Dim adminPage As New AdminPage
+            adminTab = NewTab(adminPage, "Admin")
+        End If
+        tab_panels.SelectedItem = adminTab
+    End Sub
+
+    Private Sub tlbrPayroll_Click(sender As Object, e As RoutedEventArgs)
+        If payrollTab Is Nothing Then
+            payrollTab = NewTab(New PayrollPage, "Payroll")
+        End If
+        tab_panels.SelectedItem = payrollTab
+    End Sub
+    Private Function NewTab(ByRef pg As Page, header As String) As ClosableTab
+        Dim tab As New SMSCSFuncs.ClosableTab
+        tab.Title = header
+        AddHandler tab.OnTabClose, AddressOf Me.Tab_Closed
 
         Dim frm As New Frame
         frm.Content = pg
-
+        frm.NavigationUIVisibility = NavigationUIVisibility.Hidden
         tab.Content = frm
 
         tab_panels.Items.Add(tab)
 
         Return tab
     End Function
+    Sub Tab_Closed(sender As Object, e As EventArgs)
+        If sender Is employeeTab Then
+            employeeTab = Nothing
+        ElseIf sender Is payrollTab Then
+            payrollTab = Nothing
+        ElseIf sender Is reportsTab Then
+            reportsTab = Nothing
+        ElseIf sender Is leaveTab Then
+            leaveTab = Nothing
+        ElseIf sender Is adminTab Then
+            adminTab = Nothing
+        Else
+            Debug.Print("Tab not found!")
+        End If
+
+    End Sub
+
+    Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
+        Debug.Print("Number of screens: " & System.Windows.Forms.Screen.AllScreens.Length)
+
+    End Sub
+
+    Private Sub Window_Closed(sender As Object, e As EventArgs)
+        If Not dtrBioWindow Is Nothing Then
+            Debug.Print("will close..")
+            dtrBioWindow.Close()
+            End
+        End If
+    End Sub
 End Class

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -74,23 +75,65 @@
     <Compile Include="DTRDataSet.vb">
       <DependentUpon>DTRDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DepartmentPage.xaml.vb">
+    <Compile Include="Pages\Admin Sub-pages\SalaryGradePage.xaml.vb">
+      <DependentUpon>SalaryGradePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminPage.xaml.vb">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin Sub-pages\DepartmentPage.xaml.vb">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DesignationPage.xaml.vb">
+    <Compile Include="Pages\Admin Sub-pages\DesignationPage.xaml.vb">
       <DependentUpon>DesignationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LeaveManagementPage.xaml.vb">
-      <DependentUpon>LeaveManagementPage.xaml</DependentUpon>
+    <Compile Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml.vb">
+      <DependentUpon>EmployeeEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EmployeeInformationPage.xaml.vb">
-      <DependentUpon>EmployeeInformationPage.xaml</DependentUpon>
+    <Compile Include="Pages\EmployeePage.xaml.vb">
+      <DependentUpon>EmployeePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Leave Sub-pages\LeaveApplicationPage.xaml.vb">
+      <DependentUpon>LeaveApplicationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Leave Sub-pages\LeaveCreditsPage.xaml.vb">
+      <DependentUpon>LeaveCreditsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LeavePage.xaml.vb">
+      <DependentUpon>LeavePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Payroll Sub-pages\SalaryPage.xaml.vb">
+      <DependentUpon>SalaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PayrollPage.xaml.vb">
+      <DependentUpon>PayrollPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Reports Sub-pages\DTRReportsPage.xaml.vb">
+      <DependentUpon>DTRReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Reports Sub-pages\LeaveReportPage.xaml.vb">
+      <DependentUpon>LeaveReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Reports Sub-pages\PayrollReportsPage.xaml.vb">
+      <DependentUpon>PayrollReportsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReportsPage.xaml.vb">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DTRReportWebWindow.xaml.vb">
       <DependentUpon>DTRReportWebWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LeaveReportWebWindow.xaml.vb">
+      <DependentUpon>LeaveReportWebWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoginWindow.xaml.vb">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PayrollReportWindow.xaml.vb">
+      <DependentUpon>PayrollReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PayslipWindow.xaml.vb">
+      <DependentUpon>PayslipWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\RegFPWindow.xaml.vb">
       <DependentUpon>RegFPWindow.xaml</DependentUpon>
@@ -100,23 +143,63 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </None>
-    <Page Include="Pages\DepartmentPage.xaml">
+    <Page Include="Pages\Admin Sub-pages\SalaryGradePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DesignationPage.xaml">
+    <Page Include="Pages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LeaveManagementPage.xaml">
+    <Page Include="Pages\Admin Sub-pages\DepartmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EmployeeInformationPage.xaml">
+    <Page Include="Pages\Admin Sub-pages\DesignationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RegistrationPage.xaml">
+    <Page Include="Pages\Employee Sub-pages\EmployeeEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Employee Sub-pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Leave Sub-pages\LeaveApplicationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Leave Sub-pages\LeaveCreditsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LeavePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Payroll Sub-pages\SalaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PayrollPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Reports Sub-pages\DTRReportsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Reports Sub-pages\LeaveReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Reports Sub-pages\PayrollReportsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +221,7 @@
     </Compile>
     <Compile Include="Modules\DBFunctions.vb" />
     <Compile Include="Modules\DTRBiometricSystemModule.vb" />
-    <Compile Include="Pages\RegistrationPage.xaml.vb">
+    <Compile Include="Pages\Employee Sub-pages\RegistrationPage.xaml.vb">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\DTRBiometricWindow.xaml.vb">
@@ -149,6 +232,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\DTRReportWebWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LeaveReportWebWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PayrollReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PayslipWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +295,7 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="DTRDataSet.xsc">
       <DependentUpon>DTRDataSet.xsd</DependentUpon>
@@ -339,9 +439,27 @@
     <Content Include="MonthlyReports\js\jquery.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="MonthlyReports\LeaveCreditsReportPage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="MonthlyReports\MonthlyReportPage.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="MonthlyReports\PayrollReportPage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\dingle-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\payroll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Benefits-of-Leave-Management-System-in-School-ERP-Software.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\HAHAHAHA.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTRFuncs\DTRFuncs.csproj">
@@ -349,5 +467,6 @@
       <Name>DTRFuncs</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -1,0 +1,16 @@
+﻿<Window x:Class="LoginWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="LoginWindow" Height="351.36" Width="406" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+        </Grid.Background>
+        <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,205,0,0"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" Margin="130,205,0,0"/>
+        <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,236,0,0"/>
+        <PasswordBox x:Name="psswBox" HorizontalAlignment="Left" Margin="130,236,0,0" VerticalAlignment="Top" Width="201" Height="26"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="256,278,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Image HorizontalAlignment="Center" Height="190" VerticalAlignment="Top" Width="190" Source="pack://siteoforigin:,,,/Resources/dingle-logo.png" Margin="0,10,0,0"/>
+    </Grid>
+</Window>
