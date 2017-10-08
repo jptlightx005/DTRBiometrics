@@ -125,6 +125,9 @@
     <Compile Include="Windows\LeaveReportWebWindow.xaml.vb">
       <DependentUpon>LeaveReportWebWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\LoginWindow.xaml.vb">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PayrollReportWindow.xaml.vb">
       <DependentUpon>PayrollReportWindow.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\LeaveReportWebWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

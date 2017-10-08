@@ -11,6 +11,7 @@ Module DTRBiometricSystemModule
 
     Public dtrMainWindow As MainWindow
 
+    Public tblAdminAdapter As New AdminTableAdapter
     Public tblEmployeeAdapter As New EmployeeTableAdapter
     Public tblLogAdapter As New TimelogTableAdapter
     Public tblDeptAdapter As New DepartmentTableAdapter
@@ -31,8 +32,7 @@ Module DTRBiometricSystemModule
         InitializeDBIfNotExist()
 
         Dim app As New System.Windows.Application
-        dtrMainWindow = New MainWindow
-        app.Run(dtrMainWindow)
+        app.Run(New LoginWindow)
     End Sub
 
     Public Sub InitializeDBIfNotExist()
