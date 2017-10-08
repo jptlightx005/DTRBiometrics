@@ -45,12 +45,17 @@ Class RegistrationPage
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
-        If dtrRegWindow Is Nothing Then
-            dtrRegWindow = New RegFPWindow
-            dtrRegWindow.regPage = Me
-        End If
-        dtrRegWindow.ShowDialog()
+        Dim regFP As New RegFPWindow
+        regFP.regPage = Me
         isRegisteringFingerprint = True
+        If isRegisteringFingerprint Then
+            Debug.Print("Should be disabled")
+        Else
+            Debug.Print("dfq is going on")
+        End If
+        regFP.ShowDialog()
+
+       
     End Sub
 
     Private Sub btnRegister_Click(sender As Object, e As RoutedEventArgs) Handles btnRegister.Click

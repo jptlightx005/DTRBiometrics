@@ -3,6 +3,7 @@
 Imports System.Drawing
 Imports System.Windows.Interop
 Public Class RegFPWindow
+    Dim WithEvents fp As ZKFPEngX
     Dim FTempLen As Integer
     Dim FRegTemplate As String
     Dim FRegTemp As Object
@@ -15,17 +16,12 @@ Public Class RegFPWindow
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-
-        AddHandler fprintscanner.OnFeatureInfo, AddressOf Me.fp_OnFeatureInfo
-        AddHandler fprintscanner.OnEnroll, AddressOf Me.fp_OnEnroll
-        AddHandler fprintscanner.OnImageReceived, AddressOf Me.fp_OnImageReceived
-
-        fprintscanner.s
+        fp = New ZKFPEngX
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        fprintscanner.SensorIndex = 0
-        If (fprintscanner.InitEngine = 0) Then
+        fp.SensorIndex = 0
+        If (fp.InitEngine = 0) Then
             imgConnected.Visibility = Windows.Visibility.Visible
             lblConnected.Content = "Device Connected"
         Else
@@ -33,17 +29,22 @@ Public Class RegFPWindow
             lblConnected.Content = "Device Not Connected"
         End If
 
-        fprintscanner.BeginEnroll()
+        fp.BeginEnroll()
         txbStatus.Text = "Press with your finger 3 times."
     End Sub
 
-    Private Sub fp_OnFeatureInfo(ByVal AQuality As Long)
+    Private Sub fp_OnFeatureInfo(ByVal AQuality As Long) Handles fp.OnFeatureInfo
+        Debug.Print("is still active from fp window")
+        If Not isRegisteringFingerprint Then
+            Debug.Print("but will not continue executing")
+            Return
+        End If
         Dim sTemp As String
 
         sTemp = ""
-        If fprintscanner.IsRegister Then
-            If fprintscanner.EnrollIndex - 1 > 0 Then
-                sTemp = "Press with your finger " & fprintscanner.EnrollIndex - 1 & " times"
+        If fp.IsRegister Then
+            If fp.EnrollIndex - 1 > 0 Then
+                sTemp = "Press with your finger " & fp.EnrollIndex - 1 & " times"
             Else
                 sTemp = ""
             End If
@@ -52,43 +53,47 @@ Public Class RegFPWindow
         txbStatus.Text = sTemp
     End Sub
 
-    Private Sub fp_OnEnroll(ByVal ActionResult As Boolean, ByVal aTemplate As Object)
+    Private Sub fp_OnEnroll(ByVal ActionResult As Boolean, ByVal aTemplate As Object) Handles fp.OnEnroll
+        Debug.Print("is still active from fp window")
+        If Not isRegisteringFingerprint Then
+            Debug.Print("but will not continue executing")
+            Return
+        End If
         If Not ActionResult Then
             MsgBox("Registration failed!", vbExclamation)
         Else
             MsgBox("Regsitration success!", vbInformation)
 
-            FRegTemplate = fprintscanner.GetTemplateAsString()
-            FRegTemp = fprintscanner.GetTemplate()
-            fprintscanner.SaveTemplate(applicationPath & "\fptemp.tpl", FRegTemp)
+            FRegTemplate = fp.GetTemplateAsString()
+            FRegTemp = fp.GetTemplate()
+            fp.SaveTemplate(applicationPath & "\fptemp.tpl", FRegTemp)
         End If
         regPage.FingerprintEnrolled(ActionResult)
         Me.Close()
     End Sub
 
-    Private Sub fp_OnImageReceived(ByRef AImageValid As Boolean)
+    Private Sub fp_OnImageReceived(ByRef AImageValid As Boolean) Handles fp.OnImageReceived
+        Debug.Print("is still active from fp window")
+        If Not isRegisteringFingerprint Then
+            Debug.Print("but will not continue executing")
+            Return
+        End If
         Dim myHandle As IntPtr = New WindowInteropHelper(Me).Handle
         Dim myGraphics As Graphics = Graphics.FromHwnd(myHandle)
-        Dim x = (Me.Width / 2) - (fprintscanner.ImageWidth / 2)
+        Dim x = (Me.Width / 2) - (fp.ImageWidth / 2)
         Dim i As IntPtr = myGraphics.GetHdc
-        fprintscanner.PrintImageAt(i, x, 10, fprintscanner.ImageWidth, fprintscanner.ImageHeight)
+        fp.PrintImageAt(i, x, 10, fp.ImageWidth, fp.ImageHeight)
         myGraphics.Dispose()
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
-        
-    End Sub
-
-    Private Sub Window_Closing(sender As Object, e As ComponentModel.CancelEventArgs)
-        e.Cancel = True
-        If fprintscanner.IsRegister Then
-            fprintscanner.CancelEnroll()
+        If fp.IsRegister Then
+            fp.CancelEnroll()
+            fp.CancelCapture()
         End If
         isRegisteringFingerprint = False
-        Me.Hide()
-
-        RemoveHandler fprintscanner.OnFeatureInfo, AddressOf Me.fp_OnFeatureInfo
-        AddHandler fprintscanner.OnEnroll, AddressOf Me.fp_OnEnroll
-        AddHandler fprintscanner.OnImageReceived, AddressOf Me.fp_OnImageReceived
+        If Not isRegisteringFingerprint Then
+            Debug.Print("Will now be enabled")
+        End If
     End Sub
 End Class

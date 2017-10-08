@@ -2,7 +2,7 @@
 Imports DTRSystem.DTRDataSet
 
 Imports System.IO
-Imports ZKFPEngXControl
+
 Module DTRBiometricSystemModule
     Public applicationPath As String
     Public myDocumentsFolder As String
@@ -11,9 +11,6 @@ Module DTRBiometricSystemModule
 
     Public dtrMainWindow As MainWindow
     Public dtrBioWindow As DTRBiometricWindow
-    Public dtrRegWindow As RegFPWindow
-
-    Public WithEvents fprintscanner As ZKFPEngX
 
     Public tblAdminAdapter As New AdminTableAdapter
     Public tblEmployeeAdapter As New EmployeeTableAdapter
@@ -126,5 +123,13 @@ Module DTRBiometricSystemModule
             startDate = DateAdd("d", 1, startDate)
         Next
         Return wDays
+    End Function
+
+    Public Function YesNoFromBool(truth As Boolean) As String
+        If truth Then
+            Return "YES"
+        Else
+            Return "NO"
+        End If
     End Function
 End Module

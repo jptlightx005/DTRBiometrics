@@ -1,4 +1,4 @@
-﻿Imports ZKFPEngXControl
+﻿
 Imports SMSCSFuncs
 Imports System.Windows.Forms
 
@@ -15,7 +15,7 @@ Class MainWindow
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-
+        isRegisteringFingerprint = False
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         If dtrBioWindow Is Nothing Then
@@ -118,12 +118,14 @@ Class MainWindow
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         Debug.Print("Number of screens: " & System.Windows.Forms.Screen.AllScreens.Length)
-        fprintscanner = New ZKFPEngX
+
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
         If Not dtrBioWindow Is Nothing Then
+            Debug.Print("will close..")
             dtrBioWindow.Close()
+            End
         End If
     End Sub
 End Class
