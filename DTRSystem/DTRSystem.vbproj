@@ -448,6 +448,9 @@
     <Content Include="MonthlyReports\PayrollReportPage.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\dingle-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\payroll.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

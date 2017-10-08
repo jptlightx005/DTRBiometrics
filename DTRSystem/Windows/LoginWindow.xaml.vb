@@ -16,7 +16,13 @@
                 Me.Close()
             End If
         Else
-            MsgBox("Invalid credentials!", vbExclamation)
+            If MsgBox("Invalid credentials!", vbExclamation) = MsgBoxResult.Ok Then
+                If psswBox.IsFocused Then
+                    psswBox.SelectAll()
+                Else
+                    psswBox.Focus()
+                End If
+            End If
         End If
 
     End Sub
@@ -25,5 +31,17 @@
         If e.Key = Key.Return Then
             Button_Click(sender, e)
         End If
+    End Sub
+
+    Private Sub psswBox_GotFocus(sender As Object, e As RoutedEventArgs) Handles psswBox.GotFocus
+        psswBox.SelectAll()
+    End Sub
+
+    Private Sub txtUsername_GotFocus(sender As Object, e As RoutedEventArgs) Handles txtUsername.GotFocus
+        txtUsername.SelectAll()
+    End Sub
+
+    Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
+        txtUsername.Focus()
     End Sub
 End Class
