@@ -22,6 +22,7 @@
             desgPage = New DesignationPage
         End If
 
+        desgPage.PageDidAppear()
         ReplacePage(desgPage)
     End Sub
 

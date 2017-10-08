@@ -22,11 +22,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding EmpID}" Header="Employee ID" />
                 <DataGridTextColumn Binding="{Binding DateOfTheDay, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
-                <DataGridTextColumn Binding="{Binding TimeInAM, StringFormat=\{0:hh:mm tt\}}" Header="Time in AM" />
-                <DataGridTextColumn Binding="{Binding TimeOutAM, StringFormat=\{0:hh:mm tt\}}" Header="Time out AM" />
-                <DataGridTextColumn Binding="{Binding TimeInPM, StringFormat=\{0:hh:mm tt\}}" Header="Time in PM" />
-                <DataGridTextColumn Binding="{Binding TimeOutPM, StringFormat=\{0:hh:mm tt\}}" Header="Time out PM" />
-                <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total Minutes" />
+                <DataGridTextColumn Binding="{Binding TimeInAMStr}" Header="Time in AM" />
+                <DataGridTextColumn Binding="{Binding TimeOutAMStr}" Header="Time out AM" />
+                <DataGridTextColumn Binding="{Binding TimeInPMStr}" Header="Time in PM" />
+                <DataGridTextColumn Binding="{Binding TimeOutPMStr}" Header="Time out PM" />
+                <DataGridTextColumn Binding="{Binding TotalHours, StringFormat=N2}" Header="Total Hours" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>

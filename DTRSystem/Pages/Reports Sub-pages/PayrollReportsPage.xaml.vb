@@ -159,6 +159,8 @@ Class PayrollReportsPage
 
             Dim table = GetPayrollTable(cmbDepartments.SelectedValue, fromPicker.SelectedDate, toPicker.SelectedDate)
             payrollDataGrid.ItemsSource = table.DefaultView
+
+            btnPrint.IsEnabled = table.DefaultView.Count > 0
         Else
             MsgBox("Must select a department!", vbExclamation)
         End If
@@ -166,5 +168,9 @@ Class PayrollReportsPage
 
     Private Sub Page_Initialized(sender As Object, e As EventArgs)
         cmbDepartments.ItemsSource = tblDeptAdapter.GetData
+    End Sub
+
+    Private Sub btnPrint_Click(sender As Object, e As RoutedEventArgs) Handles btnPrint.Click
+
     End Sub
 End Class

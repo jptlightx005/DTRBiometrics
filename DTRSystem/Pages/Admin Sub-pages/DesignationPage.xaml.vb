@@ -3,6 +3,7 @@ Imports DTRSystem.DTRDataSet
 Class DesignationPage
     Dim designationRow As DesignationTableRow
     Dim dataSet As New DTRSystem.DTRDataSet
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -15,6 +16,11 @@ Class DesignationPage
         designationRow = dataSet.DesignationTable.NewRow
         designationRow.designation_name = ""
         gridDesignation.DataContext = designationRow
+    End Sub
+
+    Public Sub PageDidAppear()
+        Debug.Print("Did appear focus")
+        cmbDepartment.ItemsSource = tblDeptAdapter.GetData
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As RoutedEventArgs) Handles btnAdd.Click
