@@ -80,10 +80,10 @@ Public Class DTRBiometricWindow
 
             vacleavecredits += vc_earned - vc_used
             Debug.Print("Is v equal {0} == {1}", vacleavecredits, vc_bal)
-            If vacleavecredits <> vc_bal Then
-                vacleavecredits -= vc_earned - vc_used
-                Debug.Print("Deducted v = {0}", vacleavecredits)
-            End If
+            'If vacleavecredits <> vc_bal Then
+            '    vacleavecredits -= vc_earned - vc_used
+            '    Debug.Print("Deducted v = {0}", vacleavecredits)
+            'End If
         Next
         Return vacleavecredits
     End Function
@@ -167,8 +167,8 @@ Public Class DTRBiometricWindow
                                             timeBegin = DateTime.Parse(a)
                                         End If
 
-                                        Dim timeEnd = timeLogFound.TimeOutAM
-                                        If timeEnd.TimeOfDay > New TimeSpan(12, 0, 0) Then
+                                        Dim timeEnd = Now
+                                        If Now.TimeOfDay > New TimeSpan(17, 0, 0) Then
                                             Dim a = Now.ToString("dd/MM/yyyy")
                                             a = a + " 12:00 PM" ' 10/04/2017 12:00 PM
                                             timeEnd = DateTime.Parse(a)
@@ -189,6 +189,7 @@ Public Class DTRBiometricWindow
                                             Debug.Print("{0} / 480", Math.Round(lateMinutes.TotalMinutes))
                                             Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
                                             lctransaction.EmpID = employeeFound.ID
+                                            lctransaction.Remarks = "Late"
                                             lctransaction.VC_Earned = 0
                                             lctransaction.VC_Used = creditsToBeFuckingDeducted
                                             lctransaction.VC_Balance = GetTotalCredits(employeeFound) - creditsToBeFuckingDeducted
@@ -235,10 +236,12 @@ Public Class DTRBiometricWindow
                                             timeBegin = DateTime.ParseExact(a, "dd/MM/yyyy hh:mm tt", Nothing)
                                         End If
 
-                                        Dim timeEnd = timeLogFound.TimeOutPM
-                                        If timeEnd.TimeOfDay > New TimeSpan(17, 0, 0) Then
+                                        Dim timeEnd = Now
+                                        If Now.TimeOfDay > New TimeSpan(17, 0, 0) Then
                                             Dim a = Now.ToString("dd/MM/yyyy")
-                                            a = a + " 17:00 PM" ' 10/04/2017 05:00 PM
+                                            a = a + " 05:00 PM" ' 10/04/2017 05:00 PM
+
+                                            Debug.Print("Nice try: {0}", a)
                                             timeEnd = DateTime.ParseExact(a, "dd/MM/yyyy hh:mm tt", Nothing)
                                         End If
                                         Debug.Print("PM: Begin: {0}", timeBegin.ToString)
@@ -264,7 +267,9 @@ Public Class DTRBiometricWindow
                                             Dim creditsToBeFuckingDeducted = Math.Round(lateMinutes.TotalMinutes) / 480
                                             Debug.Print("{0} / 480", Math.Round(lateMinutes.TotalMinutes))
                                             Debug.Print("Credits to be deducted {0}", creditsToBeFuckingDeducted)
+                                            Debug.Print("Employee has: {0} credits", GetTotalCredits(employeeFound))
                                             lctransaction.EmpID = employeeFound.ID
+                                            lctransaction.Remarks = "Late"
                                             lctransaction.VC_Earned = 0
                                             lctransaction.VC_Used = creditsToBeFuckingDeducted
                                             lctransaction.VC_Balance = GetTotalCredits(employeeFound) - creditsToBeFuckingDeducted

@@ -32,13 +32,13 @@
                     </StackPanel>
                 </Button>
                 <Separator />
-                <Button Click="tlbrPayroll_Click">
+                <!--<Button Click="tlbrPayroll_Click">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/payroll.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Payroll" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Separator/>
+                <Separator/>-->
                 <Button Click="tlbrAdmin_Click">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/admin_icon.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>

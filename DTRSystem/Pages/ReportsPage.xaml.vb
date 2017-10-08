@@ -2,6 +2,7 @@
 
     Dim dtrPage As DTRReportsPage
     Dim payrollPage As PayrollReportsPage
+    Dim leavePage As LeaveReportPage
     Dim activePage As Page
     Private Sub ReplacePage(ByRef pg As Page)
         activePage = pg
@@ -19,5 +20,12 @@
             payrollPage = New PayrollReportsPage
         End If
         ReplacePage(payrollPage)
+    End Sub
+
+    Private Sub treeLeave_Selected(sender As Object, e As RoutedEventArgs) Handles treeLeave.Selected
+        If leavePage Is Nothing Then
+            leavePage = New LeaveReportPage
+        End If
+        ReplacePage(leavePage)
     End Sub
 End Class
