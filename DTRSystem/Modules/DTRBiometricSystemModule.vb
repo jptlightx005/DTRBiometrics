@@ -2,7 +2,7 @@
 Imports DTRSystem.DTRDataSet
 
 Imports System.IO
-
+Imports ZKFPEngXControl
 Module DTRBiometricSystemModule
     Public applicationPath As String
     Public myDocumentsFolder As String
@@ -10,6 +10,9 @@ Module DTRBiometricSystemModule
     Public dtrSystemDB As String
 
     Public dtrMainWindow As MainWindow
+    Public rgFPWindow As RegFPWindow
+
+    Public WithEvents fprintscanner As ZKFPEngX
 
     Public tblAdminAdapter As New AdminTableAdapter
     Public tblEmployeeAdapter As New EmployeeTableAdapter

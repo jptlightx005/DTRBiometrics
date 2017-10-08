@@ -1,4 +1,4 @@
-﻿
+﻿Imports ZKFPEngXControl
 Imports SMSCSFuncs
 Imports System.Windows.Forms
 
@@ -116,6 +116,6 @@ Class MainWindow
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
         Debug.Print("Number of screens: " & System.Windows.Forms.Screen.AllScreens.Length)
-
+        fprintscanner = New ZKFPEngX
     End Sub
 End Class

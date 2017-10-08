@@ -7,7 +7,7 @@ Imports System.Windows.Threading
 Imports DTRSystem.DTRDataSet
 Imports DTRSystem.DTRDataSetTableAdapters
 Public Class DTRBiometricWindow
-    Dim WithEvents fp As ZKFPEngX
+
     Dim fpHandle As Integer
     Dim idList As List(Of Integer)
     Public otemplate As Object
@@ -24,7 +24,8 @@ Public Class DTRBiometricWindow
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        fp = New ZKFPEngX
+
+        AddHandler fprintscanner.OnCapture, AddressOf Me.fp_OnCapture
         idList = New List(Of Integer)
         dateTimer = New DispatcherTimer
         AddHandler dateTimer.Tick, AddressOf dateTimer_Tick
@@ -42,19 +43,19 @@ Public Class DTRBiometricWindow
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-        fp.SensorIndex = 0
-        If (fp.InitEngine = 0) Then
+        fprintscanner.SensorIndex = 0
+        If (fprintscanner.InitEngine = 0) Then
             imgConnected.Visibility = Windows.Visibility.Visible
             lblConnected.Content = "Device Connected"
         Else
             imgConnected.Visibility = Windows.Visibility.Hidden
             lblConnected.Content = "Device Not Connected"
         End If
-        If fp.IsRegister Then
-            fp.CancelEnroll()
+        If fprintscanner.IsRegister Then
+            fprintscanner.CancelEnroll()
         End If
 
-        fpHandle = fp.CreateFPCacheDB
+        fpHandle = fprintscanner.CreateFPCacheDB
 
         Dim i = 0
         For Each row In tblEmployeeFullAdapter.GetData
@@ -62,7 +63,7 @@ Public Class DTRBiometricWindow
             Dim fileName = String.Format(applicationPath & "\fptemp{0}.tpl", row.ID)
             File.WriteAllBytes(fileName, row.biometric)
 
-            If fp.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName) = 1 Then
+            If fprintscanner.AddRegTemplateFileToFPCacheDB(fpHandle, i, fileName) = 1 Then
                 Debug.Print("Succesfully loaded {0}'s biometric...", row.first_name)
                 idList.Add(row.ID)
                 i += 1
@@ -93,14 +94,14 @@ Public Class DTRBiometricWindow
         dtrMainWindow.Focus()
     End Sub
 
-    Private Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object) Handles fp.OnCapture
+    Private Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object)
         Dim sTemp As Object
         Dim ProcessNum As Long
-        sTemp = fp.GetTemplate
+        sTemp = fprintscanner.GetTemplate
 
         Dim score = 8
         'Selects the ID of the Employee in the ID Lists
-        Dim fi = fp.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
+        Dim fi = fprintscanner.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
 
         Dim beep As New Thread(Sub()
                                    Console.Beep(750, 500)
@@ -258,7 +259,7 @@ Public Class DTRBiometricWindow
 
                                         If total.TotalMinutes < 240 Then
                                             'calculate leave
-                                            
+
                                             Dim lateMinutes As TimeSpan = New TimeSpan(0, minutes, 0) - total
 
                                             Dim lcDataTable = New LeaveCreditsTableDataTable
@@ -326,8 +327,8 @@ Public Class DTRBiometricWindow
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
-        fp.CancelCapture()
-        fp.EndEngine()
+        fprintscanner.CancelCapture()
+        fprintscanner.EndEngine()
     End Sub
 
     Private Sub ___No_Name__MouseDown(sender As Object, e As MouseButtonEventArgs) Handles ___No_Name_.MouseDown

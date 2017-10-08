@@ -45,9 +45,9 @@ Class RegistrationPage
         cmbDepartment.ItemsSource = tblDeptAdapter.GetData
     End Sub
     Private Sub btnEnroll_Click(sender As Object, e As RoutedEventArgs) Handles btnEnroll.Click
-        Dim regFP As New RegFPWindow
-        regFP.regPage = Me
-        regFP.ShowDialog()
+        rgFPWindow = New RegFPWindow
+        rgFPWindow.regPage = Me
+        rgFPWindow.ShowDialog()
 
     End Sub
 
