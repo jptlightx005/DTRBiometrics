@@ -1,4 +1,6 @@
-﻿Imports SMSCSFuncs
+﻿
+Imports SMSCSFuncs
+Imports System.Windows.Forms
 
 Class MainWindow
     Dim employeeTab As TabItem
@@ -17,6 +19,15 @@ Class MainWindow
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         Dim dtrWindow As New DTRBiometricWindow
+
+        If System.Windows.Forms.Screen.AllScreens.Length > 1 Then
+            Dim s2 = Screen.AllScreens(1)
+            Dim r2 = s2.WorkingArea
+            dtrWindow.Top = r2.Top
+            dtrWindow.Left = r2.Left
+            dtrWindow.Show()
+
+        End If
         dtrWindow.Show()
         'Me.Hide()
     End Sub
@@ -95,6 +106,7 @@ Class MainWindow
     End Sub
 
     Private Sub Window_Loaded(sender As Object, e As RoutedEventArgs)
-       
+        Debug.Print("Number of screens: " & System.Windows.Forms.Screen.AllScreens.Length)
+
     End Sub
 End Class
