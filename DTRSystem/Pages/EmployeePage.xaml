@@ -24,7 +24,7 @@
 
         <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
         <Grid Margin="141,37,10,10">
-            <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden" Focusable="False"/>
         </Grid>
 
     </Grid>

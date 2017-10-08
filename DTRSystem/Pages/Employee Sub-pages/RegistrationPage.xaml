@@ -27,40 +27,40 @@
                 <Label Content="Designation*" HorizontalAlignment="Left" Margin="18,259,0,0" VerticalAlignment="Top" 
                        HorizontalContentAlignment="Right"/>
                 <TextBox x:Name="txtFName" Text="{Binding Path=first_name}" HorizontalAlignment="Left" Height="23" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,21,0,0"/>
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,21,0,0" TabIndex="1"/>
                 <TextBox x:Name="txtMName" Text="{Binding Path=middle_name}" HorizontalAlignment="Left" Height="23" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Margin="300,52,0,0"/>
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Margin="300,52,0,0" TabIndex="2"/>
                 <TextBox x:Name="txtLName" Text="{Binding Path=last_name}" HorizontalAlignment="Left" Height="23" 
-                         TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Margin="300,80,0,0"/>
-                <ComboBox x:Name="cmbEmpType" Text="{Binding Path=emp_type}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,208,0,0"  Width="166" IsEditable="True">
+                         TextWrapping="Wrap" VerticalAlignment="Top" Width="243" Margin="300,80,0,0" TabIndex="3"/>
+                <ComboBox x:Name="cmbEmpType" Text="{Binding Path=emp_type}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,208,0,0"  Width="166" IsEditable="True" TabIndex="7">
                     <ComboBoxItem Content="Permanent"/>
                     <ComboBoxItem Content="Part-Time"/>
                     <ComboBoxItem Content="Official"/>
                 </ComboBox>
                 <ComboBox x:Name="cmbDepartment" SelectedValue="{Binding Path=deptID}" DisplayMemberPath="dept_name" 
-                          SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,235,0,0" Width="166"/>
+                          SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,235,0,0" Width="166" TabIndex="8"/>
                 <ComboBox x:Name="cmbDesignation" SelectedValue="{Binding Path=desgID}" DisplayMemberPath="designation_name" 
-                          SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,263,0,10" Width="166"/>
+                          SelectedValuePath="ID"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="102,263,0,10" Width="166" TabIndex="9"/>
                 <Image x:Name="imgEmpPicture" HorizontalAlignment="Left" Height="144" Margin="36,21,407,0" VerticalAlignment="Top" 
                        Width="135" Source="pack://siteoforigin:,,,/Resources/placeholder.png" Stretch="UniformToFill"/>
                 <Button x:Name="btnBrowse" Content="Browse" HorizontalAlignment="Left" Margin="56,179,428,0" VerticalAlignment="Top" 
-                        Width="94"/>
+                        Width="94" TabIndex="0"/>
                 <Label Content="Address"  HorizontalAlignment="Left" Margin="241,125,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
-                <Label Content="Age" HorizontalAlignment="Left" Margin="263,153,0,0" VerticalAlignment="Top" 
+                <Label Content="Age" HorizontalAlignment="Left" Margin="263,183,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
-                <Label Content="Birthday" HorizontalAlignment="Left" Margin="241,179,0,0" VerticalAlignment="Top" 
+                <Label Content="Birthday" HorizontalAlignment="Left" Margin="240,152,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
                 <TextBox x:Name="txtAddress" Text="{Binding address}" HorizontalAlignment="Left" Height="23" 
-                	TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,125,0,0"/>
+                	TextWrapping="Wrap" VerticalAlignment="Top" Width="244" Margin="299,125,0,0" TabIndex="4"/>
                 <TextBox x:Name="txtAge" Text="{Binding age}" HorizontalAlignment="Left" Height="23" 
-                	TextWrapping="Wrap" VerticalAlignment="Top" Width="103" Margin="300,153,0,0"/>
-                <DatePicker x:Name="birthDatePicker" SelectedDate="{Binding date_of_birth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="301,180,0,0"/>
+                	TextWrapping="Wrap" VerticalAlignment="Top" Width="103" Margin="300,183,0,0" TabIndex="6"/>
+                <DatePicker x:Name="birthDatePicker" SelectedDate="{Binding date_of_birth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,153,0,0" TabIndex="5"/>
                 <Label Content="Salary Grade*" HorizontalAlignment="Left" Margin="295,235,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
                 <Label Content="Step Increment*" HorizontalAlignment="Left" Margin="281,259,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
-                <ComboBox x:Name="cmbSalaryGrade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,235,0,0" Width="166">
+                <ComboBox x:Name="cmbSalaryGrade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,235,0,0" Width="166" TabIndex="10">
                     <ComboBoxItem Content="1"/>
                     <ComboBoxItem Content="2"/>
                     <ComboBoxItem Content="3"/>
@@ -92,7 +92,7 @@
                     <ComboBoxItem Content="29"/>
                     <ComboBoxItem Content="30"/>
                 </ComboBox>
-                <ComboBox x:Name="cmbStepGrade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,263,0,0" Width="166">
+                <ComboBox x:Name="cmbStepGrade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,263,0,0" Width="166" TabIndex="11">
                     <ComboBoxItem Content="Step 1"/>
                     <ComboBoxItem Content="Step 2"/>
                     <ComboBoxItem Content="Step 3"/>
@@ -108,7 +108,7 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,344,0,0" Width="280" VerticalAlignment="Top" Height="71">
             <Grid>
                 <Label Content="Biometric*:" HorizontalAlignment="Left" Margin="32,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Button x:Name="btnEnroll" Content="Enroll" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81"/>
+                <Button x:Name="btnEnroll" Content="Enroll" HorizontalAlignment="Left" Height="22" Margin="100,12,0,0" VerticalAlignment="Top" Width="81" TabIndex="12"/>
                 <Label x:Name="lblStatus" Content="No Fingerprint Enrolled" HorizontalAlignment="Left" Margin="76,43,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>

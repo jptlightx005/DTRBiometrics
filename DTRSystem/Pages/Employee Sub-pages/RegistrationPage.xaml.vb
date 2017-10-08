@@ -98,8 +98,6 @@ Class RegistrationPage
         End If
     End Sub
     Function ValidateFields() As Boolean
-
-
         If txtFName.Text.Length = 0 Then
             MsgBox("Must fill up First Name!", vbExclamation)
             Return False
@@ -160,5 +158,15 @@ Class RegistrationPage
     Private Sub cmbDepartment_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbDepartment.SelectionChanged
         Dim filter = String.Format("DeptID = {0} ", cmbDepartment.SelectedValue)
         cmbDesignation.ItemsSource = tblDesgAdapter.GetData.Select(filter)
+    End Sub
+
+    Sub txtBoxDidFocus(sender As Object, e As EventArgs) Handles txtFName.GotFocus, txtMName.GotFocus, txtLName.GotFocus, txtAge.GotFocus, txtAddress.GotFocus
+        Dim txtBox As TextBox = sender
+        txtBox.SelectAll()
+    End Sub
+
+    Private Sub birthDatePicker_SelectedDateChanged(sender As Object, e As SelectionChangedEventArgs) Handles birthDatePicker.SelectedDateChanged
+        Dim age = Math.Floor(Now.Subtract(birthDatePicker.SelectedDate).TotalDays / 365.25)
+        txtAge.Text = age
     End Sub
 End Class
