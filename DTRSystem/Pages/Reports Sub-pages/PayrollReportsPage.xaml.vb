@@ -2,6 +2,7 @@
 Imports DTRSystem.DTRDataSet
 Imports DTRSystem.DTRDataSetTableAdapters
 Class PayrollReportsPage
+    Dim payrollTable As DataTable
     Function GetPayrollTable(deptID As Integer, startDate As Date, endDate As Date) As DataTable
         Dim employees = tblEmployeeFullAdapter.GetData.Select("deptID = " & deptID)
         ' Create new DataTable instance.
@@ -17,8 +18,8 @@ Class PayrollReportsPage
         table.Columns.Add("totaldeductions", GetType(Decimal))
         table.Columns.Add("netpay", GetType(Decimal))
 
-        Dim tax = 1000
-        Dim gsis = 300
+        Dim tax = 0.0
+        Dim gsis = 0.0
         ' Add five rows with those columns filled in the DataTable.
         For Each employee As EmployeeFullRow In employees
             Dim row As DataRow = table.NewRow
@@ -27,7 +28,8 @@ Class PayrollReportsPage
             Dim salary = GetSalary(employee.salarygrade, employee.stepgrade)
             row("monthly") = salary
             row("partial") = salary / 2
-            row("tax") = tax
+            tax = salary * 0.22
+            row("tax") = salary * 0.22
             row("gsis") = gsis
             Dim others = GetLeaveDeductions(employee, salary, fromPicker.SelectedDate, toPicker.SelectedDate)
             row("others") = others
@@ -42,7 +44,7 @@ Class PayrollReportsPage
 
     Function GetSalary(salaryGradeInt As Integer, stepGradeInt As Integer) As Decimal
         Dim filter As String = "ID = " & salaryGradeInt
-        Dim rows = tblSalaryGradeAdapter.GetData().Select(Filter)
+        Dim rows = tblSalaryGradeAdapter.GetData().Select(filter)
         Dim salaryGrade As SalaryGradeTableRow = rows(0)
         Dim stepColumn As String = "Step" & stepGradeInt
         Return salaryGrade(stepColumn)
@@ -157,10 +159,10 @@ Class PayrollReportsPage
                 Return
             End If
 
-            Dim table = GetPayrollTable(cmbDepartments.SelectedValue, fromPicker.SelectedDate, toPicker.SelectedDate)
-            payrollDataGrid.ItemsSource = table.DefaultView
+            payrollTable = GetPayrollTable(cmbDepartments.SelectedValue, fromPicker.SelectedDate, toPicker.SelectedDate)
+            payrollDataGrid.ItemsSource = payrollTable.DefaultView
 
-            btnPrint.IsEnabled = table.DefaultView.Count > 0
+            btnPrint.IsEnabled = payrollTable.DefaultView.Count > 0
         Else
             MsgBox("Must select a department!", vbExclamation)
         End If
@@ -182,7 +184,7 @@ Class PayrollReportsPage
             webReportWindow.department = departments(0)
 
 
-            webReportWindow.records = GetPayrollTable(cmbDepartments.SelectedValue, fromPicker.SelectedDate, toPicker.SelectedDate)
+            webReportWindow.records = payrollTable
             webReportWindow.fromDate = fromPicker.SelectedDate
             webReportWindow.toDate = toPicker.SelectedDate
 
@@ -190,5 +192,38 @@ Class PayrollReportsPage
         Else
             MsgBox("Department is not found", vbExclamation)
         End If
+    End Sub
+
+    Private Sub payrollDataGrid_CellEditEnding(sender As Object, e As DataGridCellEditEndingEventArgs) Handles payrollDataGrid.CellEditEnding
+        Debug.Print("Nag edit")
+        
+        btnCalculate.IsEnabled = True
+    End Sub
+
+    Private Sub btnCalculate_Click(sender As Object, e As RoutedEventArgs) Handles btnCalculate.Click
+        Dim newDataTable As DataView = payrollDataGrid.ItemsSource
+        For i = 0 To payrollTable.Rows.Count - 1
+            Dim row = newDataTable(i)
+
+            Dim salary = row("monthly")
+            Dim tax = row("tax")
+            Dim gsis = row("gsis")
+            Dim other = row("others")
+
+            Dim totalDeductions = tax + gsis + other
+
+            Dim totald = tax + gsis + other
+            newDataTable(i)("totaldeductions") = totalDeductions
+            Dim pay = (salary / 2) - totalDeductions
+            newDataTable(i)("netpay") = pay
+        Next
+        payrollDataGrid.ItemsSource = newDataTable
+
+        payrollTable = newDataTable.ToTable
+        btnCalculate.IsEnabled = False
+    End Sub
+
+    Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
+
     End Sub
 End Class
