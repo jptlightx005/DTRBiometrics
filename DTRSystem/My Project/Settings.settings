@@ -10,5 +10,17 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\dtr-biometric.accdb</Value>
     </Setting>
+    <Setting Name="SuccessMessageAudioFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Resources\thank_you.wav</Value>
+    </Setting>
+    <Setting Name="FailedMessageAudioFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Resources\pls_try_again.wav</Value>
+    </Setting>
+    <Setting Name="BeepDuration" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="BeepFrequency" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">750</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

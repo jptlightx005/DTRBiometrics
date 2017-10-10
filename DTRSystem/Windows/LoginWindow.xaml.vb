@@ -11,7 +11,9 @@
 
         If ValidateCredentials(usrn, encr) Then
             If MsgBox("Successfully logged in!", vbInformation) = vbOK Then
-                dtrMainWindow = New MainWindow
+                If dtrMainWindow Is Nothing Then
+                    dtrMainWindow = New MainWindow
+                End If
                 dtrMainWindow.Show()
                 Me.Close()
             End If
