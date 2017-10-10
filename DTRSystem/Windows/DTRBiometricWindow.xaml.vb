@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Media
 Imports System.Threading
 Imports System.Windows.Threading
+Imports WMPLib
 
 Imports DTRSystem.DTRDataSet
 Imports DTRSystem.DTRDataSetTableAdapters
@@ -312,12 +313,13 @@ Public Class DTRBiometricWindow
 
         Dim beep As New Thread(Sub()
                                    Console.Beep(My.Settings.BeepFrequency, My.Settings.BeepDuration)
+                                   Dim audioPlayer As New WindowsMediaPlayer
                                    If success Then
-                                       My.Computer.Audio.Play(My.Settings.SuccessMessageAudioFile, AudioPlayMode.Background)
+                                       audioPlayer.URL = My.Settings.SuccessMessageAudioFile
                                    Else
-                                       My.Computer.Audio.Play(My.Settings.FailedMessageAudioFile, AudioPlayMode.Background)
+                                       audioPlayer.URL = My.Settings.FailedMessageAudioFile
                                    End If
-
+                                   audioPlayer.controls.play()
                                End Sub)
         beep.Start()
 
