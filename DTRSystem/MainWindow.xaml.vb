@@ -128,4 +128,9 @@ Class MainWindow
             End
         End If
     End Sub
+
+    Private Sub mnu_settings_Click(sender As Object, e As RoutedEventArgs) Handles mnu_settings.Click
+        Dim settingsWindow As New SettingsWindow
+        settingsWindow.ShowDialog()
+    End Sub
 End Class

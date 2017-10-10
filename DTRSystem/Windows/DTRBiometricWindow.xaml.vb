@@ -311,11 +311,11 @@ Public Class DTRBiometricWindow
         End If
 
         Dim beep As New Thread(Sub()
-                                   Console.Beep(750, 500)
+                                   Console.Beep(My.Settings.BeepFrequency, My.Settings.BeepDuration)
                                    If success Then
-                                       My.Computer.Audio.Play("Resources\thank_you.wav", AudioPlayMode.Background)
+                                       My.Computer.Audio.Play(My.Settings.SuccessMessageAudioFile, AudioPlayMode.Background)
                                    Else
-                                       My.Computer.Audio.Play("Resources\pls_try_again.wav", AudioPlayMode.Background)
+                                       My.Computer.Audio.Play(My.Settings.FailedMessageAudioFile, AudioPlayMode.Background)
                                    End If
 
                                End Sub)
