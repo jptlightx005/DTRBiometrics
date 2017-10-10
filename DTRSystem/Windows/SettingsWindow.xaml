@@ -6,7 +6,7 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
-        <TabControl HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="692" Margin="10,10,0,0">
+        <TabControl Margin="10,10,10,37">
             <TabItem Header="Biometric">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="Success Audio:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -18,13 +18,15 @@
                     <Button x:Name="btnBrowseFailed" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="228,99,0,0"/>
                     <Button x:Name="btnTestFailed" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="148,99,0,0"/>
                     <Label Content="Beep Duration:" HorizontalAlignment="Left" Margin="19,161,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Margin="108,161,0,0" IsReadOnly="True"/>
+                    <TextBox x:Name="txtDuration" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Margin="108,161,0,0"/>
                     <Label Content="Beep Frequency:" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txtFrequency" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Margin="108,189,0,0" IsReadOnly="True"/>
+                    <TextBox x:Name="txtFrequency" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Margin="108,189,0,0"/>
+                    <Button x:Name="btnTestBeep" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="133,217,0,0"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="627,418,0,0"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="547,418,0,0"/>
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,90,10"/>
+        <Button x:Name="btnDefault" Content="Defaults" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" RenderTransformOrigin="0.52,19.409" Margin="10,0,0,10"/>
     </Grid>
 </Window>

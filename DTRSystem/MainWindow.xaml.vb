@@ -1,5 +1,4 @@
-﻿
-Imports SMSCSFuncs
+﻿Imports SMSCSFuncs
 Imports System.Windows.Forms
 
 Class MainWindow
@@ -132,5 +131,16 @@ Class MainWindow
     Private Sub mnu_settings_Click(sender As Object, e As RoutedEventArgs) Handles mnu_settings.Click
         Dim settingsWindow As New SettingsWindow
         settingsWindow.ShowDialog()
+
+    End Sub
+
+    Private Sub mnu_close_Click(sender As Object, e As RoutedEventArgs) Handles mnu_close.Click
+        Me.Close()
+    End Sub
+
+    Private Sub mnu_logout_Click(sender As Object, e As RoutedEventArgs) Handles mnu_logout.Click
+        Dim login As New LoginWindow
+        Me.Hide()
+        login.Show()
     End Sub
 End Class
