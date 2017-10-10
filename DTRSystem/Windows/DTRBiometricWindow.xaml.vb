@@ -108,16 +108,7 @@ Public Class DTRBiometricWindow
         'Selects the ID of the Employee in the ID Lists
         Dim fi = fpscanner.IdentificationInFPCacheDB(fpHandle, sTemp, score, ProcessNum)
 
-        Dim beep As New Thread(Sub()
-                                   Console.Beep(750, 500)
-                                   If fi = -1 Then
-                                       My.Computer.Audio.Play("Resources\pls_try_again.wav", AudioPlayMode.Background)
-                                   Else
-                                       My.Computer.Audio.Play("Resources\thank_you.wav", AudioPlayMode.Background)
-                                   End If
-
-                               End Sub)
-        beep.Start()
+        Dim success As Boolean = (fi <> -1)
 
         If fi = -1 Then 'if employee is not found
             lblEmpName.Content = ""
@@ -158,6 +149,7 @@ Public Class DTRBiometricWindow
                             timeLogFound.TimeInAM = DateTime.Now
                         Else
                             If Date.Compare(Now, timeLogFound.TimeInAM.AddMinutes(30)) < 0 Then
+                                success = False
                                 lblMessage.Content = String.Format("You have just logged in at {0}", timeLogFound("TimeInAM"))
                                 lblMessage.Content &= vbCrLf & "Wait for 30 minutes."
                             Else
@@ -216,6 +208,7 @@ Public Class DTRBiometricWindow
                                         End If
                                     End If
                                 Else
+                                    success = False
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutAM"))
                                 End If
                             End If
@@ -227,6 +220,7 @@ Public Class DTRBiometricWindow
                             timeLogFound.TimeInPM = DateTime.Now
                         Else
                             If Date.Compare(Now, timeLogFound.TimeInPM.AddMinutes(30)) < 0 Then
+                                success = False
                                 lblMessage.Content = String.Format("You have just logged in at {0}", timeLogFound("TimeInAM"))
                                 lblMessage.Content &= vbCrLf & "Wait for 30 minutes."
                             Else
@@ -296,6 +290,7 @@ Public Class DTRBiometricWindow
                                         End If
                                     End If
                                 Else
+                                    success = False
                                     lblMessage.Content = String.Format("You have have already logged out at {0}", timeLogFound("TimeOutPM"))
                                 End If
                             End If
@@ -314,6 +309,18 @@ Public Class DTRBiometricWindow
                 File.WriteAllBytes(applicationPath & "\employee.jpg", employeeFound.picture)
             End If
         End If
+
+        Dim beep As New Thread(Sub()
+                                   Console.Beep(750, 500)
+                                   If success Then
+                                       My.Computer.Audio.Play("Resources\thank_you.wav", AudioPlayMode.Background)
+                                   Else
+                                       My.Computer.Audio.Play("Resources\pls_try_again.wav", AudioPlayMode.Background)
+                                   End If
+
+                               End Sub)
+        beep.Start()
+
         resetTimer.Stop()
         resetTimer.Start()
     End Sub
