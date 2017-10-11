@@ -11,6 +11,7 @@ Module DTRBiometricSystemModule
 
     Public dtrMainWindow As MainWindow
     Public dtrBioWindow As DTRBiometricWindow
+    Public dtrLoginWindow As LoginWindow
 
     Public tblAdminAdapter As New AdminTableAdapter
     Public tblEmployeeAdapter As New EmployeeTableAdapter
@@ -24,6 +25,9 @@ Module DTRBiometricSystemModule
     Public tblSalaryGradeAdapter As New SalaryGradeTableAdapter
 
     Public isRegisteringFingerprint As Boolean
+
+    Public mUsrn As String
+    Public mEncr As String
     Sub Main()
         applicationPath = AppDomain.CurrentDomain.BaseDirectory
         myDocumentsFolder = My.Computer.FileSystem.SpecialDirectories.MyDocuments
@@ -34,7 +38,8 @@ Module DTRBiometricSystemModule
         InitializeDBIfNotExist()
 
         Dim app As New System.Windows.Application
-        app.Run(New LoginWindow)
+        dtrLoginWindow = New LoginWindow
+        app.Run(dtrLoginWindow)
         isRegisteringFingerprint = False
     End Sub
 
@@ -131,5 +136,9 @@ Module DTRBiometricSystemModule
         Else
             Return "NO"
         End If
+    End Function
+
+    Public Function IsLoggedIn() As Boolean
+        Return mUsrn <> "" And mEncr <> ""
     End Function
 End Module

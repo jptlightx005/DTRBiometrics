@@ -47,7 +47,7 @@ Width="1366" WindowStyle="None" WindowStartupLocation="Manual" Loaded="Window_Lo
         		        </InlineUIContainer>
                     </TextBlock>
                 </Label>
-                <Label x:Name="lblMessage" Content="Your message will go here" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,622,0,0" FontSize="24"/>
+                <Label x:Name="lblMessage" Content="Your message will go here" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="578,0,0,96" FontSize="24"/>
             </Grid>
         </Border>
 
