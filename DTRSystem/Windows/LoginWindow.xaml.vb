@@ -10,6 +10,8 @@
         Dim encr = HashPassword(psswBox.Password)
 
         If ValidateCredentials(usrn, encr) Then
+            mUsrn = usrn
+            mEncr = HashPassword(encr)
             If MsgBox("Successfully logged in!", vbInformation) = vbOK Then
                 If dtrMainWindow Is Nothing Then
                     dtrMainWindow = New MainWindow

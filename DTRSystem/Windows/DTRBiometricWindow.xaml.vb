@@ -91,8 +91,11 @@ Public Class DTRBiometricWindow
     End Function
     Private Sub btnClose_Click(sender As Object, e As RoutedEventArgs) Handles btnClose.Click
         Me.Hide()
-        dtrMainWindow.Show()
-        dtrMainWindow.Focus()
+        'dtrMainWindow.Show()
+        'dtrMainWindow.Focus()
+        If Not IsLoggedIn() And dtrMainWindow.Visibility = Windows.Visibility.Hidden Then
+            End
+        End If
     End Sub
 
     Private Sub fp_OnCapture(ByVal ActionResult As Boolean, ByVal atemplate As Object) Handles fpscanner.OnCapture
@@ -341,8 +344,7 @@ Public Class DTRBiometricWindow
     End Sub
 
     Private Sub Window_Closed(sender As Object, e As EventArgs)
-        fpscanner.CancelCapture()
-        fpscanner.EndEngine()
+       
     End Sub
 
     Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)
@@ -353,6 +355,8 @@ Public Class DTRBiometricWindow
 
     Private Sub Window_Closing(sender As Object, e As ComponentModel.CancelEventArgs)
         e.Cancel = True
+        fpscanner.CancelCapture()
+        fpscanner.EndEngine()
         Me.Hide()
     End Sub
 End Class

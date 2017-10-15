@@ -139,8 +139,11 @@ Class MainWindow
     End Sub
 
     Private Sub mnu_logout_Click(sender As Object, e As RoutedEventArgs) Handles mnu_logout.Click
-        Dim login As New LoginWindow
+        mUsrn = ""
+        mEncr = ""
+
+        dtrLoginWindow = New LoginWindow
         Me.Hide()
-        login.Show()
+        dtrLoginWindow.Show()
     End Sub
 End Class
