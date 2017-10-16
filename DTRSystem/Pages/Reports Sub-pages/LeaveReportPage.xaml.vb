@@ -5,10 +5,11 @@
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As RoutedEventArgs) Handles btnSearch.Click
-        btnPrint.IsEnabled = False
+        btnPrint.IsEnabled = cmbEmployees.SelectedIndex >= 0
         If cmbEmployees.SelectedIndex >= 0 Then
             leaveDataGrid.ItemsSource = tblLeaveCreditsAdapter.GetData.Select("EmpID = " & cmbEmployees.SelectedValue)
-            btnPrint.IsEnabled = True
+        Else
+            MsgBox("Name is not found!", vbExclamation)
         End If
     End Sub
 
@@ -24,5 +25,10 @@
         Else
             MsgBox("Employee is not found", vbExclamation)
         End If
+    End Sub
+
+    Private Sub cmbEmployees_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles cmbEmployees.PreviewTextInput
+        Dim cmbBx As ComboBox = sender
+        cmbBx.IsDropDownOpen = True
     End Sub
 End Class

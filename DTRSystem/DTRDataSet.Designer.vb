@@ -634,6 +634,8 @@ Partial Public Class DTRDataSet
         
         Private columnaddress As Global.System.Data.DataColumn
         
+        Private columnsurname_first As Global.System.Data.DataColumn
+        
         Private Shared columndate_of_birth_defaultValue As Date = Date.Parse("2017-10-07T00:00:00")
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -816,6 +818,14 @@ Partial Public Class DTRDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property surname_firstColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsurname_first
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -869,9 +879,10 @@ Partial Public Class DTRDataSet
                     ByVal full_name As String,  _
                     ByVal date_of_birth As Date,  _
                     ByVal age As Integer,  _
-                    ByVal address As String) As EmployeeTableRow
+                    ByVal address As String,  _
+                    ByVal surname_first As String) As EmployeeTableRow
             Dim rowEmployeeTableRow As EmployeeTableRow = CType(Me.NewRow,EmployeeTableRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, EmployeeID, biometric, first_name, middle_name, last_name, work_timeb, work_timee, picture, emp_type, deptID, desgID, salarygrade, stepgrade, full_name, date_of_birth, age, address}
+            Dim columnValuesArray() As Object = New Object() {Nothing, EmployeeID, biometric, first_name, middle_name, last_name, work_timeb, work_timee, picture, emp_type, deptID, desgID, salarygrade, stepgrade, full_name, date_of_birth, age, address, surname_first}
             rowEmployeeTableRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowEmployeeTableRow)
             Return rowEmployeeTableRow
@@ -918,6 +929,7 @@ Partial Public Class DTRDataSet
             Me.columndate_of_birth = MyBase.Columns("date_of_birth")
             Me.columnage = MyBase.Columns("age")
             Me.columnaddress = MyBase.Columns("address")
+            Me.columnsurname_first = MyBase.Columns("surname_first")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -959,6 +971,8 @@ Partial Public Class DTRDataSet
             MyBase.Columns.Add(Me.columnage)
             Me.columnaddress = New Global.System.Data.DataColumn("address", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnaddress)
+            Me.columnsurname_first = New Global.System.Data.DataColumn("surname_first", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsurname_first)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnID}, true))
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
@@ -976,6 +990,8 @@ Partial Public Class DTRDataSet
             Me.columnage.DefaultValue = CType(0,Integer)
             Me.columnaddress.DefaultValue = CType("",String)
             Me.columnaddress.MaxLength = 255
+            Me.columnsurname_first.ReadOnly = true
+            Me.columnsurname_first.MaxLength = 536870910
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1786,6 +1802,8 @@ Partial Public Class DTRDataSet
         
         Private columnaddress As Global.System.Data.DataColumn
         
+        Private columnsurname_first As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -1982,6 +2000,14 @@ Partial Public Class DTRDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property surname_firstColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsurname_first
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2037,9 +2063,10 @@ Partial Public Class DTRDataSet
                     ByVal salarygrade As Integer,  _
                     ByVal date_of_birth As Date,  _
                     ByVal age As Integer,  _
-                    ByVal address As String) As EmployeeFullRow
+                    ByVal address As String,  _
+                    ByVal surname_first As String) As EmployeeFullRow
             Dim rowEmployeeFullRow As EmployeeFullRow = CType(Me.NewRow,EmployeeFullRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, EmployeeID, biometric, first_name, middle_name, last_name, emp_type, deptID, desgID, work_timeb, work_timee, picture, full_name, dept_name, designation_name, stepgrade, salarygrade, date_of_birth, age, address}
+            Dim columnValuesArray() As Object = New Object() {Nothing, EmployeeID, biometric, first_name, middle_name, last_name, emp_type, deptID, desgID, work_timeb, work_timee, picture, full_name, dept_name, designation_name, stepgrade, salarygrade, date_of_birth, age, address, surname_first}
             rowEmployeeFullRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowEmployeeFullRow)
             Return rowEmployeeFullRow
@@ -2082,6 +2109,7 @@ Partial Public Class DTRDataSet
             Me.columndate_of_birth = MyBase.Columns("date_of_birth")
             Me.columnage = MyBase.Columns("age")
             Me.columnaddress = MyBase.Columns("address")
+            Me.columnsurname_first = MyBase.Columns("surname_first")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2127,6 +2155,8 @@ Partial Public Class DTRDataSet
             MyBase.Columns.Add(Me.columnage)
             Me.columnaddress = New Global.System.Data.DataColumn("address", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnaddress)
+            Me.columnsurname_first = New Global.System.Data.DataColumn("surname_first", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsurname_first)
             Me.columnID.AutoIncrement = true
             Me.columnID.AutoIncrementSeed = -1
             Me.columnID.AutoIncrementStep = -1
@@ -2140,6 +2170,8 @@ Partial Public Class DTRDataSet
             Me.columndept_name.MaxLength = 255
             Me.columndesignation_name.MaxLength = 255
             Me.columnaddress.MaxLength = 255
+            Me.columnsurname_first.ReadOnly = true
+            Me.columnsurname_first.MaxLength = 536870910
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4729,6 +4761,21 @@ Partial Public Class DTRDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property surname_first() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableEmployeeTable.surname_firstColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'surname_first' in table 'EmployeeTable' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableEmployeeTable.surname_firstColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsEmployeeIDNull() As Boolean
             Return Me.IsNull(Me.tableEmployeeTable.EmployeeIDColumn)
         End Function
@@ -4929,6 +4976,18 @@ Partial Public Class DTRDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetaddressNull()
             Me(Me.tableEmployeeTable.addressColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Issurname_firstNull() As Boolean
+            Return Me.IsNull(Me.tableEmployeeTable.surname_firstColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setsurname_firstNull()
+            Me(Me.tableEmployeeTable.surname_firstColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -5519,6 +5578,21 @@ Partial Public Class DTRDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property surname_first() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableEmployeeFull.surname_firstColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'surname_first' in table 'EmployeeFull' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableEmployeeFull.surname_firstColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsIDNull() As Boolean
             Return Me.IsNull(Me.tableEmployeeFull.IDColumn)
         End Function
@@ -5755,6 +5829,18 @@ Partial Public Class DTRDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetaddressNull()
             Me(Me.tableEmployeeFull.addressColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Issurname_firstNull() As Boolean
+            Return Me.IsNull(Me.tableEmployeeFull.surname_firstColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setsurname_firstNull()
+            Me(Me.tableEmployeeFull.surname_firstColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -7618,6 +7704,7 @@ Namespace DTRDataSetTableAdapters
             tableMapping.ColumnMappings.Add("date_of_birth", "date_of_birth")
             tableMapping.ColumnMappings.Add("age", "age")
             tableMapping.ColumnMappings.Add("address", "address")
+            tableMapping.ColumnMappings.Add("surname_first", "surname_first")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.OleDb.OleDbCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -7765,8 +7852,10 @@ Namespace DTRDataSetTableAdapters
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        ID, EmployeeID, biometric, first_name, middle_name, last_name, emp_"& _ 
                 "type, deptID, desgID, work_timeb, work_timee, picture, salarygrade, stepgrade, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         first_name + ' ' + Iif(ISNULL(middle_name), '', LEFT(m"& _ 
-                "iddle_name, 1) + '. ') + last_name AS full_name, date_of_birth, age, address"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FR"& _ 
-                "OM            tbl_employee"
+                "iddle_name, 1) + '. ') + last_name AS full_name,                         tbl_emp"& _ 
+                "loyee.last_name + ', ' + tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee"& _ 
+                ".middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') AS surname_first, d"& _ 
+                "ate_of_birth, age, address"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tbl_employee"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -9354,6 +9443,7 @@ Namespace DTRDataSetTableAdapters
             tableMapping.ColumnMappings.Add("date_of_birth", "date_of_birth")
             tableMapping.ColumnMappings.Add("age", "age")
             tableMapping.ColumnMappings.Add("address", "address")
+            tableMapping.ColumnMappings.Add("surname_first", "surname_first")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -9376,12 +9466,15 @@ Namespace DTRDataSetTableAdapters
                 "sgID, tbl_employee.work_timeb, tbl_employee.work_timee, tbl_employee.picture, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
                 "                         tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee"& _ 
                 ".middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') + tbl_employee.last"& _ 
-                "_name AS full_name, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         tbl_department.dept_name, tbl_des"& _ 
-                "ignation.designation_name, tbl_employee.stepgrade, tbl_employee.salarygrade, tbl"& _ 
-                "_employee.date_of_birth, tbl_employee.age, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         tbl_employ"& _ 
-                "ee.address"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            ((tbl_employee LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                    "& _ 
-                "     tbl_department ON tbl_employee.deptID = tbl_department.ID) LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         tbl_designation ON tbl_employee.desgID = tbl_designati"& _ 
-                "on.ID)"
+                "_name AS full_name, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         tbl_employee.last_name + ', ' + t"& _ 
+                "bl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tb"& _ 
+                "l_employee.middle_name, 1) + '. ') "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         AS surname_first, "& _ 
+                "tbl_department.dept_name, tbl_designation.designation_name, tbl_employee.stepgra"& _ 
+                "de, tbl_employee.salarygrade, tbl_employee.date_of_birth, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                    "& _ 
+                "     tbl_employee.age, tbl_employee.address"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            ((tbl_employee LEFT"& _ 
+                " OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         tbl_department ON tbl_employee.deptID = tb"& _ 
+                "l_department.ID) LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         tbl_designation ON tb"& _ 
+                "l_employee.desgID = tbl_designation.ID)"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         

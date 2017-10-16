@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="400"
+      d:DesignHeight="300" d:DesignWidth="600"
       Title="EmployeePage" ShowsNavigationUI="False">
     <Grid>
         <Grid.Background>
@@ -22,7 +22,8 @@
             </TreeViewItem>
         </TreeView>
 
-        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="surname_first" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
+        <Button x:Name="btnSearch" Content="Search" Width="75" Margin="346,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Grid Margin="141,37,10,10">
             <Frame x:Name="employeeFrame" Content="" NavigationUIVisibility="Hidden" Focusable="False"/>
         </Grid>
