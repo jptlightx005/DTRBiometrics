@@ -22,14 +22,14 @@
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <Label Content="Reports" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <ComboBox x:Name="cmbDepartments" DisplayMemberPath="dept_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="91,36,0,0" VerticalAlignment="Top" Width="254"/>
+        <ComboBox x:Name="cmbDepartments" DisplayMemberPath="dept_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="91,36,0,0" VerticalAlignment="Top" Width="254" IsEditable="True"/>
         <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="91,63,0,0" VerticalAlignment="Top" Width="102"/>
         <Label Content="Department:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
         <DatePicker x:Name="toPicker" Margin="231,62,-33,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>
         <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,61,0,0"/>
         <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
         <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="payrollDataGrid" Margin="10,91,10,183" Background="White" AutoGenerateColumns="False">
+        <DataGrid x:Name="payrollDataGrid" Margin="10,91,10,10" Background="White" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding full_name}" Header="Name" />
                 <DataGridTextColumn Binding="{Binding designation}" Header="Designation" />

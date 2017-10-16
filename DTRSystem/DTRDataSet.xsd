@@ -72,7 +72,7 @@
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        ID, EmployeeID, biometric, first_name, middle_name, last_name, emp_type, deptID, desgID, work_timeb, work_timee, picture, salarygrade, stepgrade, 
-                         first_name + ' ' + Iif(ISNULL(middle_name), '', LEFT(middle_name, 1) + '. ') + last_name AS full_name, date_of_birth, age, address
+                         first_name + ' ' + Iif(ISNULL(middle_name), '', LEFT(middle_name, 1) + '. ') + last_name AS full_name,                         tbl_employee.last_name + ', ' + tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') AS surname_first, date_of_birth, age, address
 FROM            tbl_employee</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -150,6 +150,7 @@ FROM            tbl_employee</CommandText>
               <Mapping SourceColumn="date_of_birth" DataSetColumn="date_of_birth" />
               <Mapping SourceColumn="age" DataSetColumn="age" />
               <Mapping SourceColumn="address" DataSetColumn="address" />
+              <Mapping SourceColumn="surname_first" DataSetColumn="surname_first" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -329,8 +330,9 @@ FROM            tbl_timelog</CommandText>
                     <CommandText>SELECT        tbl_employee.ID, tbl_employee.EmployeeID, tbl_employee.biometric, tbl_employee.first_name, tbl_employee.middle_name, tbl_employee.last_name, 
                          tbl_employee.emp_type, tbl_employee.deptID, tbl_employee.desgID, tbl_employee.work_timeb, tbl_employee.work_timee, tbl_employee.picture, 
                          tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') + tbl_employee.last_name AS full_name, 
-                         tbl_department.dept_name, tbl_designation.designation_name, tbl_employee.stepgrade, tbl_employee.salarygrade, tbl_employee.date_of_birth, tbl_employee.age, 
-                         tbl_employee.address
+                         tbl_employee.last_name + ', ' + tbl_employee.first_name + ' ' + Iif(ISNULL(tbl_employee.middle_name), '', LEFT(tbl_employee.middle_name, 1) + '. ') 
+                         AS surname_first, tbl_department.dept_name, tbl_designation.designation_name, tbl_employee.stepgrade, tbl_employee.salarygrade, tbl_employee.date_of_birth, 
+                         tbl_employee.age, tbl_employee.address
 FROM            ((tbl_employee LEFT OUTER JOIN
                          tbl_department ON tbl_employee.deptID = tbl_department.ID) LEFT OUTER JOIN
                          tbl_designation ON tbl_employee.desgID = tbl_designation.ID)</CommandText>
@@ -360,6 +362,7 @@ FROM            ((tbl_employee LEFT OUTER JOIN
               <Mapping SourceColumn="date_of_birth" DataSetColumn="date_of_birth" />
               <Mapping SourceColumn="age" DataSetColumn="age" />
               <Mapping SourceColumn="address" DataSetColumn="address" />
+              <Mapping SourceColumn="surname_first" DataSetColumn="surname_first" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -765,7 +768,7 @@ FROM            (tbl_designation INNER JOIN
               <DbSource ConnectionRef="DTRCnStr (MySettings)" DbObjectName="tbl_admin" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM `tbl_admin` WHERE ((`ID` = ?) AND ((? = 1 AND `usrn` IS NULL) OR (`usrn` = ?)) AND ((? = 1 AND `pssw` IS NULL) OR (`pssw` = ?)) AND ((? = 1 AND `fname` IS NULL) OR (`fname` = ?)) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `bdate` IS NULL) OR (`bdate` = ?)) AND ((? = 1 AND `address` IS NULL) OR (`address` = ?)) AND ((? = 1 AND `telno` IS NULL) OR (`telno` = ?)))</CommandText>
+                    <CommandText>DELETE FROM `tbl_admin` WHERE ((`ID` = ?) AND ((? = 1 AND `usrn` IS NULL) OR (`usrn` = ?)) AND ((? = 1 AND `pssw` IS NULL) OR (`pssw` = ?)) AND ((? = 1 AND `fname` IS NULL) OR (`fname` = ?)) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `bdate` IS NULL) OR (`bdate` = ?)) AND ((? = 1 AND `address` IS NULL) OR (`address` = ?)) AND ((? = 1 AND `telno` IS NULL) OR (`telno` = ?)) AND ((? = 1 AND `type` IS NULL) OR (`type` = ?)))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_ID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ID" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_usrn" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="usrn" SourceColumnNullMapping="true" SourceVersion="Original" />
@@ -782,12 +785,14 @@ FROM            (tbl_designation INNER JOIN
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_address" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="address" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_telno" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="telno" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_telno" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="telno" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_type" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="type" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_type" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="type" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO `tbl_admin` (`usrn`, `pssw`, `fname`, `email`, `bdate`, `address`, `telno`) VALUES (?, ?, ?, ?, ?, ?, ?)</CommandText>
+                    <CommandText>INSERT INTO `tbl_admin` (`usrn`, `pssw`, `fname`, `email`, `bdate`, `address`, `telno`, `type`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="usrn" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="usrn" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="pssw" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="pssw" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -796,18 +801,20 @@ FROM            (tbl_designation INNER JOIN
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="bdate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="bdate" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="address" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="address" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="telno" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="telno" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="type" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="type" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT ID, usrn, pssw, fname, email, bdate, address, telno FROM tbl_admin</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        ID, usrn, pssw, fname, email, bdate, address, telno, type
+FROM            tbl_admin</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE `tbl_admin` SET `usrn` = ?, `pssw` = ?, `fname` = ?, `email` = ?, `bdate` = ?, `address` = ?, `telno` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `usrn` IS NULL) OR (`usrn` = ?)) AND ((? = 1 AND `pssw` IS NULL) OR (`pssw` = ?)) AND ((? = 1 AND `fname` IS NULL) OR (`fname` = ?)) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `bdate` IS NULL) OR (`bdate` = ?)) AND ((? = 1 AND `address` IS NULL) OR (`address` = ?)) AND ((? = 1 AND `telno` IS NULL) OR (`telno` = ?)))</CommandText>
+                    <CommandText>UPDATE `tbl_admin` SET `usrn` = ?, `pssw` = ?, `fname` = ?, `email` = ?, `bdate` = ?, `address` = ?, `telno` = ?, `type` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `usrn` IS NULL) OR (`usrn` = ?)) AND ((? = 1 AND `pssw` IS NULL) OR (`pssw` = ?)) AND ((? = 1 AND `fname` IS NULL) OR (`fname` = ?)) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `bdate` IS NULL) OR (`bdate` = ?)) AND ((? = 1 AND `address` IS NULL) OR (`address` = ?)) AND ((? = 1 AND `telno` IS NULL) OR (`telno` = ?)) AND ((? = 1 AND `type` IS NULL) OR (`type` = ?)))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="usrn" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="usrn" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="pssw" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="pssw" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -816,6 +823,7 @@ FROM            (tbl_designation INNER JOIN
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="bdate" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="bdate" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="address" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="address" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="telno" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="telno" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="type" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="type" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_ID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="ID" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_usrn" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="usrn" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_usrn" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="usrn" SourceColumnNullMapping="false" SourceVersion="Original" />
@@ -831,6 +839,8 @@ FROM            (tbl_designation INNER JOIN
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_address" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="address" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_telno" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="telno" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_telno" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="telno" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_type" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="type" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_type" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="type" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -845,6 +855,7 @@ FROM            (tbl_designation INNER JOIN
               <Mapping SourceColumn="bdate" DataSetColumn="bdate" />
               <Mapping SourceColumn="address" DataSetColumn="address" />
               <Mapping SourceColumn="telno" DataSetColumn="telno" />
+              <Mapping SourceColumn="type" DataSetColumn="type" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -916,6 +927,13 @@ FROM            (tbl_designation INNER JOIN
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="surname_first" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnsurname_first" msprop:Generator_ColumnPropNameInRow="surname_first" msprop:Generator_ColumnPropNameInTable="surname_firstColumn" msprop:Generator_UserColumnName="surname_first" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -1024,6 +1042,13 @@ FROM            (tbl_designation INNER JOIN
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="surname_first" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnsurname_first" msprop:Generator_ColumnPropNameInRow="surname_first" msprop:Generator_ColumnPropNameInTable="surname_firstColumn" msprop:Generator_UserColumnName="surname_first" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -1202,6 +1227,13 @@ FROM            (tbl_designation INNER JOIN
                 </xs:simpleType>
               </xs:element>
               <xs:element name="telno" msprop:Generator_ColumnVarNameInTable="columntelno" msprop:Generator_ColumnPropNameInRow="telno" msprop:Generator_ColumnPropNameInTable="telnoColumn" msprop:Generator_UserColumnName="telno" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="type" msprop:Generator_ColumnVarNameInTable="columntype" msprop:Generator_ColumnPropNameInRow="type" msprop:Generator_ColumnPropNameInTable="typeColumn" msprop:Generator_UserColumnName="type" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />

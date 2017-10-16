@@ -24,10 +24,10 @@ Module DTRBiometricSystemModule
     Public tblLeaveApplicationAdapter As New LeaveApplicationsTableAdapter
     Public tblSalaryGradeAdapter As New SalaryGradeTableAdapter
 
+    Public acctLogged As AdminTableRow
+
     Public isRegisteringFingerprint As Boolean
 
-    Public mUsrn As String
-    Public mEncr As String
     Sub Main()
         applicationPath = AppDomain.CurrentDomain.BaseDirectory
         myDocumentsFolder = My.Computer.FileSystem.SpecialDirectories.MyDocuments
@@ -139,6 +139,6 @@ Module DTRBiometricSystemModule
     End Function
 
     Public Function IsLoggedIn() As Boolean
-        Return mUsrn <> "" And mEncr <> ""
+        Return Not acctLogged Is Nothing
     End Function
 End Module

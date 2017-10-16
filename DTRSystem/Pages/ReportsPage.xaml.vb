@@ -8,6 +8,11 @@
         activePage = pg
         reportsFrame.Content = pg
     End Sub
+    Public Sub SetAccess()
+        treeDTR.IsEnabled = isHR()
+        treeLeave.IsEnabled = isHR()
+        treePayroll.IsEnabled = isACCT()
+    End Sub
     Private Sub treeDTR_Selected(sender As Object, e As RoutedEventArgs) Handles treeDTR.Selected
         If dtrPage Is Nothing Then
             dtrPage = New DTRReportsPage

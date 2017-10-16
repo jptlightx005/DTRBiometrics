@@ -22,9 +22,10 @@
             </TreeViewItem>
         </TreeView>
 
-        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="surname_first" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="141,10,10,0" VerticalAlignment="Top" Width="200" IsEditable="True"/>
         <Grid Margin="141,37,10,10">
             <Frame x:Name="leaveFrame" Content="" NavigationUIVisibility="Hidden"/>
         </Grid>
+        <Button x:Name="btnSearch" Content="Search" Width="75" Margin="346,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Page>

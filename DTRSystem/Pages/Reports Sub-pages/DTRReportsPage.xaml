@@ -11,7 +11,7 @@
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
         </Grid.Background>
         <Label Content="Reports" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
-        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="full_name" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="79,36,0,0" VerticalAlignment="Top" Width="254"/>
+        <ComboBox x:Name="cmbEmployees" DisplayMemberPath="surname_first" SelectedValuePath="ID" HorizontalAlignment="Left" Margin="79,36,0,0" VerticalAlignment="Top" Width="254" IsEditable="True"/>
         <DatePicker x:Name="fromPicker" HorizontalAlignment="Left" Margin="79,63,0,0" VerticalAlignment="Top" Width="102"/>
         <Label Content="Employee:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,36,0,0"/>
         <DatePicker x:Name="toPicker" Margin="231,62,10,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>

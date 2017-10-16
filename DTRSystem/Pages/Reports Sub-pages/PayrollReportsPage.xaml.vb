@@ -164,7 +164,7 @@ Class PayrollReportsPage
 
             btnPrint.IsEnabled = payrollTable.DefaultView.Count > 0
         Else
-            MsgBox("Must select a department!", vbExclamation)
+            MsgBox("Invalid department!", vbExclamation)
         End If
     End Sub
 
@@ -182,7 +182,6 @@ Class PayrollReportsPage
             End If
 
             webReportWindow.department = departments(0)
-
 
             webReportWindow.records = payrollTable
             webReportWindow.fromDate = fromPicker.SelectedDate
@@ -225,5 +224,10 @@ Class PayrollReportsPage
 
     Private Sub Page_Loaded(sender As Object, e As RoutedEventArgs)
 
+    End Sub
+
+    Private Sub cmbDepartments_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles cmbDepartments.PreviewTextInput
+        Dim cmbBx As ComboBox = sender
+        cmbBx.IsDropDownOpen = True
     End Sub
 End Class

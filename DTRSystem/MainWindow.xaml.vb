@@ -8,6 +8,7 @@ Class MainWindow
     Dim leaveTab As TabItem
     Dim adminTab As TabItem
 
+    Dim reportsPage As ReportsPage
     Public Sub New()
 
         ' This call is required by the designer.
@@ -15,6 +16,15 @@ Class MainWindow
 
         ' Add any initialization after the InitializeComponent() call.
         isRegisteringFingerprint = False
+
+    End Sub
+
+    Public Sub SetAccess()
+        tlbrAdmin.IsEnabled = isHR()
+        tlbrEmployee.IsEnabled = isHR()
+        tlbrLeave.IsEnabled = isHR()
+
+        Me.Title = acctLogged.type
     End Sub
     Private Sub btnDTR_Click(sender As Object, e As RoutedEventArgs) Handles btnDTR.Click
         If dtrBioWindow Is Nothing Then
@@ -55,9 +65,16 @@ Class MainWindow
     End Sub
 
     Private Sub tlbrReports_Click(sender As Object, e As RoutedEventArgs)
+        Debug.Print("reports tab is nothing: {0}", reportsTab)
         If reportsTab Is Nothing Then
-            reportsTab = NewTab(New ReportsPage, "Reports")
+            Debug.Print("reports tab is nothing: YES")
+            If reportsPage Is Nothing Then
+                reportsPage = New ReportsPage
+            End If
+            reportsTab = NewTab(reportsPage, "Reports")
         End If
+        Debug.Print("reports tab is nothing: {0}", reportsTab)
+        reportsPage.SetAccess()
         tab_panels.SelectedItem = reportsTab
     End Sub
 
@@ -136,13 +153,22 @@ Class MainWindow
 
     Private Sub mnu_close_Click(sender As Object, e As RoutedEventArgs) Handles mnu_close.Click
         Me.Close()
+        End
     End Sub
 
-    Private Sub mnu_logout_Click(sender As Object, e As RoutedEventArgs) Handles mnu_logout.Click
-        mUsrn = ""
-        mEncr = ""
 
+    Private Sub mnu_logout_Click(sender As Object, e As RoutedEventArgs) Handles mnu_logout.Click
+        acctLogged = Nothing
         dtrLoginWindow = New LoginWindow
+
+        If tab_panels.Items.Count > 0 Then
+            For i = tab_panels.Items.Count - 1 To 0 Step -1
+                Dim tabItem = tab_panels.Items(i)
+                Tab_Closed(tabItem, e)
+                tab_panels.Items.RemoveAt(i)
+            Next
+        End If
+
         Me.Hide()
         dtrLoginWindow.Show()
     End Sub

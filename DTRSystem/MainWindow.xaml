@@ -13,7 +13,7 @@
                     <MenuItem x:Name="mnu_logout" Header="_Logout"/>
                     <MenuItem x:Name="mnu_close" Header="_Close" />
                 </MenuItem>
-                <MenuItem Header="_About" IsEnabled="False"/>
+                <MenuItem Header="A_bout" IsEnabled="False"/>
             </Menu>
         </DockPanel>
         <DockPanel LastChildFill="False" Margin="0,22,0,0" VerticalAlignment="Top">
@@ -39,7 +39,7 @@
                     </StackPanel>
                 </Button>
                 <Separator/>-->
-                <Button Click="tlbrAdmin_Click">
+                <Button x:Name="tlbrAdmin" Click="tlbrAdmin_Click">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/admin_icon.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Admin" HorizontalAlignment="Center"/>
@@ -47,13 +47,13 @@
                 </Button>
                 <Separator/>
                 <Button Click="tlbrReports_Click">
-                    <StackPanel Width="65">
+                    <StackPanel x:Name="tlbrReports" Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/All_reports.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Reports" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Click="tblrLeave_Click">
+                <Button x:Name="tlbrLeave" Click="tblrLeave_Click">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/Benefits-of-Leave-Management-System-in-School-ERP-Software.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Leave" HorizontalAlignment="Center"/>

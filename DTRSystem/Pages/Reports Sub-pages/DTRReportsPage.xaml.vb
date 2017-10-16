@@ -16,16 +16,23 @@ Class DTRReportsPage
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As RoutedEventArgs) Handles btnSearch.Click
-        If fromPicker.SelectedDate Is Nothing Or toPicker.SelectedDate Is Nothing Then
-            timeLogDataGrid.ItemsSource = FilteredDataTable(tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue))
+        If cmbEmployees.SelectedIndex >= 0 Then
+            If fromPicker.SelectedDate Is Nothing Or toPicker.SelectedDate Is Nothing Then
+                timeLogDataGrid.ItemsSource = FilteredDataTable(tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue))
+            Else
+
+                Dim filterExpression As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromPicker.SelectedDate, toPicker.SelectedDate)
+                Dim dataTable As New TimelogTableDataTable
+                For Each row In tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
+                    dataTable.ImportRow(row)
+                Next
+                timeLogDataGrid.ItemsSource = FilteredDataTable(dataTable)
+
+            End If
         Else
-            Dim filterExpression As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromPicker.SelectedDate, toPicker.SelectedDate)
-            Dim dataTable As New TimelogTableDataTable
-            For Each row In tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
-                dataTable.ImportRow(row)
-            Next
-            timeLogDataGrid.ItemsSource = FilteredDataTable(dataTable)
+            MsgBox("Name is not found!", vbExclamation)
         End If
+       
     End Sub
 
     Function FilteredDataTable(timeLog As TimelogTableDataTable) As TimelogTableDataTable
@@ -105,5 +112,10 @@ Class DTRReportsPage
 
     Private Sub cmbEmployees_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles cmbEmployees.SelectionChanged
         btnPrint.IsEnabled = cmbEmployees.SelectedIndex >= 0
+    End Sub
+
+    Private Sub cmbEmployees_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles cmbEmployees.PreviewTextInput
+        Dim cmbBx As ComboBox = sender
+        cmbBx.IsDropDownOpen = True
     End Sub
 End Class
