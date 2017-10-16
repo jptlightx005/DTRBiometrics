@@ -1,4 +1,5 @@
-﻿Public Class LoginWindow
+﻿'"ADMIN" = admin, "HR" = human resource, "ACCT" = accountant
+Public Class LoginWindow
 
     Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
         If Trim(txtUsername.Text).Count = 0 Or Trim(psswBox.Password).Count = 0 Then
@@ -9,13 +10,12 @@
         Dim usrn = txtUsername.Text
         Dim encr = HashPassword(psswBox.Password)
 
-        If ValidateCredentials(usrn, encr) Then
-            mUsrn = usrn
-            mEncr = HashPassword(encr)
+        If ValidateCredentials(usrn, encr, acctLogged) Then
             If MsgBox("Successfully logged in!", vbInformation) = vbOK Then
                 If dtrMainWindow Is Nothing Then
                     dtrMainWindow = New MainWindow
                 End If
+                dtrMainWindow.SetAccess()
                 dtrMainWindow.Show()
                 Me.Close()
             End If

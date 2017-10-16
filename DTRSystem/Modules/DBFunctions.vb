@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Security.Cryptography
 Imports System.Text
-
+Imports DTRSystem.DTRDataSet
 Module DBFunctions
     Sub Test()
         Dim connection As SqlConnection = New SqlConnection()
@@ -10,9 +10,25 @@ Module DBFunctions
 
     End Sub
 
-    Public Function ValidateCredentials(usrn As String, encr As String) As Boolean
+    Public Function isADMIN() As Boolean
+        Return (acctLogged.type = "ADMIN")
+    End Function
+
+    Public Function isHR() As Boolean
+        Return (acctLogged.type = "HR") Or isADMIN()
+    End Function
+
+    Public Function isACCT() As Boolean
+        Return (acctLogged.type = "ACCT") Or isADMIN()
+    End Function
+
+    Public Function ValidateCredentials(usrn As String, encr As String, ByRef acct As AdminTableRow) As Boolean
         Dim filter = String.Format("usrn = '{0}' AND pssw = '{1}'", usrn, encr)
-        Return tblAdminAdapter.GetData.Select(filter).Count > 0
+        Dim rows = tblAdminAdapter.GetData.Select(filter)
+        If rows.Count > 0 Then
+            acct = rows(0)
+        End If
+        Return rows.Count > 0
     End Function
     Public Function CreateGenericPassword() As String
         Dim pass = "password"

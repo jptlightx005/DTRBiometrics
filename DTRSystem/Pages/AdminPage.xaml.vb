@@ -8,7 +8,11 @@
         adminFrame.Content = pg
     End Sub
 
-
+    Public Sub setAccess()
+        treeDept.IsEnabled = isHR()
+        treeDesg.IsEnabled = isHR()
+        treeDept.IsEnabled = isHR()
+    End Sub
     Private Sub treeDept_Selected(sender As Object, e As RoutedEventArgs) Handles treeDept.Selected
         If deptPage Is Nothing Then
             deptPage = New DepartmentPage
