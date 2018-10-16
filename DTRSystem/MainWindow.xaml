@@ -53,13 +53,13 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button x:Name="tlbrLeave" Click="tblrLeave_Click">
+                <!-- <Button x:Name="tlbrLeave" Click="tblrLeave_Click">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/Benefits-of-Leave-Management-System-in-School-ERP-Software.png" HorizontalAlignment="Center" Height="25" Margin="12,0"/>
                         <Label Content="Leave" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Separator/>
+                <Separator/> -->
                 <Button x:Name="btnClose">
                     <StackPanel Width="65">
                         <Image Source="pack://siteoforigin:,,,/Resources/close-button-icon-30064.png" HorizontalAlignment="Left" Height="25" Margin="20,0,0,0"/>

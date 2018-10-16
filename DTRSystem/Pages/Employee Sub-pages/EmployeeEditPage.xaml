@@ -54,7 +54,7 @@
                 <TextBox x:Name="txtAge" Text="{Binding age}" HorizontalAlignment="Left" Height="23" 
                 	TextWrapping="Wrap" VerticalAlignment="Top" Width="103" Margin="300,153,0,0" TabIndex="6"/>
                 <DatePicker x:Name="birthDatePicker" SelectedDate="{Binding date_of_birth}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="301,180,0,0" TabIndex="7"/>
-                <Label Content="Salary Grade" HorizontalAlignment="Left" Margin="295,235,0,0" VerticalAlignment="Top" 
+                <!--<Label Content="Salary Grade" HorizontalAlignment="Left" Margin="295,235,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
                 <Label Content="Step Increment" HorizontalAlignment="Left" Margin="287,259,0,0" VerticalAlignment="Top" 
                 	HorizontalContentAlignment="Right"/>
@@ -99,7 +99,7 @@
                     <ComboBoxItem Content="Step 6"/>
                     <ComboBoxItem Content="Step 7"/>
                     <ComboBoxItem Content="Step 8"/>
-                </ComboBox>
+                </ComboBox>-->
             </Grid>
         </Border>
         

@@ -22,7 +22,7 @@ Class MainWindow
     Public Sub SetAccess()
         tlbrAdmin.IsEnabled = isHR()
         tlbrEmployee.IsEnabled = isHR()
-        tlbrLeave.IsEnabled = isHR()
+        'tlbrLeave.IsEnabled = isHR()
 
         Me.Title = acctLogged.type
     End Sub

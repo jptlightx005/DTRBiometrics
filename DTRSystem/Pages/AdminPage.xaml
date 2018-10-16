@@ -19,7 +19,7 @@
             <TreeViewItem Header="Admin">
                 <TreeViewItem x:Name="treeDept" Header="Departments"/>
                 <TreeViewItem x:Name="treeDesg" Header="Designations"/>
-                <TreeViewItem x:Name="treeSalG" Header="Salary Grades"/>
+                <!--<TreeViewItem x:Name="treeSalG" Header="Salary Grades"/>-->
             </TreeViewItem>
         </TreeView>
 

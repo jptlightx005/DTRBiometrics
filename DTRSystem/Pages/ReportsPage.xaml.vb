@@ -10,8 +10,8 @@
     End Sub
     Public Sub SetAccess()
         treeDTR.IsEnabled = isHR()
-        treeLeave.IsEnabled = isHR()
-        treePayroll.IsEnabled = isACCT()
+        '.IsEnabled = isHR()
+        'treePayroll.IsEnabled = isACCT()
     End Sub
     Private Sub treeDTR_Selected(sender As Object, e As RoutedEventArgs) Handles treeDTR.Selected
         If dtrPage Is Nothing Then
@@ -20,17 +20,17 @@
         ReplacePage(dtrPage)
     End Sub
 
-    Private Sub treePayroll_Selected(sender As Object, e As RoutedEventArgs) Handles treePayroll.Selected
-        If payrollPage Is Nothing Then
-            payrollPage = New PayrollReportsPage
-        End If
-        ReplacePage(payrollPage)
-    End Sub
+    'Private Sub treePayroll_Selected(sender As Object, e As RoutedEventArgs) Handles treePayroll.Selected
+    '    If payrollPage Is Nothing Then
+    '        payrollPage = New PayrollReportsPage
+    '    End If
+    '    ReplacePage(payrollPage)
+    'End Sub
 
-    Private Sub treeLeave_Selected(sender As Object, e As RoutedEventArgs) Handles treeLeave.Selected
-        If leavePage Is Nothing Then
-            leavePage = New LeaveReportPage
-        End If
-        ReplacePage(leavePage)
-    End Sub
+    'Private Sub treeLeave_Selected(sender As Object, e As RoutedEventArgs) Handles treeLeave.Selected
+    '    If leavePage Is Nothing Then
+    '        leavePage = New LeaveReportPage
+    '    End If
+    '    ReplacePage(leavePage)
+    'End Sub
 End Class

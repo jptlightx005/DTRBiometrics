@@ -18,8 +18,8 @@
             </TreeView.ItemContainerStyle>
             <TreeViewItem Header="Reports">
                 <TreeViewItem x:Name="treeDTR" Header="DTR Reports"/>
-                <TreeViewItem x:Name="treePayroll" Header="Payroll Reports"/>
-                <TreeViewItem x:Name="treeLeave" Header="Leave Reports"/>
+                <!-- <TreeViewItem x:Name="treePayroll" Header="Payroll Reports"/>
+                <TreeViewItem x:Name="treeLeave" Header="Leave Reports"/> -->
             </TreeViewItem>
         </TreeView>
 
