@@ -30,11 +30,11 @@
         ReplacePage(desgPage)
     End Sub
 
-    Private Sub treeSalG_Selected(sender As Object, e As RoutedEventArgs) Handles treeSalG.Selected
-        If salGPage Is Nothing Then
-            salGPage = New SalaryGradePage
-        End If
+    'Private Sub treeSalG_Selected(sender As Object, e As RoutedEventArgs) Handles treeSalG.Selected
+    '    If salGPage Is Nothing Then
+    '        salGPage = New SalaryGradePage
+    '    End If
 
-        ReplacePage(salGPage)
-    End Sub
+    '    ReplacePage(salGPage)
+    'End Sub
 End Class

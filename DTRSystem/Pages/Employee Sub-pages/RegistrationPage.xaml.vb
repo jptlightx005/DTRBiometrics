@@ -17,8 +17,8 @@ Class RegistrationPage
         txtFName.Text = ""
         txtMName.Text = ""
         txtLName.Text = ""
-        cmbSalaryGrade.SelectedIndex = -1
-        cmbStepGrade.SelectedIndex = -1
+        'cmbSalaryGrade.SelectedIndex = -1
+        'cmbStepGrade.SelectedIndex = -1
         lblStatus.Content = "No Fingerprint Enrolled"
 
         regPage_Initialized(Me, New EventArgs)
@@ -73,8 +73,8 @@ Class RegistrationPage
                 employeeRow.work_timeb = 8
                 employeeRow.work_timee = 17
                 employeeRow.picture = image
-                employeeRow.salarygrade = cmbSalaryGrade.SelectedIndex + 1
-                employeeRow.stepgrade = cmbStepGrade.SelectedIndex + 1
+                'employeeRow.salarygrade = cmbSalaryGrade.SelectedIndex + 1
+                'employeeRow.stepgrade = cmbStepGrade.SelectedIndex + 1
                 dataTable.Rows.Add(employeeRow)
                 If tblEmployeeAdapter.Update(dataTable) = 1 Then
                     File.Delete(applicationPath & "\fptemp.tpl")
@@ -128,15 +128,15 @@ Class RegistrationPage
             Return False
         End If
 
-        If cmbSalaryGrade.SelectedIndex < 0 Then
-            MsgBox("Must select Salary Grade!", vbExclamation)
-            Return False
-        End If
+        'If cmbSalaryGrade.SelectedIndex < 0 Then
+        '    MsgBox("Must select Salary Grade!", vbExclamation)
+        '    Return False
+        'End If
 
-        If cmbStepGrade.SelectedIndex < 0 Then
-            MsgBox("Must select Step Grade!", vbExclamation)
-            Return False
-        End If
+        'If cmbStepGrade.SelectedIndex < 0 Then
+        '    MsgBox("Must select Step Grade!", vbExclamation)
+        '    Return False
+        'End If
 
         If Not hasFingerPrint Then
             MsgBox("Must register a fingerprint first!", vbExclamation)

@@ -19,8 +19,8 @@ Class EmployeeEditPage
             cmbDepartment.SelectedIndex = -1
             cmbDepartment.SelectedValue = selectedEmployee.deptID
 
-            cmbSalaryGrade.SelectedIndex = selectedEmployee.salarygrade - 1
-            cmbStepGrade.SelectedIndex = selectedEmployee.stepgrade - 1
+            'cmbSalaryGrade.SelectedIndex = selectedEmployee.salarygrade - 1
+            'cmbStepGrade.SelectedIndex = selectedEmployee.stepgrade - 1
 
             imgEmpPicture.Source = DataToBitmap(selectedEmployee("picture"))
             
@@ -34,8 +34,8 @@ Class EmployeeEditPage
             selectedEmployee.deptID = cmbDepartment.SelectedValue
             selectedEmployee.desgID = cmbDesignation.SelectedValue
 
-            selectedEmployee.salarygrade = cmbSalaryGrade.SelectedIndex + 1
-            selectedEmployee.stepgrade = cmbStepGrade.SelectedIndex + 1
+            'selectedEmployee.salarygrade = cmbSalaryGrade.SelectedIndex + 1
+            'selectedEmployee.stepgrade = cmbStepGrade.SelectedIndex + 1
 
             If tblEmployeeAdapter.Update(selectedEmployee) = 1 Then
                 MsgBox("Successfully updated!", vbInformation)
@@ -76,15 +76,15 @@ Class EmployeeEditPage
             Return False
         End If
 
-        If cmbSalaryGrade.SelectedIndex < 0 Then
-            MsgBox("Must select Salary Grade!", vbExclamation)
-            Return False
-        End If
+        'If cmbSalaryGrade.SelectedIndex < 0 Then
+        '    MsgBox("Must select Salary Grade!", vbExclamation)
+        '    Return False
+        'End If
 
-        If cmbStepGrade.SelectedIndex < 0 Then
-            MsgBox("Must select Step Grade!", vbExclamation)
-            Return False
-        End If
+        'If cmbStepGrade.SelectedIndex < 0 Then
+        '    MsgBox("Must select Step Grade!", vbExclamation)
+        '    Return False
+        'End If
 
         Return True
     End Function
