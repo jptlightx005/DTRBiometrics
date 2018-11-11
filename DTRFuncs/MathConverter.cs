@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace SMSCSFuncs
+namespace DTRFuncs
 {
     /// <summary>
     /// Value converter that performs arithmetic calculations over its argument(s)

@@ -1,7 +1,7 @@
 ﻿Imports System.IO.File
 Imports DTRSystem.DTRDataSet
 Imports DTRSystem.DTRDataSetTableAdapters
-Imports SMSCSFuncs
+Imports DTRFuncs
 Public Class LeaveReportWebWindow
     Public records As LeaveCreditsTableRow()
     Public employee As EmployeeFullRow

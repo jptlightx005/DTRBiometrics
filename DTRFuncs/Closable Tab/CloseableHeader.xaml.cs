@@ -9,7 +9,7 @@ using System.Windows.Media;
 /// <summary>
 /// Interaction logic for CloseableItem.xaml
 /// </summary>
-namespace SMSCSFuncs
+namespace DTRFuncs
 {
     public partial class CloseableHeader : UserControl
     {

@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:SMSCSFuncs="clr-namespace:SMSCSFuncs;assembly=DTRFuncs"
+      xmlns:DTRFuncs="clr-namespace:DTRFuncs;assembly=DTRFuncs"
       mc:Ignorable="d" 
       Title="ReportsPage">
     <Grid Margin="0">
@@ -18,7 +18,7 @@
         <Label Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,61,0,0"/>
         <Label Content="To:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,63,0,0"/>
         <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="351,36,10,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="timeLogDataGrid" Margin="10,91,10,10" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid x:Name="timeLogDataGrid" Margin="10,120,10,10" Background="White" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding EmpID}" Header="Employee ID" />
                 <DataGridTextColumn Binding="{Binding DateOfTheDay, StringFormat=\{0:MMMM dd yyyy\}}" Header="Date" />
@@ -30,5 +30,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnPrint" Content="Print" HorizontalAlignment="Left" Margin="351,62,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
+        <Button x:Name="btn_Export" Content="Export" HorizontalAlignment="Left" Margin="186,93,0,0" VerticalAlignment="Top" Width="75"/>
+        <DatePicker x:Name="exportMonthPicker" Margin="79,92,0,0" VerticalAlignment="Top" Width="102" HorizontalAlignment="Left"/>
+        <Label Content="Export" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,87,0,0"/>
     </Grid>
 </Page>

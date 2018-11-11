@@ -1,5 +1,5 @@
 ﻿Imports System.IO.File
-Imports SMSCSFuncs
+Imports DTRFuncs
 Imports DTRSystem.DTRDataSet
 Public Class DTRReportWebWindow
     Public employee As EmployeeFullRow

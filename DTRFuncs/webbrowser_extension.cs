@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using mshtml;
-namespace SMSCSFuncs
+namespace DTRFuncs
 {
     public class webbrowser_extension
     {

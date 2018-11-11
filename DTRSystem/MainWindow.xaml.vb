@@ -1,4 +1,4 @@
-﻿Imports SMSCSFuncs
+﻿Imports DTRFuncs
 Imports System.Windows.Forms
 
 Class MainWindow
@@ -102,7 +102,7 @@ Class MainWindow
         tab_panels.SelectedItem = payrollTab
     End Sub
     Private Function NewTab(ByRef pg As Page, header As String) As ClosableTab
-        Dim tab As New SMSCSFuncs.ClosableTab
+        Dim tab As New DTRFuncs.ClosableTab
         tab.Title = header
         AddHandler tab.OnTabClose, AddressOf Me.Tab_Closed
 

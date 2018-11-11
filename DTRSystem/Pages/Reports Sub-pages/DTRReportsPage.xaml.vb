@@ -1,7 +1,10 @@
-﻿Imports SMSCSFuncs
+﻿Imports DTRFuncs
 Imports System.Data
 Imports DTRSystem.DTRDataSetTableAdapters
 Imports DTRSystem.DTRDataSet
+Imports DTRFuncs.DocumentExporter
+
+
 Class DTRReportsPage
 
     Public Sub New()
@@ -117,5 +120,73 @@ Class DTRReportsPage
     Private Sub cmbEmployees_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles cmbEmployees.PreviewTextInput
         Dim cmbBx As ComboBox = sender
         cmbBx.IsDropDownOpen = True
+    End Sub
+
+    Private Sub btn_Export_Click(sender As Object, e As RoutedEventArgs) Handles btn_Export.Click
+        If cmbEmployees.SelectedIndex = -1 Then
+            MsgBox("There are no employees added yet!", MsgBoxStyle.Exclamation, "Empty Records")
+            Return
+        End If
+        Dim employees = tblEmployeeFullAdapter.GetData.Select("ID = " & cmbEmployees.SelectedValue)
+        If employees.Count = 0 Then
+            MsgBox("Employee not found!", MsgBoxStyle.Exclamation, "Empty Records")
+            Return
+        End If
+
+        'webReportWindow.employee = employees(0)
+        'If fromPicker.SelectedDate Is Nothing Or toPicker.SelectedDate Is Nothing Then
+        '    webReportWindow.records = FilteredDataTable(tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue))
+        'Else
+        '    Dim filterExpression As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromPicker.SelectedDate, toPicker.SelectedDate)
+        '    Dim dataTable As New TimelogTableDataTable
+        '    For Each row In tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
+        '        dataTable.ImportRow(row)
+        '    Next
+        '    webReportWindow.records = FilteredDataTable(dataTable)
+        'End If
+        'webReportWindow.ShowDialog()
+
+        Dim employee = employees.First
+        Dim exportDate = exportMonthPicker.SelectedDate
+        If exportDate Is Nothing Then
+            exportDate = DateTime.Now
+        End If
+        Dim exportFrom = New DateTime(exportDate.Value.Year, exportDate.Value.Month, 1)
+        Dim exportTo = exportFrom.AddMonths(1).AddSeconds(-1)
+
+        Dim record = New Dictionary(Of String, Object)
+        Dim period = New Dictionary(Of String, DateTime)
+        period("From") = exportFrom
+        period("To") = exportTo
+
+        record("Period") = period
+        record("Employee") = employee("first_name_first")
+
+        Dim timeLogs = New List(Of Dictionary(Of String, Object))
+
+        Dim filterExpression As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", exportFrom, exportTo)
+
+        'Dim filterExpression As String = String.Format("DateOfTheDay >= #{0}# AND DateOfTheDay <= #{1}#", fromPicker.SelectedDate, toPicker.SelectedDate)
+        Debug.Print("Filter Expression: {0}", filterExpression)
+
+        'For Each rrow In tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
+
+        'Next
+        For Each rrow In tblLogAdapter.GetEmployeeTableLog(cmbEmployees.SelectedValue).Select(filterExpression)
+
+            Dim timeLog = New Dictionary(Of String, Object)
+            Dim row = DirectCast(rrow, TimelogTableRow)
+            timeLog("DateOfTheDay") = row.DateOfTheDay
+            timeLog("TimeInAM") = row.TimeInAM.ToString("hh:mm tt")
+            timeLog("TimeOutAM") = row.TimeOutAM.ToString("hh:mm tt")
+            timeLog("TimeInPM") = row.TimeInPM.ToString("hh:mm tt")
+            timeLog("TimeOutPM") = row.TimeOutPM.ToString("hh:mm tt")
+
+            timeLogs.Add(timeLog)
+        Next
+        record("TimeLogs") = timeLogs
+        Debug.Print(timeLogs.ToString())
+        DocumentExporter.exportToExcel(record)
+
     End Sub
 End Class
