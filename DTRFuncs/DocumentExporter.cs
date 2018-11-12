@@ -126,15 +126,20 @@ namespace DTRFuncs
                 {
                     var current = (DateTime)timeLog["DateOfTheDay"];
                     int i = current.Day;
-                    workSheet.Cells[5 + i, "C"] = timeLog["TimeInAM"];
-                    workSheet.Cells[5 + i, "D"] = timeLog["TimeOutAM"];
-                    workSheet.Cells[5 + i, "E"] = timeLog["TimeInPM"];
-                    workSheet.Cells[5 + i, "F"] = timeLog["TimeOutPM"];
+                    var keys = timeLog.Keys;
+                    var timeInAM = keys.Contains("TimeInAM") ? timeLog["TimeInAM"] : "";
+                    var timeOutAM = keys.Contains("TimeOutAM") ? timeLog["TimeOutAM"] : "";
+                    var timeInPM = keys.Contains("TimeInPM") ? timeLog["TimeInPM"] : "";
+                    var timeOutPM = keys.Contains("TimeOutPM") ? timeLog["TimeOutPM"] : "";
+                    workSheet.Cells[5 + i, "C"] = timeInAM;
+                    workSheet.Cells[5 + i, "D"] = timeOutAM;
+                    workSheet.Cells[5 + i, "E"] = timeInPM;
+                    workSheet.Cells[5 + i, "F"] = timeOutPM;
 
-                    workSheet.Cells[5 + i, "I"] = timeLog["TimeInAM"];
-                    workSheet.Cells[5 + i, "J"] = timeLog["TimeOutAM"];
-                    workSheet.Cells[5 + i, "K"] = timeLog["TimeInPM"];
-                    workSheet.Cells[5 + i, "L"] = timeLog["TimeOutPM"];
+                    workSheet.Cells[5 + i, "I"] = timeInAM;
+                    workSheet.Cells[5 + i, "J"] = timeOutAM;
+                    workSheet.Cells[5 + i, "K"] = timeInPM;
+                    workSheet.Cells[5 + i, "L"] = timeOutPM;
                 }
             }
 

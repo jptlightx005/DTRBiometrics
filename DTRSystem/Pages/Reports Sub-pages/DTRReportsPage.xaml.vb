@@ -177,10 +177,19 @@ Class DTRReportsPage
             Dim timeLog = New Dictionary(Of String, Object)
             Dim row = DirectCast(rrow, TimelogTableRow)
             timeLog("DateOfTheDay") = row.DateOfTheDay
-            timeLog("TimeInAM") = row.TimeInAM.ToString("hh:mm tt")
-            timeLog("TimeOutAM") = row.TimeOutAM.ToString("hh:mm tt")
-            timeLog("TimeInPM") = row.TimeInPM.ToString("hh:mm tt")
-            timeLog("TimeOutPM") = row.TimeOutPM.ToString("hh:mm tt")
+            If Not IsDBNull(row("TimeInAM")) Then
+                timeLog("TimeInAM") = row.TimeInAM.ToString("hh:mm tt")
+            End If
+            If Not IsDBNull(row("TimeOutAM")) Then
+                timeLog("TimeOutAM") = row.TimeOutAM.ToString("hh:mm tt")
+            End If
+            If Not IsDBNull(row("TimeInPM")) Then
+                timeLog("TimeInPM") = row.TimeInPM.ToString("hh:mm tt")
+            End If
+            If Not IsDBNull(row("TimeOutPM")) Then
+                timeLog("TimeOutPM") = row.TimeOutPM.ToString("hh:mm tt")
+            End If
+
 
             timeLogs.Add(timeLog)
         Next
